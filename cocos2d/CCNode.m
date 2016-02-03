@@ -1665,10 +1665,14 @@ CGAffineTransformMakeRigid(CGPoint translate, CGFloat radians)
  */
 - (BOOL)hitTestWithWorldPos:(CGPoint)pos
 {
-    pos = [self convertToNodeSpace:pos];
+    CGPoint localPos = [self convertToNodeSpace:pos];
     CGPoint offset = ccp(-self.hitAreaExpansion, -self.hitAreaExpansion);
     CGSize size = CGSizeMake(self.contentSizeInPoints.width - offset.x, self.contentSizeInPoints.height - offset.y);
-    if ((pos.y < offset.y) || (pos.y > size.height) || (pos.x < offset.x) || (pos.x > size.width)) return(NO);
+    if ((localPos.y < offset.y) || (localPos.y > size.height) || (localPos.x < offset.x) || (localPos.x > size.width)) return(NO);
+    
+    if (self.responderHitAreaMask) {
+        return [self.responderHitAreaMask hitTestWithWorldPos:pos];
+    }
     
     return(YES);
 }

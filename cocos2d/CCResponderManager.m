@@ -98,6 +98,8 @@
 
 - (void)buildResponderList
 {
+    // rebuild masks
+    [self buildResponderMasks:[CCDirector sharedDirector].runningScene];
     // rebuild responder list
     [self removeAllResponders];
     [self buildResponderList:[CCDirector sharedDirector].runningScene];
@@ -150,6 +152,23 @@
         [self cancelResponder:[_runningResponderList lastObject]];
     }
     _exclusiveMode = NO;
+}
+
+- (void)buildResponderMasks:(CCNode *)node {
+    // we can ignore invisible nodes as they won't be responders anyway
+    if (!node.visible) return;
+    
+    if (node.parent) {
+        if (node.parent.masksChildResponders) {
+            node.responderHitAreaMask = node.parent;
+        } else {
+            node.responderHitAreaMask = node.parent.responderHitAreaMask;
+        }
+    }
+    for (CCNode *child in node.children)
+    {
+        [self buildResponderMasks:child];
+    }
 }
 
 // -----------------------------------------------------------------
