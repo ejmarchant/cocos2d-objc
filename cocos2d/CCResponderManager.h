@@ -125,7 +125,7 @@ typedef NS_ENUM(NSInteger, CCMouseButton)
  */
 enum
 {
-    CCResponderManagerBufferSize        = 128,
+    CCResponderManagerBufferSize        = 256,
 };
 
 /**
