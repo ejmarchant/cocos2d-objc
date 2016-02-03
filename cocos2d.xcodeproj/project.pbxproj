@@ -21,6 +21,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		001A75FA1C57B82A00B4D9E2 /* libObjectiveChipmunk-Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B153484C1BE1E7A20022C4BB /* libObjectiveChipmunk-Mac.a */; };
+		001A75FD1C57BB7900B4D9E2 /* libObjectAL (Mac).a in Frameworks */ = {isa = PBXBuildFile; fileRef = B15348371BE1E78C0022C4BB /* libObjectAL (Mac).a */; };
 		0529445D11098D6F00E500F3 /* CCProfiling.h in Headers */ = {isa = PBXBuildFile; fileRef = 0529445911098D6F00E500F3 /* CCProfiling.h */; };
 		0529445E11098D6F00E500F3 /* CCProfiling.m in Sources */ = {isa = PBXBuildFile; fileRef = 0529445A11098D6F00E500F3 /* CCProfiling.m */; };
 		0EFC792D1B3B0E14008926DD /* CCRendererGLSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EFC792C1B3B0E14008926DD /* CCRendererGLSupport.m */; };
@@ -533,7 +535,6 @@
 		B75C2E7C17C5908B002B0E0D /* NSAttributedString+CCAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = B75C2E7A17C5908B002B0E0D /* NSAttributedString+CCAdditions.h */; };
 		B75C2E7D17C5908B002B0E0D /* NSAttributedString+CCAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = B75C2E7B17C5908B002B0E0D /* NSAttributedString+CCAdditions.m */; };
 		B77060CF18341AD50043CC67 /* CCBReader_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = B77060CE18341AD50043CC67 /* CCBReader_Private.h */; };
-		B77582CE1A76CDB200C8589F /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B77582CD1A76CDB200C8589F /* libz.dylib */; };
 		B78AE46217E7AF1C0028BE0B /* CCButton.h in Headers */ = {isa = PBXBuildFile; fileRef = B78AE45A17E7AF1C0028BE0B /* CCButton.h */; };
 		B78AE46317E7AF1C0028BE0B /* CCButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B78AE45B17E7AF1C0028BE0B /* CCButton.m */; };
 		B78AE46417E7AF1C0028BE0B /* CCControl.h in Headers */ = {isa = PBXBuildFile; fileRef = B78AE45C17E7AF1C0028BE0B /* CCControl.h */; };
@@ -1001,6 +1002,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		001A75FB1C57B93100B4D9E2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FC39961319C3B92F00C93E5E /* ObjectAL.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D369B4CF19C8E73C00BA46EA;
+			remoteInfo = "ObjectAL (Mac)";
+		};
 		7A40378219E36EFF007B6E8F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 83409E2A19D5B791004B7EB9 /* SSZipArchive.xcodeproj */;
@@ -1137,6 +1145,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		001A75E61C57A44900B4D9E2 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/usr/lib/libz.tbd; sourceTree = DEVELOPER_DIR; };
 		0529445911098D6F00E500F3 /* CCProfiling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCProfiling.h; sourceTree = "<group>"; };
 		0529445A11098D6F00E500F3 /* CCProfiling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCProfiling.m; sourceTree = "<group>"; };
 		0E0094961B3ACC3E006EA7FC /* install.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = install.sh; sourceTree = "<group>"; };
@@ -1556,7 +1565,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B77582CE1A76CDB200C8589F /* libz.dylib in Frameworks */,
+				001A75FD1C57BB7900B4D9E2 /* libObjectAL (Mac).a in Frameworks */,
+				001A75FA1C57B82A00B4D9E2 /* libObjectiveChipmunk-Mac.a in Frameworks */,
 				7A59498319E38C9800F65F90 /* libSSZipArchiveMac.a in Frameworks */,
 				7A4037C819E3712A007B6E8F /* OpenGL.framework in Frameworks */,
 				7A4037C619E37126007B6E8F /* QuartzCore.framework in Frameworks */,
@@ -1648,6 +1658,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				001A75E61C57A44900B4D9E2 /* libz.tbd */,
 				B7E7DE781A76EC06004234B7 /* ApplicationServices.framework */,
 				B7E7DE761A76EBFB004234B7 /* QuartzCore.framework */,
 				B7E7DE741A76EBF0004234B7 /* GLKit.framework */,
@@ -2994,6 +3005,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				001A75FC1C57B93100B4D9E2 /* PBXTargetDependency */,
 				7A59497F19E38C8300F65F90 /* PBXTargetDependency */,
 			);
 			name = "cocos2d-mac";
@@ -3667,6 +3679,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		001A75FC1C57B93100B4D9E2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "ObjectAL (Mac)";
+			targetProxy = 001A75FB1C57B93100B4D9E2 /* PBXContainerItemProxy */;
+		};
 		7A59497F19E38C8300F65F90 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SSZipArchiveMac;
@@ -3798,6 +3815,10 @@
 				MACH_O_TYPE = staticlib;
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lz",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -3826,6 +3847,10 @@
 				MACH_O_TYPE = staticlib;
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lz",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
