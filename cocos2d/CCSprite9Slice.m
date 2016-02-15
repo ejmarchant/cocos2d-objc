@@ -132,13 +132,10 @@ TexCoordInterpolationMatrix(const CCSpriteVertexes *verts)
 	float scaleX = physicalSize.width/rectSize.width;
 	float scaleY = physicalSize.height/rectSize.height;
 	
-	float alphaX2[4];
-	alphaX2[0] = 0;
-	alphaX2[1] = _marginLeft / (physicalSize.width / rectSize.width);
-	alphaX2[2] = 1 - _marginRight / (physicalSize.width / rectSize.width);
-	alphaX2[3] = 1;
-	const float alphaX[4] = {0.0f, _marginLeft, scaleX - _marginRight, scaleX};
-	const float alphaY[4] = {0.0f, _marginBottom, scaleY - _marginTop, scaleY};
+    float averageScaledMarginsX = (_marginLeft + scaleX - _marginRight) * 0.5f;
+    float averageScaledMarginsY = (_marginBottom + scaleY - _marginTop) * 0.5f;
+	const float alphaX[4] = {0.0f, MIN(_marginLeft, averageScaledMarginsX), MAX(scaleX - _marginRight,averageScaledMarginsX), scaleX};
+	const float alphaY[4] = {0.0f, MIN(_marginBottom, averageScaledMarginsY), MAX(scaleY - _marginTop, averageScaledMarginsY), scaleY};
 	
 	const float alphaTexX[4] = {0.0f, _marginLeft, 1.0f - _marginRight, 1.0f};
 	const float alphaTexY[4] = {0.0f, _marginBottom, 1.0f - _marginTop, 1.0f};
