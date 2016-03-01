@@ -60,6 +60,15 @@
 }
 
 // -----------------------------------------------------------------
+
+- (void)setMasksChildResponders:(BOOL)masksChildResponders
+{
+    if (_masksChildResponders == masksChildResponders) return;
+    _masksChildResponders = masksChildResponders;
+    [[[CCDirector sharedDirector] responderManager] markAsDirty];
+}
+
+// -----------------------------------------------------------------
 // override for touch and mouse functionality
 
 - (BOOL)hitTestWithWorldPos:(CGPoint)pos

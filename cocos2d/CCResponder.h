@@ -83,6 +83,16 @@
  */
 @property (nonatomic, assign) float hitAreaExpansion;
 
+/**
+ *  Touches are required to pass hit area test for this mask too.
+ */
+@property (nonatomic, weak) CCResponder *responderHitAreaMask;
+
+/**
+ *  If true will act as a hit area mask for children.
+ */
+@property (nonatomic, assign) BOOL masksChildResponders;
+
 // purposefully undocumented: CCResponder should not be instantiated by users
 - (id)init;
 

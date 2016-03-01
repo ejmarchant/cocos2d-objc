@@ -711,10 +711,7 @@
         CCNode* responder = [responders objectAtIndex:i];
         if (foundSelf)
         {
-            if (![self isAncestor:responder toNode:self])
-            {
-                return NO;
-            }
+            return NO;
         }
         else if (responder == self)
         {
@@ -756,8 +753,14 @@ shouldRequireFailureOfGestureRecognizer:(UIGestureRecognizer *)otherGestureRecog
     
     NSMutableArray* recognizers = [view.gestureRecognizers mutableCopy];
     if (!recognizers) recognizers = [NSMutableArray arrayWithCapacity:2];
-    [recognizers insertObject:_panRecognizer atIndex:0];
-    [recognizers insertObject:_tapRecognizer atIndex:0];
+    
+    if ([recognizers containsObject:_panRecognizer] == NO) {
+        [recognizers insertObject:_panRecognizer atIndex:0];
+    }
+    
+    if ([recognizers containsObject:_tapRecognizer] == NO) {
+        [recognizers insertObject:_tapRecognizer atIndex:0];
+    }
     
     view.gestureRecognizers = recognizers;
     [super onEnterTransitionDidFinish];
