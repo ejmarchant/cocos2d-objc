@@ -711,10 +711,7 @@
         CCNode* responder = [responders objectAtIndex:i];
         if (foundSelf)
         {
-            if (![self isAncestor:responder toNode:self])
-            {
-                return NO;
-            }
+            return NO;
         }
         else if (responder == self)
         {
