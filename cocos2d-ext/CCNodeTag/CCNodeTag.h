@@ -1,7 +1,10 @@
 /*
+ * cocos2d for iPhone: http://www.cocos2d-iphone.org
  *
- * Copyright (c) 2012 Zynga Inc.
- * Copyright (c) 2013 Apportable Inc.
+ * Copyright (c) 2008-2010 Ricardo Quesada
+ * Copyright (c) 2011 Zynga Inc.
+ * Copyright (c) 2013-2014 Cocos2D Authors
+ * Copyright (c) 2013-2014 Cocos2D Authors
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,13 +27,24 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
-#import "CCAnimationManager.h"
 
-//This has been replaced by CCAnimationManager
-__attribute__ ((deprecated))
-@interface CCBAnimationManager : CCAnimationManager
-{
-    
-}
+//----------------------------------------------------------------------
+
+@interface CCNode (CCNodeTag)
+
+//----------------------------------------------------------------------
+
+@property (nonatomic, assign) NSInteger tag;
+
+//----------------------------------------------------------------------
+
+- (void)addChild:(CCNode *)node z:(NSInteger)z tag:(NSInteger)tag;
+- (void)removeChildByTag:(NSInteger)tag;
+- (void)removeChildByTag:(NSInteger)tag cleanup:(BOOL)cleanup;
+- (CCNode *)getChildByTag:(NSInteger)tag;
+- (CCNode *)getChildByTag:(NSInteger)tag recursively:(bool)isRecursive;
+
+//----------------------------------------------------------------------
 
 @end
+
