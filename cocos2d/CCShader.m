@@ -686,16 +686,46 @@ MetalUniformSettersForFunctions(id<MTLFunction> vertexFunction, id<MTLFunction> 
 	}
 #endif
 	{
+        // Workaround to make sure that #extension lines appear at the start of the shader.
+        // Warning: will not work correctly for #extension lines appearing within an #ifdef.
+        NSArray *vertexSourceLines = [vertexSource componentsSeparatedByString:@"\n"];
+        NSMutableArray *vertexExtensions = [NSMutableArray arrayWithCapacity:1];
+        NSMutableArray *vertexNonExtensions = [NSMutableArray arrayWithCapacity:vertexSourceLines.count];
+        for (NSInteger i = 0; i < vertexSourceLines.count; ++i) {
+            NSString *line = vertexSourceLines[i];
+            if ([line hasPrefix:@"#extension"]) {
+                [vertexExtensions addObject:line];
+            } else {
+                [vertexNonExtensions addObject:line];
+            }
+        }
+        NSArray *fragmentSourceLines = [fragmentSource componentsSeparatedByString:@"\n"];
+        NSMutableArray *fragmentExtensions = [NSMutableArray arrayWithCapacity:1];
+        NSMutableArray *fragmentNonExtensions = [NSMutableArray arrayWithCapacity:fragmentSourceLines.count];
+        for (NSInteger i = 0; i < fragmentSourceLines.count; ++i) {
+            NSString *line = fragmentSourceLines[i];
+            if ([line hasPrefix:@"#extension"]) {
+                [fragmentExtensions addObject:line];
+            } else {
+                [fragmentNonExtensions addObject:line];
+            }
+        }
+        
+        NSString *vertexShaderFirstHeader = [NSString stringWithFormat:@"%@\n%@", [vertexExtensions componentsJoinedByString:@"\n"], CCShaderHeader];
+        NSString *fragmentShaderFirstHeader = [NSString stringWithFormat:@"%@\n%@", [fragmentExtensions componentsJoinedByString:@"\n"], CCShaderHeader];
+        NSString *remainingVertexSource = [vertexNonExtensions componentsJoinedByString:@"\n"];
+        NSString *remainingFragmentSource = [fragmentNonExtensions componentsJoinedByString:@"\n"];
+        
         NSArray *prefixedVertexSources = @[
-                                           CCShaderHeader,
+                                           vertexShaderFirstHeader,
                                            CCVertexShaderHeader,
-                                           vertexSource
+                                           remainingVertexSource
                                            ];
         
         NSArray *prefixedFragmentSources = @[
-                                             CCShaderHeader,
+                                             fragmentShaderFirstHeader,
                                              CCFragmentShaderHeader,
-                                             fragmentSource
+                                             remainingFragmentSource
                                              ];
         
         return [self initWithGLVertexShaderSources:prefixedVertexSources fragmentShaderSources:prefixedFragmentSources];
