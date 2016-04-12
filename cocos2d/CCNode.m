@@ -666,6 +666,12 @@ TransformPointAsVector(CGPoint p, CGAffineTransform t)
 
 #pragma mark CCNode Composition
 
+-(void) setParent:(CCNode *)parent
+{
+    _parent = parent;
+    [self parentsContentSizeChanged];
+}
+
 -(void) childrenAlloc
 {
 	_children = [[NSMutableArray alloc] init];
