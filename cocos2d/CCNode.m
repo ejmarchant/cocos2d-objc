@@ -669,7 +669,9 @@ TransformPointAsVector(CGPoint p, CGAffineTransform t)
 -(void) setParent:(CCNode *)parent
 {
     _parent = parent;
-    [self parentsContentSizeChanged];
+    if (parent != nil) {
+        [self parentsContentSizeChanged];
+    }
 }
 
 -(void) childrenAlloc
