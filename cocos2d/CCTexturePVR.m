@@ -305,8 +305,8 @@ typedef struct {
 
 	flags = CFSwapInt32LittleToHost(header->flags);
 	formatFlags = flags & PVR_TEXTURE_FLAG_TYPE_MASK;
-	BOOL flipped = flags & kPVR2TextureFlagVerticalFlip;
-	if( flipped )
+	BOOL flipped = (flags & kPVR2TextureFlagVerticalFlip) != 0;
+	if( !flipped )
 		CCLOGWARN(@"cocos2d: WARNING: Image is not flipped. Regenerate it using PVRTexTool");
 
 	if( ! [configuration supportsNPOT] &&
