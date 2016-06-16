@@ -34,6 +34,7 @@
 #import "CCDirector.h"
 #import "ccConfig.h"
 #import "ccTypes.h"
+#import "CCImageResizer.h"
 
 #import "Support/CCFileUtils.h"
 #import "Support/NSThread+performBlock.h"
@@ -279,66 +280,75 @@ static CCTextureCache *sharedTextureCache;
 	CCFileUtils *fileUtils = [CCFileUtils sharedFileUtils];
 	path = [fileUtils standarizePath:path];
 
-	__block CCTexture * tex = nil;
+	__block CCTexture *tex = nil;
 
 	dispatch_sync(_dictQueue, ^{
 		tex = [_textures objectForKey: path];
 	});
+    if (tex) {
+        return (id)(tex.proxy);
+    }
 
-	if( ! tex ) {
-
-		CGFloat contentScale;
-		NSString *fullpath = [fileUtils fullPathForFilename:path contentScale:&contentScale];
-        
-		// all images are handled by UIKit/AppKit except PVR extension that is handled by cocos2d's handler
-        // main bundle loading is priotirized for backwards compatibility reasons
-        if( fullpath ) {
-            NSString *lowerCase = [fullpath lowercaseString];
-
-            if ( [lowerCase hasSuffix:@".pvr"] || [lowerCase hasSuffix:@".pvr.gz"] || [lowerCase hasSuffix:@".pvr.ccz"] )
-                tex = [self addPVRImage:path];
+    // We will try in order:
+    // - autoresizing a base texture
+    // - finding an image in an asset catalog
+    // - creating a placeholder texture
+    
+    // Autoresize
+    if (!tex) {
+        tex = [[CCImageResizer sharedInstance] resizedTextureOfBaseTextureWithName:path];
+    }
+    
+    // Asset catalog
+    if (!tex) {
 #if __CC_PLATFORM_IOS
-            else {
-                UIImage *image = [[UIImage alloc] initWithContentsOfFile:fullpath];
-                tex = [[CCTexture alloc] initWithCGImage:image.CGImage contentScale:contentScale];
-            }
+        UIImage *image = [UIImage imageNamed:path];
+        if (image) {
+            tex = [[CCTexture alloc] initWithCGImage:image.CGImage contentScale:image.scale];
+        }
 #elif __CC_PLATFORM_MAC
-            else {
-                NSData *data = [[NSData alloc] initWithContentsOfFile:fullpath];
-                NSBitmapImageRep *image = [[NSBitmapImageRep alloc] initWithData:data];
-                tex = [ [CCTexture alloc] initWithCGImage:[image CGImage] contentScale:contentScale];
-                
-                // autorelease prevents possible crash in multithreaded environments
-                //[tex autorelease];
-            }
-#endif // __CC_PLATFORM_MAC
-        // if we cant find a file in the main bundle then we trying to load it from xcassets
-        } else {
-#if __CC_PLATFORM_IOS
-            UIImage *image = [UIImage imageNamed:path];
-            
-            if (image)
-                tex = [[CCTexture alloc] initWithCGImage:image.CGImage contentScale:image.scale];
-#elif __CC_PLATFORM_MAC
-            NSImage *image = [NSImage imageNamed:path];
-        
-            if (image)
-                tex = [[CCTexture alloc] initWithCGImage:[image CGImageForProposedRect:nil context:nil hints:nil] contentScale:contentScale];
+        NSImage *image = [NSImage imageNamed:path];
+        if (image) {
+            CGImageRef cgImage = [image CGImageForProposedRect:nil context:nil hints:nil];
+            CGFloat scale = CGImageGetWidth(cgImage) / image.size.width;
+            tex = [[CCTexture alloc] initWithCGImage:cgImage contentScale:scale];
+        }
 #endif
-        }
-		
-        //if we could load a tex from anywhere we add it to the cache
-        if( tex ){
-            dispatch_sync(_dictQueue, ^{
-                [_textures setObject: tex forKey:path];
-            });
-        }else{
-            CCLOG(@"cocos2d: Couldn't create texture for file:%@ in CCTextureCache", path);
-            return nil;
-        }
-	}
-
-	return((id)tex.proxy);
+    }
+    
+    // Construct a placeholder white 1x1 image
+    if (!tex) {
+#if __CC_PLATFORM_IOS
+        CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
+        UIGraphicsBeginImageContext(rect.size);
+        CGContextRef context = UIGraphicsGetCurrentContext();
+        CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
+        CGContextFillRect(context, rect);
+        UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        tex = [[CCTexture alloc] initWithCGImage:image.CGImage contentScale:image.scale];
+#elif __CC_PLATFORM_MAC
+        NSImage *image = [[NSImage alloc] initWithSize:NSMakeSize(1, 1)];
+        [image lockFocus];
+        [[NSColor whiteColor] setFill];
+        [NSBezierPath fillRect:NSMakeRect(0, 0, 1, 1)];
+        [image unlockFocus];
+        tex = [[CCTexture alloc] initWithCGImage:[image CGImageForProposedRect:nil context:nil hints:nil] contentScale:1];
+#endif
+        CCLOG(@"cocos2d: Couldn't create texture for file: %@ in CCTextureCache.", path);
+    }
+        
+    // Add to the cache
+    if (tex) {
+        dispatch_sync(_dictQueue, ^{
+            [_textures setObject: tex forKey:path];
+        });
+    } else {
+        CCLOG(@"cocos2d: Couldn't create texture for file:%@ in CCTextureCache", path);
+        return nil;
+    }
+	
+	return (id)(tex.proxy);
 }
 
 
@@ -367,7 +377,7 @@ static CCTextureCache *sharedTextureCache;
 		CCLOG(@"cocos2d: Couldn't add CGImage in CCTextureCache");
 	}
 
-	return((id)tex.proxy);
+	return (id)(tex.proxy);
 }
 
 #pragma mark TextureCache - Remove
