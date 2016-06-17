@@ -77,6 +77,7 @@
 #import "CCTexture.h"
 #import "CCTexturePVR.h"
 #import "UITouch+CC.h"
+#import "CCImageResizer.h"
 
 // Layouts
 #import "CCLayout.h"
