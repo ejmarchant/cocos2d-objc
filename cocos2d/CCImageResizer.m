@@ -70,7 +70,7 @@
             if (ABS(resizeScale - 1) < 0.01) {
                 return [[CCTexture alloc] initWithCGImage:image.CGImage contentScale:contentScale];
             }
-            CGSize scaledSize = CGSizeMake(image.size.width * resizeScale, image.size.height * resizeScale);
+            CGSize scaledSize = CGSizeMake(floorf(image.size.width * resizeScale), floorf(image.size.height * resizeScale));
             BOOL hasAlpha = YES;
             CGFloat contextScale = 1.0;
             UIGraphicsBeginImageContextWithOptions(scaledSize, !hasAlpha, contextScale);
@@ -85,7 +85,7 @@
             if (ABS(resizeScale - 1) < 0.01) {
                 return [[CCTexture alloc] initWithCGImage:[image CGImageForProposedRect:nil context:nil hints:nil] contentScale:contentScale];
             }
-            CGSize scaledSize = CGSizeMake(image.size.width * resizeScale, image.size.height * resizeScale);
+            CGSize scaledSize = CGSizeMake(floorf(image.size.width * resizeScale), floorf(image.size.height * resizeScale));
             NSImage *scaledImage = [[NSImage alloc] initWithSize:scaledSize];
             [scaledImage lockFocus];
             NSGraphicsContext *ctx = [NSGraphicsContext currentContext];
