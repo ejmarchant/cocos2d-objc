@@ -199,6 +199,15 @@ typedef NS_ENUM(NSInteger, CCRenderTextureImageFormat)
  */
 - (CCRenderer *)beginWithClear:(float)r g:(float)g b:(float)b a:(float)a depth:(float)depthValue stencil:(int)stencilValue;
 
+/**
+ *  Starts rendering to the texture without clearing the texture first.
+ *
+ *  @param w Width in pixels.
+ *  @param h Height in pixels.
+ *  @returns A CCRenderer instance used for drawing.
+ */
+- (CCRenderer *)beginWithPixelWidth:(NSUInteger)w pixelHeight:(NSUInteger)h;
+
 /** 
  *  Ends rendering and allows you to use the texture, ie save it or using it in a sprite.
  */

@@ -291,6 +291,20 @@ FlipY(GLKMatrix4 projection)
 	return [self beginWithClear:r g:g b:b a:a depth:depthValue stencil:stencilValue flags:GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT|GL_STENCIL_BUFFER_BIT];
 }
 
+-(CCRenderer *)beginWithPixelWidth:(NSUInteger)w pixelHeight:(NSUInteger)h
+{
+    [self setContentSize:CGSizeMake(w / _contentScale, h / _contentScale)];
+    [self createTextureAndFboWithPixelSize:CGSizeMake(w, h)];
+    
+    CCRenderer *renderer = [[CCDirector sharedDirector] rendererFromPool];
+    [renderer prepareWithProjection:&_projection framebuffer:_framebuffer];
+    
+    _previousRenderer = [CCRenderer currentRenderer];
+    [CCRenderer bindRenderer:renderer];
+    
+    return renderer;
+}
+
 -(void)end
 {
 	CCRenderer *renderer = [CCRenderer currentRenderer];
