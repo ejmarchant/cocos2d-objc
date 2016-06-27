@@ -182,7 +182,7 @@
   }
 	
 	// As of 3.1, the x alpha needs to be flipped. Not really sure why.
-	alpha.x = 1.0 - alpha.x;
+	//alpha.x = 1.0 - alpha.x;
 	return GLKVector2Make(min.x * (1.f - alpha.x) + max.x * alpha.x, min.y * (1.f - alpha.y) + max.y * alpha.y);
 }
 
