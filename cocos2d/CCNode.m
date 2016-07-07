@@ -384,17 +384,27 @@ TransformPointAsVector(CGPoint p, CGAffineTransform t)
 
 -(void) setContentSize:(CGSize)size
 {
-	if( ! CGSizeEqualToSize(size, _contentSize) )
+    if( ! CGSizeEqualToSize(size, _contentSize) )
     {
-		_contentSize = size;
-        [self contentSizeChanged];
-	}
+        CGSize oldSize = _contentSize;
+        _contentSize = size;
+        if (!CGSizeEqualToSize([self convertContentSizeToPoints:oldSize type:_contentSizeType], [self contentSizeInPoints])) {
+            [self contentSizeChanged];
+        }
+    }
 }
 
 - (void) setContentSizeType:(CCSizeType)contentSizeType
 {
-    _contentSizeType = contentSizeType;
-    [self contentSizeChanged];
+    if(contentSizeType.widthUnit != _contentSizeType.widthUnit ||
+       contentSizeType.heightUnit != _contentSizeType.heightUnit)
+    {
+        CCSizeType oldSizeType = _contentSizeType;
+        _contentSizeType = contentSizeType;
+        if (!CGSizeEqualToSize([self convertContentSizeToPoints:_contentSize type:oldSizeType], [self contentSizeInPoints])) {
+            [self contentSizeChanged];
+        }
+    }
 }
 
 - (void) contentSizeChanged
@@ -419,11 +429,18 @@ TransformPointAsVector(CGPoint p, CGAffineTransform t)
 }
 
 - (void) parentsContentSizeChanged
-        {
+{
     if (!CCSizeTypeIsBasicPoints(_contentSizeType))
     {
-        [self contentSizeChanged];
+        if (_contentSizeType.widthUnit == CCSizeUnitNormalized &&
+            _contentSizeType.heightUnit == CCSizeUnitNormalized &&
+            CGSizeEqualToSize(self.contentSizeInPoints, CGSizeZero) &&
+            CGSizeEqualToSize(_parent.contentSizeInPoints, CGSizeZero)) {
+            // There will be no change to contentSizeInPoints
+        } else {
+            [self contentSizeChanged];
         }
+    }
     else if (!CCPositionTypeIsBasicPoints(_positionType))
     {
         _isTransformDirty = _isInverseDirty = YES;
