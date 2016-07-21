@@ -319,8 +319,6 @@
     frameTime = _displayLink.duration * _displayLink.frameInterval;
     bank -= frameTime;
     if (bank > 0) {
-        //CCLOG(@"too much bank");
-        NSLog(@"--- frame skip (bank = %.4f ---", bank);
         return;
     }
     bank = 0;
