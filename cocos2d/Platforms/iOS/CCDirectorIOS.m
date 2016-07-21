@@ -309,7 +309,30 @@
 
 -(void) mainLoop:(id)sender
 {
-	[self drawScene];
+    /*
+     * Experimental game loop.
+     * To stop the game becoming unresponsive after heavy load.
+     * See : http://www.ananseproductions.com/game-loops-on-ios/
+     */
+    static double bank = 0;
+    double frameTime;
+    frameTime = _displayLink.duration * _displayLink.frameInterval;
+    bank -= frameTime;
+    if (bank > 0) {
+        //CCLOG(@"too much bank");
+        NSLog(@"--- frame skip (bank = %.4f ---", bank);
+        return;
+    }
+    bank = 0;
+    CFTimeInterval now = CACurrentMediaTime();
+    
+    [self drawScene];
+    
+    CFTimeInterval elapsed = CACurrentMediaTime() - now;
+    bank = elapsed;
+    if (elapsed > frameTime) {
+        bank = frameTime + fmod( elapsed, frameTime );
+    }
 }
 
 - (void)setAnimationInterval:(NSTimeInterval)interval
