@@ -771,6 +771,14 @@ RecursivelyIncrementPausedAncestors(CCNode *node, int increment)
 	}
     
     [[[CCDirector sharedDirector] responderManager] markAsDirty];
+    
+    // Cascade opacity & color to the child
+    if (_cascadeOpacityEnabled) {
+        [child updateDisplayedOpacity:_displayColor.a];
+    }
+    if (_cascadeColorEnabled) {
+        [child updateDisplayedColor:_displayColor];
+    }
 }
 
 -(void) addChild: (CCNode*) child z:(NSInteger)z
