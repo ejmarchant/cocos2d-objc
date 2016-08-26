@@ -41,7 +41,12 @@
  - CCActionSoundEffect (plays a sound effect via OALSimpleAudio)
  - CCActionSpriteFrame (sets the spriteFrame property of a CCSprite)
 */
-@interface CCActionInstant : CCActionFiniteTime <NSCopying>
+@interface CCActionInstant : CCActionFiniteTime <NSCopying> {
+    BOOL _hasExecuted;
+}
+
+// Executes the task. Will only be called once.
+- (void)execute;
 
 @end
 
@@ -259,9 +264,6 @@
  */
 - (id)initWithTarget:(id)t selector:(SEL)s;
 
-// Executes the selector on the specific target.
-- (void)execute;
-
 @end
 
 
@@ -327,9 +329,6 @@
  *  @return An initialized call block action.
  */
 - (id)initWithBlock:(void(^)())block;
-
-// Executes the selector on the specific target.
-- (void)execute;
 
 @end
 

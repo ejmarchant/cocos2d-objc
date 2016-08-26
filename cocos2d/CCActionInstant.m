@@ -40,8 +40,10 @@
 
 -(id) init
 {
-	if( (self=[super init]) )
+    if( (self=[super init]) ) {
 		_duration = 0;
+        _hasExecuted = NO;
+    }
 
 	return self;
 }
@@ -54,7 +56,7 @@
 
 - (BOOL) isDone
 {
-	return YES;
+	return _hasExecuted;
 }
 
 -(void) step: (CCTime) dt
@@ -64,7 +66,14 @@
 
 -(void) update: (CCTime) t
 {
-	// nothing
+    if (!_hasExecuted) {
+        [self execute];
+        _hasExecuted = YES;
+    }
+}
+
+-(void)execute {
+    // Override me & perform task.
 }
 
 -(CCActionFiniteTime*) reverse
@@ -107,8 +116,8 @@
 }
 
 
--(void) update:(CCTime)time {
-	[(CCNode *)_target removeFromParentAndCleanup:_cleanUp];
+-(void)execute {
+	[(CCNode*)_target removeFromParentAndCleanup:_cleanUp];
 }
 @end
 
@@ -119,9 +128,8 @@
 #pragma mark CCShow
 
 @implementation CCActionShow
--(void) update:(CCTime)time
-{
-	((CCNode *)_target).visible = YES;
+-(void)execute {
+	((CCNode*)_target).visible = YES;
 }
 
 -(CCActionFiniteTime*) reverse
@@ -136,9 +144,8 @@
 #pragma mark CCHide
 
 @implementation CCActionHide
--(void) update:(CCTime)time
-{
-	((CCNode *)_target).visible = NO;
+-(void)execute {
+	((CCNode*)_target).visible = NO;
 }
 
 -(CCActionFiniteTime*) reverse
@@ -153,9 +160,8 @@
 #pragma mark CCToggleVisibility
 
 @implementation CCActionToggleVisibility
--(void) update:(CCTime)time
-{
-	((CCNode *)_target).visible = !((CCNode *)_target).visible;
+-(void)execute {
+	((CCNode*)_target).visible = !((CCNode*)_target).visible;
 }
 @end
 
@@ -178,8 +184,7 @@
 	return self;
 }
 
--(void) update:(CCTime)time
-{
+-(void)execute {
 	[(CCSprite*)_target setFlipX:_flipX];
 }
 
@@ -214,8 +219,7 @@
 	return self;
 }
 
--(void) update:(CCTime)time
-{
+-(void)execute {
 	[(CCSprite*)_target setFlipY:_flipY];
 }
 
@@ -257,9 +261,8 @@
 	return copy;
 }
 
--(void) update:(CCTime)time
-{
-	((CCNode *)_target).position = _position;
+-(void)execute {
+	((CCNode*)_target).position = _position;
 }
 
 @end
@@ -307,13 +310,7 @@
 	return copy;
 }
 
--(void) update:(CCTime)time
-{
-	[self execute];
-}
-
--(void) execute
-{
+-(void)execute {
     typedef void (*Func)(id, SEL);
     ((Func)objc_msgSend)(_targetCallback, _selector);
 }
@@ -346,13 +343,7 @@
 	return copy;
 }
 
--(void) update:(CCTime)time
-{
-	[self execute];
-}
-
--(void) execute
-{
+-(void)execute {
 	_block();
 }
 
@@ -381,9 +372,8 @@
 	return copy;
 }
 
-- (void)update:(CCTime)time
-{
-	((CCSprite *)self.target).spriteFrame = _spriteFrame;
+-(void)execute {
+	((CCSprite*)self.target).spriteFrame = _spriteFrame;
 }
 
 @end

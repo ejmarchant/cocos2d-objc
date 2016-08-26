@@ -297,10 +297,7 @@
 	if( (self=[super initWithDuration: d ]) ) {
 		_times = times;
 		self.innerAction = action;
-		_isActionInstant = ([action isKindOfClass:[CCActionInstant class]]) ? YES : NO;
-
-		//a instant action needs to be executed one time less in the update method since it uses startWithTarget to execute the action
-		if (_isActionInstant) _times -=1;
+        _isActionInstant = ([action isKindOfClass:[CCActionInstant class]]) ? YES : NO;
 		_total = 0;
 	}
 	return self;
@@ -332,44 +329,37 @@
 // container action like CCRepeat, CCSequence, CCEase, etc..
 -(void) update:(CCTime) dt
 {
-	if (dt >= _nextDt)
-	{
-		while (dt > _nextDt && _total < _times)
-		{
-
-			[_innerAction update:1.0];
-			_total++;
-
-			[_innerAction stop];
-			[_innerAction startWithTarget:_target];
-			_nextDt += [_innerAction duration]/_duration;
-		}
-		
-		// fix for issue #1288, incorrect end value of repeat
-		if(dt >= 1.0 && _total < _times)
-		{
-			_total++;
-		}
-		
-		// don't set a instantaction back or update it, it has no use because it has no duration
-		if (!_isActionInstant)
-		{
-			if (_total == _times)
-			{
-				[_innerAction update:1.0];
-				[_innerAction stop];
-			}
-			else
-			{
-				// issue #390 prevent jerk, use right update
-				[_innerAction update:dt - (_nextDt - _innerAction.duration/_duration)];
-			}
-		}
-	}
-	else
-	{
-		[_innerAction update:fmodf(dt * _times,1.0)];
-	}
+    if (_isActionInstant) {
+        while (_total < _times) {
+            _total++;
+            [((CCActionInstant*)_innerAction) execute];
+        }
+    } else {
+        if (dt >= _nextDt) {
+            while (dt > _nextDt && _total < _times) {
+                [_innerAction update:1.0];
+                _total++;
+                [_innerAction stop];
+                [_innerAction startWithTarget:_target];
+                _nextDt += [_innerAction duration] / _duration;
+            }
+            
+            // fix for issue #1288, incorrect end value of repeat
+            if (dt >= 1.0 && _total < _times) {
+                _total++;
+            }
+            
+            if (_total == _times) {
+                [_innerAction update:1.0];
+                [_innerAction stop];
+            } else {
+                // issue #390 prevent jerk, use right update
+                [_innerAction update: dt - (_nextDt - _innerAction.duration / _duration)];
+            }
+        } else {
+            [_innerAction update:fmodf(dt * _times, 1.0)];
+        }
+    }
 }
 
 -(BOOL) isDone
