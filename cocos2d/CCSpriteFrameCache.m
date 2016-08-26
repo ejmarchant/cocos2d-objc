@@ -43,6 +43,7 @@
 #import "Support/CCFileUtils.h"
 #import "CCTexture.h"
 #import "CCDirector.h"
+#import "CCImageResizer.h"
 
 @interface CCSpriteFrame(Proxy)
 - (BOOL)hasProxy;
@@ -238,6 +239,14 @@ static CCSpriteFrameCache *_sharedSpriteFrameCache=nil;
 	// check the format
 	NSAssert( format >= 0 && format <= 3, @"format is not supported for CCSpriteFrameCache addSpriteFramesWithDictionary:textureFilename:");
 
+    // check if we need to scale frames
+    CGFloat contentScale = [[CCDirector sharedDirector] contentScaleFactor];
+    CGFloat resizeScale = [[CCImageResizer sharedInstance] assetUIScaleFactor] * contentScale / [[CCImageResizer sharedInstance] baseAssetScaleFactor];
+    CGSize baseSize = CCSizeFromString([metadataDict objectForKey:@"size"]);
+    CGSize scaledSize = CGSizeMake(roundf(baseSize.width * resizeScale), roundf(baseSize.height * resizeScale));
+    CGFloat realScaleX = scaledSize.width / baseSize.width;
+    CGFloat realScaleY = scaledSize.height / baseSize.height;
+    
 	// SpriteFrame info
 	CGRect rectInPixels;
 	BOOL isRotated;
@@ -309,6 +318,13 @@ static CCSpriteFrameCache *_sharedSpriteFrameCache=nil;
 			frameOffset = spriteOffset;
 			originalSize = spriteSourceSize;
 		}
+        
+        if (([[CCImageResizer sharedInstance] enableResizing]) &&
+            (fabs(realScaleX - 1.0) > 0.01 || fabs(realScaleY - 1.0) > 0.01)) {
+            rectInPixels = CGRectIntegral(CGRectMake(rectInPixels.origin.x * realScaleX, rectInPixels.origin.y * realScaleY, rectInPixels.size.width * realScaleX, rectInPixels.size.height * realScaleY));
+            frameOffset = CGPointMake(floorf(frameOffset.x * realScaleX), floorf(frameOffset.y * realScaleY));
+            originalSize = CGSizeMake(MAX(ceilf(originalSize.width * realScaleX), rectInPixels.size.width), MAX(ceilf(originalSize.height * realScaleY), rectInPixels.size.height));
+        }
         
         [self addSpriteFrame:spriteFrame withTextureReference:textureReference key:frameDictKey rectInPixels:rectInPixels rotated:isRotated offset:frameOffset originalSize:originalSize];
 	}

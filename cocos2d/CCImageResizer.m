@@ -111,18 +111,21 @@
         if (ABS(resizeScale - 1) < 0.01) {
             return bigTex;
         }
-        int w = (int)(bigTex.pixelWidth * resizeScale / contentScale);
-        int h = (int)(bigTex.pixelHeight * resizeScale / contentScale);
-        CGFloat scale = MIN(w / (CGFloat)bigTex.pixelWidth, h / (CGFloat)bigTex.pixelHeight) * contentScale;
+        int w = (int)round(bigTex.pixelWidth * resizeScale / contentScale);
+        int h = (int)round(bigTex.pixelHeight * resizeScale / contentScale);
+        CGFloat scaleX = w / (CGFloat)bigTex.pixelWidth * contentScale;
+        CGFloat scaleY = h / (CGFloat)bigTex.pixelHeight * contentScale;
         CCRenderTexture *rtx = [[CCRenderTexture alloc] initWithWidth:w height:h pixelFormat:CCTexturePixelFormat_RGBA8888];
         CCSprite *sprite = [CCSprite spriteWithTexture:bigTex];
-        sprite.scale = scale;
+        sprite.scaleX = scaleX;
+        sprite.scaleY = scaleY;
         sprite.anchorPoint = CGPointZero;
         sprite.position = CGPointZero;
         [rtx begin];
         [sprite visit];
         [rtx end];
         tex = rtx.texture;
+        tex.antialiased = YES;
         tex.contentScale = contentScale;
     }
 
