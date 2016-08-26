@@ -71,7 +71,6 @@
 		08F4AACA1C6E98A1004DAAF7 /* CCMetalView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3903B13199528B6003AA81A /* CCMetalView.m */; };
 		08F4AACB1C6E98A1004DAAF7 /* base64.c in Sources */ = {isa = PBXBuildFile; fileRef = 50F29F5510204FD60046CA73 /* base64.c */; };
 		08F4AACC1C6E98A1004DAAF7 /* ZipUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 50F2A102102094550046CA73 /* ZipUtils.m */; };
-		08F4AACD1C6E98A1004DAAF7 /* CCPlatformTextFieldIOS.m in Sources */ = {isa = PBXBuildFile; fileRef = 571CD02219649E03003D460C /* CCPlatformTextFieldIOS.m */; };
 		08F4AACE1C6E98A1004DAAF7 /* CCRenderTexture.m in Sources */ = {isa = PBXBuildFile; fileRef = 50316AA510291280003ACFE7 /* CCRenderTexture.m */; };
 		08F4AACF1C6E98A1004DAAF7 /* CCSpriteFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E2A14F10A45E7F00D894CE /* CCSpriteFrame.m */; };
 		08F4AAD01C6E98A1004DAAF7 /* CCSpriteFrameCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 502C8BDF10A661E200D137BA /* CCSpriteFrameCache.m */; };
@@ -1753,7 +1752,6 @@
 				08F4AACA1C6E98A1004DAAF7 /* CCMetalView.m in Sources */,
 				08F4AACB1C6E98A1004DAAF7 /* base64.c in Sources */,
 				08F4AACC1C6E98A1004DAAF7 /* ZipUtils.m in Sources */,
-				08F4AACD1C6E98A1004DAAF7 /* CCPlatformTextFieldIOS.m in Sources */,
 				08F4AACE1C6E98A1004DAAF7 /* CCRenderTexture.m in Sources */,
 				08F4AACF1C6E98A1004DAAF7 /* CCSpriteFrame.m in Sources */,
 				08F4AAD01C6E98A1004DAAF7 /* CCSpriteFrameCache.m in Sources */,
