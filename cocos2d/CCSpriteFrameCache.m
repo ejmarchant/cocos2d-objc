@@ -321,9 +321,14 @@ static CCSpriteFrameCache *_sharedSpriteFrameCache=nil;
         
         if (([[CCImageResizer sharedInstance] enableResizing]) &&
             (fabs(realScaleX - 1.0) > 0.01 || fabs(realScaleY - 1.0) > 0.01)) {
-            rectInPixels = CGRectIntegral(CGRectMake(rectInPixels.origin.x * realScaleX, rectInPixels.origin.y * realScaleY, rectInPixels.size.width * realScaleX, rectInPixels.size.height * realScaleY));
-            frameOffset = CGPointMake(floorf(frameOffset.x * realScaleX), floorf(frameOffset.y * realScaleY));
-            originalSize = CGSizeMake(MAX(ceilf(originalSize.width * realScaleX), rectInPixels.size.width), MAX(ceilf(originalSize.height * realScaleY), rectInPixels.size.height));
+            // Keep the same center but expand the rect to integral proportions.
+            // Note: we may end up with a rect with non-integral origin (but this should look ok).
+            CGFloat newRectWidthInPixels = ceilf(rectInPixels.size.width * realScaleX);
+            CGFloat newRectHeightInPixels = ceilf(rectInPixels.size.height * realScaleY);
+            CGPoint newRectCenter = CGPointMake(realScaleX * (rectInPixels.origin.x + rectInPixels.size.width * 0.5), realScaleY * (rectInPixels.origin.y + rectInPixels.size.height * 0.5));
+            rectInPixels = CGRectMake(newRectCenter.x - newRectWidthInPixels * 0.5, newRectCenter.y - newRectHeightInPixels * 0.5, newRectWidthInPixels, newRectHeightInPixels);
+            frameOffset = CGPointMake(frameOffset.x * realScaleX, frameOffset.y * realScaleY);
+            originalSize = CGSizeMake(MAX(ceilf(originalSize.width * realScaleX), newRectWidthInPixels), MAX(ceilf(originalSize.height * realScaleY), newRectHeightInPixels));
         }
         
         [self addSpriteFrame:spriteFrame withTextureReference:textureReference key:frameDictKey rectInPixels:rectInPixels rotated:isRotated offset:frameOffset originalSize:originalSize];
