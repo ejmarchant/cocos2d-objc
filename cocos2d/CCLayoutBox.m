@@ -25,7 +25,7 @@
 
 #import "CCLayoutBox.h"
 #import "ccMacros.h"
-#import "CGPointExtension.h"
+#import "Support/CGPointExtension.h"
 
 @implementation CCLayoutBox
 

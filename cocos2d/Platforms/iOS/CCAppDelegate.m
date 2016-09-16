@@ -28,7 +28,7 @@
 
 #import "CCAppDelegate.h"
 #import "CCTexture.h"
-#import "CCFileUtils.h"
+#import "Support/CCFileUtils.h"
 #import "CCDirector.h"
 #import "CCConfiguration.h"
 #import "CCScheduler.h"

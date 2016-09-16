@@ -24,12 +24,12 @@
 
 #import "CCTextField.h"
 #import "CCControlSubclass.h"
-#import "CCDirector.h"
-#import "CCPlatformTextField.h"
+#import "../cocos2d/CCDirector.h"
+#import "Platform/CCPlatformTextField.h"
 #if __CC_PLATFORM_IOS
-#import "CCPlatformTextFieldIOS.h"
+#import "Platform/iOS/CCPlatformTextFieldIOS.h"
 #elif __CC_PLATFORM_MAC
-#import "CCPlatformTextFieldMac.h"
+#import "Platform/Mac/CCPlatformTextFieldMac.h"
 #endif
 
 @implementation CCTextField {

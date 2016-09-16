@@ -22,10 +22,10 @@
  * THE SOFTWARE.
  */
 
-#import "cocos2d.h"
+#import "../cocos2d/cocos2d.h"
 #import "CCControl.h"
 
-#import "CCPlatformTextField.h"
+#import "Platform/CCPlatformTextField.h"
 
 @class CCPlatformTextField;
 

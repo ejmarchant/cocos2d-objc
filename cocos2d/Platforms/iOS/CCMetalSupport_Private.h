@@ -23,12 +23,12 @@
  *
  */
 
-#import "ccMacros.h"
+#import "../../ccMacros.h"
 #if __CC_METAL_SUPPORTED_AND_ENABLED
 
 #import <Metal/Metal.h>
 
-#import "CCRenderer_Private.h"
+#import "../../CCRenderer_Private.h"
 
 // The number of buffer/texture/sampler cannot be queried.
 // They are only defined in the Metal docs to be 31/31/16.

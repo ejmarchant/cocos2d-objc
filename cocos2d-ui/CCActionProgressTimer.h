@@ -26,7 +26,7 @@
 
 #import <Foundation/Foundation.h>
 #import "CCProgressNode.h"
-#import "CCActionInterval.h"
+#import "../cocos2d/CCActionInterval.h"
 
 /**
  *  This action is for use with the CCProgressNode to control the progression to animation.

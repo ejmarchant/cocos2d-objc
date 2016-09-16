@@ -23,13 +23,13 @@
  */
 
 #import "CCScrollView.h"
-#import "CCDirector.h"
-#import "CGPointExtension.h"
-#import "CCActionInterval.h"
-#import "CCActionEase.h"
-#import "CCActionInstant.h"
-#import "CCResponderManager.h"
-#import "UITouch+CC.h"
+#import "../cocos2d/CCDirector.h"
+#import "../cocos2d/Support/CGPointExtension.h"
+#import "../cocos2d/CCActionInterval.h"
+#import "../cocos2d/CCActionEase.h"
+#import "../cocos2d/CCActionInstant.h"
+#import "../cocos2d/CCResponderManager.h"
+#import "../cocos2d/Platforms/iOS/UITouch+CC.h"
 
 #if __CC_PLATFORM_IOS
 

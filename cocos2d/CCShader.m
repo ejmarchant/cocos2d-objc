@@ -31,7 +31,7 @@
 #import "CCRenderer_Private.h"
 #import "CCDirector.h"
 #import "CCCache.h"
-#import "CCGL.h"
+#import "Platforms/CCGL.h"
 #import "CCRenderDispatch.h"
 #import "CCMetalSupport_Private.h"
 

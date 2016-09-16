@@ -26,11 +26,11 @@
 
 #import "CCProgressNode.h"
 
-#import "ccMacros.h"
-#import "CCTextureCache.h"
-#import "CCShader.h"
-#import "CCDirector.h"
-#import "CGPointExtension.h"
+#import "../cocos2d/ccMacros.h"
+#import "../cocos2d/CCTextureCache.h"
+#import "../cocos2d/CCShader.h"
+#import "../cocos2d/CCDirector.h"
+#import "../cocos2d/Support/CGPointExtension.h"
 
 @implementation CCProgressNode {
 	CCProgressNodeType _type;

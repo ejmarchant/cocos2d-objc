@@ -23,7 +23,7 @@
  */
 
 #import "CCRenderDispatch_Private.h"
-#import "CCGL.h"
+#import "Platforms/CCGL.h"
 
 #if CC_RENDER_DISPATCH_ENABLED
 

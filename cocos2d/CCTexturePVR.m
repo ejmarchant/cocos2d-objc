@@ -68,7 +68,7 @@ Copyright (C) 2008 Apple Inc. All Rights Reserved.
 #import "Support/ccUtils.h"
 #import "Support/CCFileUtils.h"
 #import "Support/ZipUtils.h"
-#import "CCGL.h"
+#import "Platforms/CCGL.h"
 #import "CCRenderDispatch.h"
 
 #pragma mark -

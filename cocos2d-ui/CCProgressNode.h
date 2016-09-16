@@ -25,7 +25,7 @@
  */
 
 #import <Foundation/Foundation.h>
-#import "CCSprite.h"
+#import "../cocos2d/CCSprite.h"
 #import "CCActionProgressTimer.h"
 
 /** Progress Node type used by CCProgressNode. */

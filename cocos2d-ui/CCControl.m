@@ -26,7 +26,7 @@
 #import "CCControlSubclass.h"
 #import <objc/message.h>
 #import <objc/runtime.h>
-#import "UITouch+CC.h"
+#import "../cocos2d/Platforms/iOS/UITouch+CC.h"
 
 #if __CC_PLATFORM_IOS
 

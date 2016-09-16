@@ -24,8 +24,6 @@
  * THE SOFTWARE.
  */
 
-#import "ccMacros.h"
-
 #if __CC_PLATFORM_IOS
 #import <UIKit/UIKit.h>		// Needed for UIDevice
 #endif

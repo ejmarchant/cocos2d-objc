@@ -30,7 +30,7 @@
 #import "CCDrawNode.h"
 #import "CCShader.h"
 #import "Support/CGPointExtension.h"
-#import "CCColor.h"
+#import "Support/CCColor.h"
 #import "CCConfiguration.h"
 #import "CCMetalSupport_Private.h"
 

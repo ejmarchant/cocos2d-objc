@@ -1,6 +1,5 @@
 
 #import "CCFileUtils.h"
-#import "ccMacros.h"
 
 
 @implementation CCFileUtils

@@ -8,7 +8,7 @@
 
 #import "CCSlider.h"
 #import "CCControlSubclass.h"
-#include "UITouch+CC.h"
+#include "../cocos2d/Platforms/iOS/UITouch+CC.h"
 
 @interface CCSlider (Inputs)
 - (void) inputEnteredWithWorlPos:(CGPoint)worldLocation;

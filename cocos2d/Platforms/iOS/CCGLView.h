@@ -72,7 +72,7 @@ Copyright (C) 2008 Apple Inc. All Rights Reserved.
 #import <OpenGLES/ES2/gl.h>
 #import <OpenGLES/ES2/glext.h>
 
-#import "CCDirectorView.h"
+#import "../CCDirectorView.h"
 
 
 //CLASSES:

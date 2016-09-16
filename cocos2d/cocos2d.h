@@ -56,7 +56,7 @@
 #import "CCActionInstant.h"
 #import "CCActionInterval.h"
 #import "CCActionTween.h"
-#import "CCColor.h"
+#import "Support/CCColor.h"
 #import "CCConfiguration.h"
 #import "CCDirector.h"
 #import "CCDrawNode.h"
@@ -76,7 +76,7 @@
 #import "CCTransition.h"
 #import "CCTexture.h"
 #import "CCTexturePVR.h"
-#import "UITouch+CC.h"
+#import "Platforms/iOS/UITouch+CC.h"
 #import "CCImageResizer.h"
 
 // Layouts

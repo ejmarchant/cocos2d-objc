@@ -7,8 +7,8 @@
 //
 
 #import "CCPlatformTextFieldIOS.h"
-#import "CCDirector.h"
-#import "CCControl.h"
+#import "../../../cocos2d/CCDirector.h"
+#import "../../CCControl.h"
 #import <UIKit/UIKit.h>
 
 @implementation CCPlatformTextFieldIOS {

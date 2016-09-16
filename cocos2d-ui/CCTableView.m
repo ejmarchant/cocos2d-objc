@@ -24,8 +24,8 @@
 
 #import "CCTableView.h"
 #import "CCButton.h"
-#import "CCDirector.h"
-#import "CGPointExtension.h"
+#import "../cocos2d/CCDirector.h"
+#import "../cocos2d/Support/CGPointExtension.h"
 #import <objc/message.h>
 
 #pragma mark Helper classes

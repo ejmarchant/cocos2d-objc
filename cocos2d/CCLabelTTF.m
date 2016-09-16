@@ -32,8 +32,8 @@
 #import "CCShader.h"
 #import "Support/CCFileUtils.h"
 #import "ccMacros.h"
-#import "ccUtils.h"
-#import "NSAttributedString+CCAdditions.h"
+#import "Support/ccUtils.h"
+#import "Support/NSAttributedString+CCAdditions.h"
 #import "CCConfiguration.h"
 #import "CCDirector.h"
 #import <Foundation/Foundation.h>

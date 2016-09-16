@@ -6,12 +6,12 @@
 //
 //
 
-#import "ccMacros.h"
+#import "../../../cocos2d/ccMacros.h"
 
 #if __CC_PLATFORM_MAC
 
 #import <AppKit/AppKit.h>
-#import "CCPlatformTextField.h"
+#import "../CCPlatformTextField.h"
 
 @interface CCPlatformTextFieldMac : CCPlatformTextField <NSTextFieldDelegate>
 

@@ -1,11 +1,11 @@
-#import "ccMacros.h"
+#import "../../ccMacros.h"
 
 #if __CC_METAL_SUPPORTED_AND_ENABLED
 
 #import <UIKit/UIKit.h>
 #import <Metal/Metal.h>
 
-#import "CCDirectorView.h"
+#import "../CCDirectorView.h"
 
 /** Metal renderer, can be used in place of CCGLView on devices that support Metal rendering.
  

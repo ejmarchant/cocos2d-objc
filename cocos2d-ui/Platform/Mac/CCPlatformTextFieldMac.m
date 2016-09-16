@@ -10,8 +10,8 @@
 
 #if __CC_PLATFORM_MAC
 
-#import "CCDirector.h"
-#import "CCControl.h"
+#import "../../../cocos2d/CCDirector.h"
+#import "../../CCControl.h"
 
 @implementation CCPlatformTextFieldMac {
     NSTextField *_textField;

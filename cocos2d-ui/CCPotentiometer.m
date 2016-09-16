@@ -26,11 +26,11 @@
 
 #import "CCPotentiometer.h"
 #import "CCControlSubclass.h"
-#import "CCSprite.h"
+#import "../cocos2d/CCSprite.h"
 #import "CCProgressNode.h"
-#import "CCActionEase.h"
-#import "CCActionTween.h"
-#import "cocos2d.h"
+#import "../cocos2d/CCActionEase.h"
+#import "../cocos2d/CCActionTween.h"
+#import "../cocos2d/cocos2d.h"
 
 @interface CCPotentiometer () 
 @property (nonatomic, strong) CCSprite        *thumbSprite;

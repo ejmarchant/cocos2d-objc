@@ -14,7 +14,7 @@
 #import <Cocoa/Cocoa.h>
 #endif
 #import "CCDirector.h"
-#import "CCFileUtils.h"
+#import "Support/CCFileUtils.h"
 #import "CCRenderTexture.h"
 
 
