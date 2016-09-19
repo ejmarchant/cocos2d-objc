@@ -26,7 +26,7 @@
 #import "CCControlSubclass.h"
 #import "../cocos2d/CCDirector.h"
 #import "Platform/CCPlatformTextField.h"
-#if __CC_PLATFORM_IOS
+#if __CC_PLATFORM_IOS && !defined(__TV_OS_VERSION_MAX_ALLOWED)
 #import "Platform/iOS/CCPlatformTextFieldIOS.h"
 #elif __CC_PLATFORM_MAC
 #import "Platform/Mac/CCPlatformTextFieldMac.h"
@@ -62,7 +62,7 @@
     
     [self addChild:_background];
     
-#if __CC_PLATFORM_IOS
+#if __CC_PLATFORM_IOS && !defined(__TV_OS_VERSION_MAX_ALLOWED)
     _platformTextField = [[CCPlatformTextFieldIOS alloc] init];
 #elif __CC_PLATFORM_MAC
     _platformTextField = [[CCPlatformTextFieldMac alloc] init];

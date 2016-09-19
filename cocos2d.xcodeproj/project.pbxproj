@@ -137,7 +137,6 @@
 		08F4AB101C6E98A1004DAAF7 /* CCSprite.h in Headers */ = {isa = PBXBuildFile; fileRef = 509A79950F6188420032F449 /* CCSprite.h */; };
 		08F4AB111C6E98A1004DAAF7 /* CCFileUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 50C508C40F7C194400799124 /* CCFileUtils.h */; };
 		08F4AB121C6E98A1004DAAF7 /* CGPointExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = 503798C40F912C2000986724 /* CGPointExtension.h */; };
-		08F4AB131C6E98A1004DAAF7 /* CCPlatformTextFieldIOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 571CD02119649E03003D460C /* CCPlatformTextFieldIOS.h */; };
 		08F4AB151C6E98A1004DAAF7 /* CCLayoutBox.h in Headers */ = {isa = PBXBuildFile; fileRef = B7EE69DE1819E75700B983FE /* CCLayoutBox.h */; };
 		08F4AB171C6E98A1004DAAF7 /* CCRenderDispatch.h in Headers */ = {isa = PBXBuildFile; fileRef = D3903B0E199528A0003AA81A /* CCRenderDispatch.h */; };
 		08F4AB181C6E98A1004DAAF7 /* CCTextField.h in Headers */ = {isa = PBXBuildFile; fileRef = B7E260D618171D2000A0E872 /* CCTextField.h */; };
@@ -348,7 +347,6 @@
 		7A59475619E3731100F65F90 /* CCProtocols.h in Headers */ = {isa = PBXBuildFile; fileRef = 50E2A25110A46CC600D894CE /* CCProtocols.h */; };
 		7A59475719E3731100F65F90 /* CCScheduler.h in Headers */ = {isa = PBXBuildFile; fileRef = 5066020F0E38A70D000B500E /* CCScheduler.h */; };
 		7A59476019E3731400F65F90 /* CCPlatformTextField.h in Headers */ = {isa = PBXBuildFile; fileRef = 571CD01E19649E03003D460C /* CCPlatformTextField.h */; };
-		7A59476219E3731400F65F90 /* CCPlatformTextFieldIOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 571CD02119649E03003D460C /* CCPlatformTextFieldIOS.h */; };
 		7A59476419E3731500F65F90 /* CCPlatformTextFieldMac.h in Headers */ = {isa = PBXBuildFile; fileRef = 571CD02419649E03003D460C /* CCPlatformTextFieldMac.h */; };
 		7A59477919E3731D00F65F90 /* cocos2d-ui.h in Headers */ = {isa = PBXBuildFile; fileRef = B7C6237917EA7D8600928F91 /* cocos2d-ui.h */; };
 		7A59477A19E3731E00F65F90 /* CCControl.h in Headers */ = {isa = PBXBuildFile; fileRef = B78AE45C17E7AF1C0028BE0B /* CCControl.h */; };
@@ -1325,7 +1323,6 @@
 				08F4AB101C6E98A1004DAAF7 /* CCSprite.h in Headers */,
 				08F4AB111C6E98A1004DAAF7 /* CCFileUtils.h in Headers */,
 				08F4AB121C6E98A1004DAAF7 /* CGPointExtension.h in Headers */,
-				08F4AB131C6E98A1004DAAF7 /* CCPlatformTextFieldIOS.h in Headers */,
 				006768061D902DDA006C84F1 /* CCImageResizer.h in Headers */,
 				08F4AB151C6E98A1004DAAF7 /* CCLayoutBox.h in Headers */,
 				08F4AB171C6E98A1004DAAF7 /* CCRenderDispatch.h in Headers */,
@@ -1560,7 +1557,6 @@
 				7A59475619E3731100F65F90 /* CCProtocols.h in Headers */,
 				7A59475719E3731100F65F90 /* CCScheduler.h in Headers */,
 				7A59476019E3731400F65F90 /* CCPlatformTextField.h in Headers */,
-				7A59476219E3731400F65F90 /* CCPlatformTextFieldIOS.h in Headers */,
 				7A59476419E3731500F65F90 /* CCPlatformTextFieldMac.h in Headers */,
 				7A59477919E3731D00F65F90 /* cocos2d-ui.h in Headers */,
 				7A59477A19E3731E00F65F90 /* CCControl.h in Headers */,
