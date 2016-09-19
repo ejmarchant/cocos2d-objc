@@ -24,6 +24,9 @@
 		0038CAA71D11953800582E3C /* CCImageResizer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0038CAA51D11953800582E3C /* CCImageResizer.h */; };
 		0038CAA81D11953800582E3C /* CCImageResizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0038CAA61D11953800582E3C /* CCImageResizer.m */; };
 		0038CADE1D11A4C400582E3C /* CCImageResizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0038CAA61D11953800582E3C /* CCImageResizer.m */; };
+		006768051D902DD9006C84F1 /* CCImageResizer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0038CAA51D11953800582E3C /* CCImageResizer.h */; };
+		006768061D902DDA006C84F1 /* CCImageResizer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0038CAA51D11953800582E3C /* CCImageResizer.h */; };
+		006768071D902DDD006C84F1 /* CCImageResizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0038CAA61D11953800582E3C /* CCImageResizer.m */; };
 		0529445D11098D6F00E500F3 /* CCProfiling.h in Headers */ = {isa = PBXBuildFile; fileRef = 0529445911098D6F00E500F3 /* CCProfiling.h */; };
 		0529445E11098D6F00E500F3 /* CCProfiling.m in Sources */ = {isa = PBXBuildFile; fileRef = 0529445A11098D6F00E500F3 /* CCProfiling.m */; };
 		08A4EB6F1C7A553E00A08923 /* CCActionProgressTimer.h in Headers */ = {isa = PBXBuildFile; fileRef = 08A4EB6B1C7A553E00A08923 /* CCActionProgressTimer.h */; };
@@ -1323,6 +1326,7 @@
 				08F4AB111C6E98A1004DAAF7 /* CCFileUtils.h in Headers */,
 				08F4AB121C6E98A1004DAAF7 /* CGPointExtension.h in Headers */,
 				08F4AB131C6E98A1004DAAF7 /* CCPlatformTextFieldIOS.h in Headers */,
+				006768061D902DDA006C84F1 /* CCImageResizer.h in Headers */,
 				08F4AB151C6E98A1004DAAF7 /* CCLayoutBox.h in Headers */,
 				08F4AB171C6E98A1004DAAF7 /* CCRenderDispatch.h in Headers */,
 				08F4AB181C6E98A1004DAAF7 /* CCTextField.h in Headers */,
@@ -1546,6 +1550,7 @@
 				7A59474919E3730D00F65F90 /* CCGL.h in Headers */,
 				7A59474A19E3730D00F65F90 /* CCNS.h in Headers */,
 				7A59474B19E3730E00F65F90 /* cocos2d.h in Headers */,
+				006768051D902DD9006C84F1 /* CCImageResizer.h in Headers */,
 				7A59474D19E3730E00F65F90 /* ccFPSImages.h in Headers */,
 				7A59474F19E3730F00F65F90 /* ccConfig.h in Headers */,
 				7A59475019E3730F00F65F90 /* CCDirector.h in Headers */,
@@ -1781,6 +1786,7 @@
 				08F4AAEA1C6E98A1004DAAF7 /* CCLayout.m in Sources */,
 				08F4AAEB1C6E98A1004DAAF7 /* ccFPSImages.m in Sources */,
 				08F4AAEC1C6E98A1004DAAF7 /* CCTableView.m in Sources */,
+				006768071D902DDD006C84F1 /* CCImageResizer.m in Sources */,
 				08F4AAED1C6E98A1004DAAF7 /* CCSprite9Slice.m in Sources */,
 				08F4AAEE1C6E98A1004DAAF7 /* NSAttributedString+CCAdditions.m in Sources */,
 				08F4AAEF1C6E98A1004DAAF7 /* CCLayoutBox.m in Sources */,
