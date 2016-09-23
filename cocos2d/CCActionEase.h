@@ -27,6 +27,8 @@
 
 #import "CCActionInterval.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - Ease Actions
 /**
  CCActionEase is an abstract class that adds the ability to interpolate an action over time using quadratic functions. Easing essentially
@@ -305,4 +307,4 @@
 
 @end
 
-
+NS_ASSUME_NONNULL_END

@@ -31,6 +31,8 @@
 #import "CCResponderManager.h"
 #import "ccMacros.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
   CCResponder is the base class for all nodes.
   It exposes the touch and mouse interface to any node, which enables user interaction.
@@ -86,7 +88,7 @@
 /**
  *  Touches are required to pass hit area test for this mask too.
  */
-@property (nonatomic, weak) CCResponder *responderHitAreaMask;
+@property (nonatomic, weak, nullable) CCResponder *responderHitAreaMask;
 
 /**
  *  If true will act as a hit area mask for children.
@@ -253,3 +255,5 @@
 #endif
 
 @end
+
+NS_ASSUME_NONNULL_END

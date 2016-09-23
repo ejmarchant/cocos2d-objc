@@ -30,6 +30,8 @@
 @class CCColor;
 #import "../ccTypes.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 BOOL NSAttributedStringHasAttribute(NSAttributedString *attrString, NSString*attr);
 
 NSAttributedString* NSAttributedStringCopyAdjustedForContentScaleFactor(NSAttributedString *attrString);
@@ -43,3 +45,5 @@ BOOL NSMutableAttributedStringFixPlatformSpecificAttributes(NSMutableAttributedS
                                                             NSString* defaultFontName,
                                                             CGFloat defaultFontSize,
                                                             CCTextAlignment defaultHorizontalAlighment);
+
+NS_ASSUME_NONNULL_END

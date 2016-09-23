@@ -27,6 +27,8 @@
 #import <Foundation/Foundation.h>
 #import "Platforms/CCGL.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 #define CC_MINIMUM_TABLET_SCREEN_DIAGONAL 6.0
 extern Class CCGraphicsBufferClass;
 extern Class CCGraphicsBufferBindingsClass;
@@ -182,3 +184,5 @@ typedef NS_ENUM(NSUInteger, CCGraphicsAPI) {
 -(void) dumpInfo;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CoreGraphics.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class CCControl;
 
 @class CCPlatformTextField;
@@ -24,8 +26,10 @@
 - (void) onEnterTransitionDidFinish;
 - (void) onExitTransitionDidStart;
 - (void) setFontSize:(float)fontSize;
-@property (nonatomic, weak) id<CCPlatformTextFieldDelegate> delegate;
+@property (nonatomic, weak, nullable) id<CCPlatformTextFieldDelegate> delegate;
 @property (nonatomic) NSString * string;
 @property (nonatomic) BOOL hidden;
 @property (nonatomic, readonly) id nativeTextField;
 @end
+
+NS_ASSUME_NONNULL_END

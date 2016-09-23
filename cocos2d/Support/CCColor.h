@@ -31,6 +31,7 @@
 #import <UIKit/UIColor.h>
 #endif
 
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  A CCColor object represents color and sometimes opacity (alpha value) for use with Cocos2D objects.
@@ -400,3 +401,5 @@
 - (BOOL)isEqualToColor:(CCColor*) color;
 
 @end
+
+NS_ASSUME_NONNULL_END

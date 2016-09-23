@@ -35,6 +35,8 @@
 
 #import "CCActionInterval.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -322,3 +324,5 @@ extern "C" {
 - (id)initWithDuration:(CCTime)dt points:(CCPointArray*)points;
 
 @end
+
+NS_ASSUME_NONNULL_END

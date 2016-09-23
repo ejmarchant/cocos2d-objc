@@ -28,6 +28,8 @@
 #import "../cocos2d/CCSprite.h"
 #import "CCActionProgressTimer.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 /** Progress Node type used by CCProgressNode. */
 typedef NS_ENUM(NSUInteger, CCProgressNodeType) {
 	/** Reveals radial (like radar blip) in counter-clockwise direction. */
@@ -69,7 +71,7 @@ typedef NS_ENUM(NSUInteger, CCProgressNodeType) {
  *  @return The CCProgressNode Object.
  *  @see CCSprite
  */
-+(instancetype)progressWithSprite:(CCSprite*) sprite;
++(instancetype)progressWithSprite:(nullable CCSprite*) sprite;
 
 /**
  *  Initializes and returns a progress node object using the specified sprite value.
@@ -79,7 +81,7 @@ typedef NS_ENUM(NSUInteger, CCProgressNodeType) {
  *  @return An initialized CCProgressNode Object.
  *  @see CCSprite
  */
--(id)initWithSprite:(CCSprite*) sprite;
+-(id)initWithSprite:(nullable CCSprite*) sprite;
 
 /// -----------------------------------------------------------------------
 /// @name Changing Progress Behavior
@@ -115,6 +117,8 @@ typedef NS_ENUM(NSUInteger, CCProgressNodeType) {
 
 /** The CCSprite used by the progress node.
  @see CCSprite */
-@property (nonatomic, readwrite, strong) CCSprite *sprite;
+@property (nonatomic, readwrite, strong, nullable) CCSprite *sprite;
 
 @end
+
+NS_ASSUME_NONNULL_END

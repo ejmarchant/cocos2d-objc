@@ -2,16 +2,17 @@
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CoreGraphics.h>
 
+NS_ASSUME_NONNULL_BEGIN
 
 @interface CCFileUtils : NSObject
 
 +(instancetype)sharedFileUtils;
 
 // Preferred method.
--(NSString*)fullPathForFilename:(NSString*)filename;
+-(nullable NSString*)fullPathForFilename:(NSString*)filename;
 
 // Deprecated methods.
--(NSString*)fullPathForFilename:(NSString*)filename contentScale:(CGFloat*)contentScale;
+-(nullable NSString*)fullPathForFilename:(NSString*)filename contentScale:(nullable CGFloat*)contentScale;
 -(NSString*)standarizePath:(NSString*)path;
 -(NSString*)fullPathForFilenameIgnoringResolutions:(NSString*)filename;
 -(NSString*)fullPathFromRelativePathIgnoringResolutions:(NSString*)relPath;
@@ -34,8 +35,10 @@ extern "C" {
      *  @return The size of the allocated buffer.
      *  @warning Avoid using this method in new code. See class *Overview*.
      */
-    NSInteger ccLoadFileIntoMemory(const char *filename, unsigned char **out);
-    
+    NSInteger ccLoadFileIntoMemory(const char * _Nonnull filename, unsigned char * _Nonnull * _Nonnull out);
+
 #ifdef __cplusplus
 }
 #endif
+
+NS_ASSUME_NONNULL_END

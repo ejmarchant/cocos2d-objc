@@ -26,6 +26,9 @@
  */
 
 #import "CCNode.h"
+
+NS_ASSUME_NONNULL_BEGIN
+
 #if CC_LIGHTING
 @class CCLightCollection;
 #endif
@@ -57,3 +60,5 @@
 - (id)init;
 
 @end
+
+NS_ASSUME_NONNULL_END

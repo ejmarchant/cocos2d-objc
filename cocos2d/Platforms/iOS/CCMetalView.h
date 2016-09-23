@@ -15,7 +15,7 @@
 
 /** @name Properties */
 
-@property(nonatomic, readonly, strong) id<MTLTexture> destinationTexture;
+@property(nonatomic, readonly, strong, nullable) id<MTLTexture> destinationTexture;
 
 /** returns surface size in pixels */
 @property(nonatomic,readonly) CGSize surfaceSize;

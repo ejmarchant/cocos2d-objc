@@ -27,6 +27,8 @@
 
 #import "Platform/CCPlatformTextField.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class CCPlatformTextField;
 
 /**
@@ -57,7 +59,7 @@
  *
  *  @return Returns a new text field.
  */
-+ (id) textFieldWithSpriteFrame:(CCSpriteFrame*)frame;
++ (id) textFieldWithSpriteFrame:(nullable CCSpriteFrame*)frame;
 
 /**
  Initializes a text field with the specified sprite frame used as its background.
@@ -66,7 +68,7 @@
  
  @return Returns a new text field.
  */
-- (id) initWithSpriteFrame:(CCSpriteFrame*)frame;
+- (id) initWithSpriteFrame:(nullable CCSpriteFrame*)frame;
 
 /** @name Accessing the Platform-Specific Text Field */
 
@@ -102,3 +104,5 @@
 @property (nonatomic,strong) NSString* string;
 
 @end
+
+NS_ASSUME_NONNULL_END

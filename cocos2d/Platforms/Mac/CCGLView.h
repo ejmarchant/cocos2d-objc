@@ -32,6 +32,8 @@
 #import <Cocoa/Cocoa.h>
 #import "../CCDirectorView.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 //#import "../../ccConfig.h"
 
 /** CCGLView
@@ -41,7 +43,7 @@
 @interface CCGLView : NSOpenGLView <CCDirectorView>
 
 /** initializes the CCGLView with a frame rect and an OpenGL context */
-- (id) initWithFrame:(NSRect)frameRect shareContext:(NSOpenGLContext*)context;
+- (nullable id) initWithFrame:(NSRect)frameRect shareContext:(nullable NSOpenGLContext*)context;
 
 /** returns the depth format of the view in BPP */
 - (NSUInteger) depthFormat;
@@ -56,6 +58,8 @@
 
 
 @end
+
+NS_ASSUME_NONNULL_END
 
 #endif // __CC_PLATFORM_MAC
 

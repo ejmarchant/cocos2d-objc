@@ -22,6 +22,8 @@
  * THE SOFTWARE.
  */
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface CCRenderState(){
 	@public
 	BOOL _immutable;
@@ -134,3 +136,5 @@ CCGraphicsBufferPushElements(CCGraphicsBuffer *buffer, size_t requestedCount)
 -(void)bindWithClear:(GLbitfield)mask color:(GLKVector4)color4 depth:(GLclampf)depth stencil:(GLint)stencil;
 
 @end
+
+NS_ASSUME_NONNULL_END

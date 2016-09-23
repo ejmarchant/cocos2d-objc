@@ -27,6 +27,8 @@
 #import <Foundation/Foundation.h>
 #import <sys/time.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class CCProfilingTimer;
 
 /** 
@@ -86,3 +88,5 @@ extern void CCProfilingResetTimingBlock(NSString *timerName);
 extern BOOL kCCProfilerCategorySprite;
 extern BOOL kCCProfilerCategoryBatchSprite;
 extern BOOL kCCProfilerCategoryParticles;
+
+NS_ASSUME_NONNULL_END

@@ -28,6 +28,8 @@
 #import "CCSpriteBatchNode.h"
 #import "Support/uthash.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class CCBMFontConfiguration;
 
 /**
@@ -73,7 +75,7 @@
  *
  *  @return The CCLabelBMFont Object.
  */
-+(instancetype) labelWithString:(NSString*)string fntFile:(NSString*)fntFile;
++(nullable instancetype) labelWithString:(nullable NSString*)string fntFile:(nullable NSString*)fntFile;
 
 /**
  *  Creates and returns a label object using the specified text, font file and alignment values.
@@ -86,7 +88,7 @@
  *  @return The CCLabelBMFont Object.
  *  @see CCTextAlignment
  */
-+(instancetype) labelWithString:(NSString*)string fntFile:(NSString*)fntFile width:(float)width alignment:(CCTextAlignment)alignment;
++(nullable instancetype) labelWithString:(nullable NSString*)string fntFile:(nullable NSString*)fntFile width:(float)width alignment:(CCTextAlignment)alignment;
 
 /**
  *  Creates and returns a label object using the specified text, font file, alignment and image offset values.
@@ -100,7 +102,7 @@
  *  @return The CCLabelBMFont Object.
  *  @see CCTextAlignment
  */
-+(instancetype) labelWithString:(NSString*)string fntFile:(NSString*)fntFile width:(float)width alignment:(CCTextAlignment)alignment imageOffset:(CGPoint)offset;
++(nullable instancetype) labelWithString:(nullable NSString*)string fntFile:(nullable NSString*)fntFile width:(float)width alignment:(CCTextAlignment)alignment imageOffset:(CGPoint)offset;
 
 /**
  *  Initializes and returns a label object using the specified text and font file values.
@@ -110,7 +112,7 @@
  *
  *  @return An initialized CCLabelBMFont Object.
  */
--(id) initWithString:(NSString*)string fntFile:(NSString*)fntFile;
+-(nullable id) initWithString:(nullable NSString*)string fntFile:(nullable NSString*)fntFile;
 
 /**
  *  Initializes and returns a label object using the specified text, font file and alignment values.
@@ -123,7 +125,7 @@
  *  @return An initialized CCLabelBMFont Object.
  *  @see CCTextAlignment
  */
--(id) initWithString:(NSString*)string fntFile:(NSString*)fntFile width:(float)width alignment:(CCTextAlignment)alignment;
+-(nullable id) initWithString:(nullable NSString*)string fntFile:(nullable NSString*)fntFile width:(float)width alignment:(CCTextAlignment)alignment;
 
 /**
  *  Initializes and returns a label object using the specified text, font file, alignment and image offset values.
@@ -137,7 +139,7 @@
  *  @return An initialized CCLabelBMFont Object.
  *  @see CCTextAlignment
  */
--(id) initWithString:(NSString*)string fntFile:(NSString*)fntFile width:(float)width alignment:(CCTextAlignment)alignment imageOffset:(CGPoint)offset;
+-(nullable id) initWithString:(nullable NSString*)string fntFile:(nullable NSString*)fntFile width:(float)width alignment:(CCTextAlignment)alignment imageOffset:(CGPoint)offset;
 
 
 /// -----------------------------------------------------------------------
@@ -288,7 +290,7 @@ typedef struct _KerningHashElement {
 @property (nonatomic, readwrite, strong) NSString *atlasName;
 
 // Creates and returns a CCBMFontConfiguration object from a specified font file value.
-+(instancetype) configurationWithFNTFile:(NSString*)FNTfile;
++(nullable instancetype) configurationWithFNTFile:(NSString*)FNTfile;
 
 
 /// -----------------------------------------------------------------------
@@ -296,7 +298,7 @@ typedef struct _KerningHashElement {
 /// -----------------------------------------------------------------------
 
 //  Initializes and returns a CCBMFontConfiguration object from a specified font file value.
--(id) initWithFNTfile:(NSString*)FNTfile;
+-(nullable id) initWithFNTfile:(NSString*)FNTfile;
 
 @end
 
@@ -311,3 +313,4 @@ CCBMFontConfiguration* FNTConfigLoadFile(NSString *file);
 // Clear font configuration cache.
 void FNTConfigRemoveCache(void);
 
+NS_ASSUME_NONNULL_END

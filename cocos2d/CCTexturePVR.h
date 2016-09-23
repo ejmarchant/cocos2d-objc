@@ -50,6 +50,8 @@ Copyright (C) 2008 Apple Inc. All Rights Reserved.
 #import "Platforms/CCGL.h"
 #import "CCTexture.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 struct CCPVRMipmap {
 	unsigned char *address;
 	unsigned int len;
@@ -127,7 +129,7 @@ enum {
  *
  *  @return The CCTexturePVR object.
  */
-+(instancetype)pvrTextureWithContentsOfFile:(NSString *)path;
++(instancetype)pvrTextureWithContentsOfFile:(nullable NSString *)path;
 
 /**
  *  Creates and returns a PVR Texture from the specified URL value.
@@ -136,7 +138,7 @@ enum {
  *
  *  @return The CCTexturePVR object.
  */
-+(instancetype)pvrTextureWithContentsOfURL:(NSURL *)url;
++(instancetype)pvrTextureWithContentsOfURL:(nullable NSURL *)url;
 
 
 /// -----------------------------------------------------------------------
@@ -150,7 +152,7 @@ enum {
  *
  *  @return An initialized CCTexturePVR object.
  */
--(id)initWithContentsOfFile:(NSString *)path;
+-(id)initWithContentsOfFile:(nullable NSString *)path;
 
 /**
  *  Initializes a PVR Texture from the specified URL value.
@@ -159,7 +161,7 @@ enum {
  *
  *  @return An initialized CCTexturePVR object.
  */
--(id)initWithContentsOfURL:(NSURL *)url;
+-(id)initWithContentsOfURL:(nullable NSURL *)url;
 
 
 /// -----------------------------------------------------------------------
@@ -195,4 +197,4 @@ enum {
 
 @end
 
-
+NS_ASSUME_NONNULL_END

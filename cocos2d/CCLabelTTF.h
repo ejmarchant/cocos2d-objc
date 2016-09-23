@@ -29,6 +29,8 @@
 #import "CCSprite.h"
 #import "Platforms/CCNS.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  CCLabelTTF displays text rendered using a TrueType (TTF, OTF) font.
  
@@ -88,7 +90,7 @@
  *
  *  @return The CCLabelTTF Object.
  */
-+(instancetype) labelWithString:(NSString *)string fontName:(NSString *)name fontSize:(CGFloat)size;
++(instancetype) labelWithString:(NSString *)string fontName:(nullable NSString *)name fontSize:(CGFloat)size;
 
 /**
  *  Creates and returns a label object using the specified text, font name, font size and dimensions.
@@ -100,7 +102,7 @@
  *
  *  @return The CCLabelTTF Object.
  */
-+(instancetype) labelWithString:(NSString *)string fontName:(NSString *)name fontSize:(CGFloat)size dimensions:(CGSize)dimensions;
++(instancetype) labelWithString:(NSString *)string fontName:(nullable NSString *)name fontSize:(CGFloat)size dimensions:(CGSize)dimensions;
 
 /**
  *  Initializes and returns a label object using the specified text, font name and font size.
@@ -111,7 +113,7 @@
  *
  *  @return An initialized CCLabelTTF Object.
  */
--(id) initWithString:(NSString*)string fontName:(NSString*)name fontSize:(CGFloat)size;
+-(id) initWithString:(NSString*)string fontName:(nullable NSString*)name fontSize:(CGFloat)size;
 
 /**
  *  Initializes and returns a label object using the specified text, font name, font size and dimensions.
@@ -123,7 +125,7 @@
  *
  *  @return An initialized CCLabelTTF Object.
  */
--(id) initWithString:(NSString*)string fontName:(NSString*)name fontSize:(CGFloat)size dimensions:(CGSize)dimensions;
+-(id) initWithString:(NSString*)string fontName:(nullable NSString*)name fontSize:(CGFloat)size dimensions:(CGSize)dimensions;
 
 /// -----------------------------------------------------------------------
 /// @name Creating an Attributed Truetype Font Label
@@ -187,7 +189,7 @@
 @property (nonatomic,copy) NSAttributedString* attributedString;
 
 /** The platform font name to use for the text. */
-@property (nonatomic,strong) NSString* fontName;
+@property (nonatomic,strong,nullable) NSString* fontName;
 
 /** The font size of the text. */
 @property (nonatomic,assign) CGFloat fontSize;
@@ -284,7 +286,9 @@
  *
  *  @return Registered font name. Returns nil if the font file failed to register.
  */
-+(NSString *) registerCustomTTF:(NSString*)fontFile;
++(nullable NSString *) registerCustomTTF:(NSString*)fontFile;
 
 
 @end
+
+NS_ASSUME_NONNULL_END

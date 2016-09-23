@@ -24,6 +24,8 @@
  */
 #import "CCControl.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class CCProgressNode, CCSprite, CCColor;
 
 /** 
@@ -118,3 +120,5 @@
 #pragma mark - Public Methods
 
 @end
+
+NS_ASSUME_NONNULL_END

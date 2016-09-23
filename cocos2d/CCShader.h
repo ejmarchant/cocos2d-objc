@@ -39,6 +39,8 @@
 #define CC_METAL(x) @#x
 #endif
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class CCRenderer;
 typedef void (^CCUniformSetter)(
                                 __unsafe_unretained CCRenderer *renderer,
@@ -96,15 +98,15 @@ extern NSString * const CCShaderUniformAlphaTestValue;
  @param fragmentSource The fragment shader's source code string. Must not be nil.
  @returns The created CCShader instance, or nil if there was a compile error in either of the two shader programs.
  */
--(instancetype)initWithVertexShaderSource:(NSString *)vertexSource fragmentShaderSource:(NSString *)fragmentSource;
+-(nullable instancetype)initWithVertexShaderSource:(NSString *)vertexSource fragmentShaderSource:(NSString *)fragmentSource;
 /** Creates a shader with the given fragment shader source code as string.
  When the GL renderer is running, GLSL source is expected. When the Metal renderer is running, Metal shading language source is expected.
  @param source The fragment shader's source code string. Must not be nil.
  @returns The created CCShader instance, or nil if there was a compile error in the shader programs.
  */
--(instancetype)initWithFragmentShaderSource:(NSString *)source;
+-(nullable instancetype)initWithFragmentShaderSource:(NSString *)source;
 
--(instancetype)initWithRawVertexShaderSource:(NSString *)vertexSource rawFragmentShaderSource:(NSString *)fragmentSource;
+-(nullable instancetype)initWithRawVertexShaderSource:(NSString *)vertexSource rawFragmentShaderSource:(NSString *)fragmentSource;
 
 #if __CC_METAL_SUPPORTED_AND_ENABLED
 /** @name Creating a Metal Shader */
@@ -125,7 +127,7 @@ extern NSString * const CCShaderUniformAlphaTestValue;
  When the GL renderer is running, this searches for a file name "shaderName.fsh" for the fragment shader, and optionally "shaderName.vsh" for the vertex shader.
  When the Metal renderer is running it searces in CCShaders.metallib for a fragment function named "shaderNameFS" and optionally a vertex function named "shaderNameVS".
  @param shaderName The shader's unique name. */
-+(instancetype)shaderNamed:(NSString *)shaderName;
++(nullable instancetype)shaderNamed:(NSString *)shaderName;
 
 /** @name Obtaining a Built-In Shader */
 
@@ -144,3 +146,5 @@ extern NSString * const CCShaderUniformAlphaTestValue;
 @property(nonatomic, copy) NSString *debugName;
 
 @end
+
+NS_ASSUME_NONNULL_END

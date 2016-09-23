@@ -28,6 +28,8 @@
 
 #import "ccTypes.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class CCScheduler;
 
 // Targets are things that can have update: and fixedUpdate: methods called by the scheduler.
@@ -82,7 +84,7 @@
 
 // purposefully undocumented
 /* Track an object along with the timer. [CCNode schedule:interval:] methods use this to store the selector name. */
-@property(nonatomic, strong) id userData;
+@property(nonatomic, strong, nullable) id userData;
 
 // purposefully undocumented: same as setting repeatCount and repeatInterval
 // Set the timer to repeat once with the given interval.
@@ -152,22 +154,24 @@ typedef void (^CCTimerBlock)(CCTimer *timer);
  */
 -(void) update:(CCTime)dt;
 
--(CCTimer *)scheduleBlock:(CCTimerBlock)block forTarget:(NSObject<CCSchedulerTarget> *)target withDelay:(CCTime)delay;
+-(CCTimer *)scheduleBlock:(CCTimerBlock)block forTarget:(nullable NSObject<CCSchedulerTarget> *)target withDelay:(CCTime)delay;
 
--(void) scheduleTarget:(NSObject<CCSchedulerTarget> *)target;
+-(void) scheduleTarget:(nullable NSObject<CCSchedulerTarget> *)target;
 
 /* Unschedules all selectors and blocks for a given target.
  This also includes the "update" selector.
  */
--(void) unscheduleTarget:(NSObject<CCSchedulerTarget> *)target;
+-(void) unscheduleTarget:(nullable NSObject<CCSchedulerTarget> *)target;
 
 // TODO This is no longer needed and should maybe be removed or made a testing only method.
--(BOOL) isTargetScheduled:(NSObject<CCSchedulerTarget> *)target;
+-(BOOL) isTargetScheduled:(nullable NSObject<CCSchedulerTarget> *)target;
 
--(void)setPaused:(BOOL)paused target:(NSObject<CCSchedulerTarget> *)target;
+-(void)setPaused:(BOOL)paused target:(nullable NSObject<CCSchedulerTarget> *)target;
 
--(BOOL) isTargetPaused:(NSObject<CCSchedulerTarget> *)target;
+-(BOOL) isTargetPaused:(nullable NSObject<CCSchedulerTarget> *)target;
 
--(NSArray *)timersForTarget:(NSObject<CCSchedulerTarget> *)target;
+-(NSArray *)timersForTarget:(nullable NSObject<CCSchedulerTarget> *)target;
 
 @end
+
+NS_ASSUME_NONNULL_END

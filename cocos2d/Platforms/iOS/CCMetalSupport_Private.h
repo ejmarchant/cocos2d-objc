@@ -30,6 +30,8 @@
 
 #import "../../CCRenderer_Private.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 // The number of buffer/texture/sampler cannot be queried.
 // They are only defined in the Metal docs to be 31/31/16.
 // Need to do something smarter here. (So does Apple...)
@@ -60,13 +62,13 @@
 	id<MTLRenderCommandEncoder> _currentRenderCommandEncoder;
 }
 
-@property(nonatomic, readonly) id<MTLDevice> device;
-@property(nonatomic, readonly) id<MTLLibrary> library;
+@property(nonatomic, readonly, nullable) id<MTLDevice> device;
+@property(nonatomic, readonly, nullable) id<MTLLibrary> library;
 
-@property(nonatomic, readonly) id<MTLCommandQueue> commandQueue;
-@property(nonatomic, readonly) id<MTLCommandBuffer> currentCommandBuffer;
+@property(nonatomic, readonly, nullable) id<MTLCommandQueue> commandQueue;
+@property(nonatomic, readonly, nullable) id<MTLCommandBuffer> currentCommandBuffer;
 
-@property(nonatomic, readonly) id<MTLRenderCommandEncoder> currentRenderCommandEncoder;
+@property(nonatomic, readonly, nullable) id<MTLRenderCommandEncoder> currentRenderCommandEncoder;
 
 +(instancetype)currentContext;
 +(void)setCurrentContext:(CCMetalContext *)context;
@@ -100,8 +102,10 @@
 
 @interface CCFrameBufferObjectMetal : CCFrameBufferObject
 
-@property(nonatomic, strong) id<MTLTexture> frameBufferTexture;
+@property(nonatomic, strong, nullable) id<MTLTexture> frameBufferTexture;
 
 @end
+
+NS_ASSUME_NONNULL_END
 
 #endif

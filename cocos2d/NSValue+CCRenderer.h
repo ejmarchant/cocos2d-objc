@@ -24,6 +24,8 @@
 
 #import "ccTypes.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 /** NSValue category to easily create NSValue from GLKit structs. Mainly used internally by CCRenderer and CCEffect classes. */
 @interface NSValue(CCRenderer)
 
@@ -44,3 +46,5 @@
 +(NSValue *)valueWithGLKMatrix4:(GLKMatrix4)matrix;
 
 @end
+
+NS_ASSUME_NONNULL_END

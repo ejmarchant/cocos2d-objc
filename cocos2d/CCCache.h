@@ -28,10 +28,12 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface CCCacheEntry : NSObject
 
-@property(nonatomic, strong) id sharedData;
-@property(nonatomic, weak) id publicObject;
+@property(nonatomic, strong, nullable) id sharedData;
+@property(nonatomic, weak, nullable) id publicObject;
 
 @end
 
@@ -46,7 +48,7 @@
 
 - (void)preload:(id<NSCopying>)key;
 
-- (id)rawObjectForKey:(id<NSCopying>)key;
+- (nullable id)rawObjectForKey:(id<NSCopying>)key;
 - (id)objectForKey:(id<NSCopying>)key;
 - (void)makeAlias:(id<NSCopying>)alias forKey:(id<NSCopying>)key;
 - (BOOL)keyExists:(id<NSCopying>)key;
@@ -61,3 +63,5 @@
 //------------------------------------------------------------------------------
 
 @end
+
+NS_ASSUME_NONNULL_END

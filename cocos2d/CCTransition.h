@@ -29,6 +29,8 @@
 #import "cocos2d.h"
 #import "CCScene.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  A transition animates the presentation of a new scene while moving the current scene out of view.
  A transition is optionally played when calling one of the presentScene:withTransition: methods of CCDirector.
@@ -112,13 +114,13 @@
  *  CCRenderTexture, holding the incoming scene as a texture
  *  Only valid after prepareTransition has been called.
  */
-@property (nonatomic, readonly) CCRenderTexture *incomingTexture;
+@property (nonatomic, readonly, nullable) CCRenderTexture *incomingTexture;
 
 /**
  *  CCRenderTexture, holding the outgoing scene as a texture
  *  Only valid after prepareTransition has been called.
  */
-@property (nonatomic, readonly) CCRenderTexture *outgoingTexture;
+@property (nonatomic, readonly, nullable) CCRenderTexture *outgoingTexture;
 
 /// -----------------------------------------------------------------------
 /// @name Transition Running Time and Progress
@@ -233,3 +235,5 @@ typedef NS_ENUM(NSInteger, CCTransitionDirection)
 
 
 @end
+
+NS_ASSUME_NONNULL_END

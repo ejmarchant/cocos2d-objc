@@ -24,6 +24,8 @@
 
 #import "CCControl.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 /** Methods Used by Sub-Classes */
 @interface CCControl (Implemented_by_Subclasses)
 
@@ -63,7 +65,7 @@
  @see CCControlState
  @see valueForKey:state:
  */
-- (void) setValue:(id)value forKey:(NSString *)key state:(CCControlState) state;
+- (void) setValue:(nullable id)value forKey:(NSString *)key state:(CCControlState) state;
 
 /**
  *  Can be implemented by sub-classes. Override this method to return values of custom properties that are set by state.
@@ -74,7 +76,7 @@
  *  @return The value for the specified key and value or `NULL` if no such value exist.
  *  @see setValue:forKey:state:
  */
-- (id) valueForKey:(NSString *)key state:(CCControlState)state;
+- (nullable id) valueForKey:(NSString *)key state:(CCControlState)state;
 
 /** @name Input Event Handling */
 #if __CC_PLATFORM_IOS
@@ -163,3 +165,5 @@
 #endif
 
 @end
+
+NS_ASSUME_NONNULL_END

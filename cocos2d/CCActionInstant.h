@@ -28,6 +28,8 @@
 #import "CCAction.h"
 #import "CCSpriteFrame.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  Base class for instant actions, ie actions which perform their task immediately and quit.
  
@@ -237,7 +239,7 @@
 
 // purposefully undocumented: there's little to no need to change the action's target
 /* Target for the selector that will be called. */
-@property (nonatomic, readwrite, weak) id targetCallback;
+@property (nonatomic, readwrite, weak, nullable) id targetCallback;
 
 
 /// -----------------------------------------------------------------------
@@ -252,7 +254,7 @@
  *
  *  @return The call func action object.
  */
-+ (id)actionWithTarget:(id)t selector:(SEL)s;
++ (id)actionWithTarget:(nullable id)t selector:(SEL)s;
 
 /**
  *  Initializes the action with the callback.
@@ -262,7 +264,7 @@
  *
  *  @return An initialized call func action object.
  */
-- (id)initWithTarget:(id)t selector:(SEL)s;
+- (id)initWithTarget:(nullable id)t selector:(SEL)s;
 
 @end
 
@@ -369,3 +371,4 @@
 
 @end
 
+NS_ASSUME_NONNULL_END

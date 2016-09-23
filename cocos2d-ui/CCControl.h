@@ -24,6 +24,8 @@
 
 #import "../cocos2d/CCNode.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  The possible states for a CCControl.
  */
@@ -135,7 +137,7 @@ typedef NS_ENUM(NSUInteger, CCControlState)
  
  @see setTarget:selector:
  */
-@property (nonatomic,copy) void(^block)(id sender);
+@property (nonatomic,copy,nullable) void(^block)(id sender);
 
 /**
  Sets a target and selector that should be called when an action is triggered by the control. Actions are generated when buttons are clicked, sliders are dragged etc.
@@ -157,3 +159,5 @@ typedef NS_ENUM(NSUInteger, CCControlState)
 -(void) setTarget:(id)target selector:(SEL)selector;
 
 @end
+
+NS_ASSUME_NONNULL_END

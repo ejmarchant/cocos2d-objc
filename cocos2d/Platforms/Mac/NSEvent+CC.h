@@ -29,6 +29,8 @@
 
 #import <Cocoa/Cocoa.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class CCNode;
 
 @interface NSEvent (CC)
@@ -38,5 +40,7 @@
 - (CGPoint) locationInWorld;
 
 @end
+
+NS_ASSUME_NONNULL_END
 
 #endif

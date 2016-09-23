@@ -32,6 +32,8 @@
 
 #import <Foundation/Foundation.h> //	for NSObject
 
+NS_ASSUME_NONNULL_BEGIN
+
 //#if __CC_PLATFORM_IOS 
 //
 //#define CCRectFromString(__r__)		CGRectFromString(__r__)
@@ -159,4 +161,4 @@ static inline NSString *CCNSStringFromCGAffineTransform(CGAffineTransform m)
 #define CCNSPointToCGPoint			NSPointToCGPoint
 #endif
 
-
+NS_ASSUME_NONNULL_END

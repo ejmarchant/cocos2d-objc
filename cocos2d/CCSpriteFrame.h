@@ -29,6 +29,8 @@
 #import "CCNode.h"
 #import "CCProtocols.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 /** 
  A CCSpriteFrame contains the texture and rectangle of the texture to be used by a CCSprite.
 
@@ -132,10 +134,11 @@
 
 /** Texture used by the frame.
  @see CCTexture */
-@property (nonatomic, strong, readonly) CCTexture *texture;
+@property (nonatomic, strong, readonly, nullable) CCTexture *texture;
 
 /** Texture image file name used to create the texture. */
-@property (nonatomic, strong, readonly) NSString *textureFilename;
+@property (nonatomic, strong, readonly, nullable) NSString *textureFilename;
 
 @end
 
+NS_ASSUME_NONNULL_END

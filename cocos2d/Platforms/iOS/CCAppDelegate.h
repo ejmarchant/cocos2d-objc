@@ -30,6 +30,8 @@
 #import <UIKit/UIKit.h>
 #import "CCDirectorIOS.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class CCAppDelegate;
 @class CCScene;
 
@@ -62,7 +64,7 @@
 /**
  *  The [UIWindow](https://developer.apple.com/Library/ios/documentation/UIKit/Reference/UIWindow_Class/index.html) containing the Cocos2D view.
  */
-@property (nonatomic, strong) UIWindow *window;
+@property (nonatomic, strong, nullable) UIWindow *window;
 
 /**
  The navigation controller that Cocos2D is using.
@@ -70,7 +72,7 @@
  @note The CCNavigationController is a subclass of [UINavigationController](https://developer.apple.com/library/ios/documentation/Uikit/reference/UINavigationController_Class/index.html).
  It implements certain navigation controller methods mainly related to orientation and projection changes Cocos2D needs to know about. Other than that it is just a regular UINavigationController.
  */
-@property (atomic, readonly) CCNavigationController *navController;
+@property (atomic, readonly, nullable) CCNavigationController *navController;
 
 // -----------------------------------------------------------------------
 /** @name Cocos2d Setup */
@@ -100,5 +102,7 @@
 - (void) setupCocos2dWithOptions:(NSDictionary*)config;
 
 @end
+
+NS_ASSUME_NONNULL_END
 
 #endif

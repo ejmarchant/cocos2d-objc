@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CoreGraphics.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 // Works for png & pvr.
 // Note: pvr files will be converted into RGBA8888, so will lose memory advantages.
 // Is about 2.5x slower than loading a lower res image when reszing by a factor of 0.5.
@@ -28,6 +30,8 @@
 // The resizing scale factor is:
 //   _assetUIScaleFactor * [[CCDirector sharedDirector] contentScaleFactor] / _baseAssetScaleFactor
 
--(CCTexture*)resizedTextureOfBaseTextureWithName:(NSString*)fileName;
+-(nullable CCTexture*)resizedTextureOfBaseTextureWithName:(NSString*)fileName;
 
 @end
+
+NS_ASSUME_NONNULL_END

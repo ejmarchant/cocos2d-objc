@@ -27,6 +27,8 @@
 #import <Foundation/Foundation.h>
 #import "CCActionInterval.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 /** CCActionTween lets you modify a node property over time.
  
  Usage Example that modifies the `rotationalSkewX` property of a target from 0 to 89 in 2.5 seconds:
@@ -72,3 +74,5 @@
 - (id)initWithDuration:(CCTime)aDuration key:(NSString *)key from:(float)from to:(float)to;
 
 @end
+
+NS_ASSUME_NONNULL_END

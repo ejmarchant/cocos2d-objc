@@ -27,6 +27,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class CCAnimation;
 
 /**
@@ -71,7 +73,7 @@
  *
  *  @return CCAnimation object.
  */
--(CCAnimation*) animationByName:(NSString*)name;
+-(nullable CCAnimation*) animationByName:(NSString*)name;
 
 /**
  *  Add animation to cache using the specified dictionary.
@@ -88,3 +90,5 @@
 -(void) addAnimationsWithFile:(NSString *)plist;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -9,6 +9,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface NSThread (sendBlockToBackground)
 /* performs a block on the thread. It won't wait until it is done. */
 - (void) performBlock:(void (^)(void))block;
@@ -17,6 +19,8 @@
 - (void) performBlock:(void (^)(void))block waitUntilDone:(BOOL)wait;
 
 /* performs a block on the thread. */
-- (void) performBlock:(void (^)(id param))block withObject:(id)object waitUntilDone:(BOOL)wait;
+- (void) performBlock:(void (^)(id param))block withObject:(nullable id)object waitUntilDone:(BOOL)wait;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -33,6 +33,7 @@
 #import <UIKit/UIApplication.h>
 #endif
 
+NS_ASSUME_NONNULL_BEGIN
 
 @class CCTexture;
 @class CCDirector;
@@ -52,10 +53,10 @@
 /// The shader this node will be drawn using.
 @property(nonatomic, strong) CCShader *shader;
 /// The dictionary of shader uniform values that will be passed to the shader.
-@property(nonatomic, readonly) NSMutableDictionary *shaderUniforms;
+@property(nonatomic, readonly, nullable) NSMutableDictionary *shaderUniforms;
 
 /// The rendering state this node will use when rendering.
-@property(nonatomic, readonly, strong) CCRenderState *renderState;
+@property(nonatomic, readonly, strong, nullable) CCRenderState *renderState;
 
 @end
 
@@ -64,7 +65,7 @@
 @protocol CCEffectProtocol <NSObject>
 
 /** Effect which will be applied to this sprite, NOTE: effect will overwrite any custom CCShader settings. */
-@property (nonatomic, strong) CCEffect* effect;
+@property (nonatomic, strong, nullable) CCEffect* effect;
 
 @end
 
@@ -80,7 +81,7 @@
 @property(nonatomic, readwrite, strong) CCBlendMode *blendMode;
 
 /// The rendering state this node will use when rendering.
-@property(nonatomic, readonly, strong) CCRenderState *renderState;
+@property(nonatomic, readonly, strong, nullable) CCRenderState *renderState;
 
 /** set the source blending function for the texture */
 -(void) setBlendFunc:(ccBlendFunc)blendFunc __attribute__((deprecated));
@@ -105,10 +106,10 @@
 @optional
 
 /// The main texture that will be passed to this node's shader.
-@property(nonatomic, strong) CCTexture *texture;
+@property(nonatomic, strong, nullable) CCTexture *texture;
 
 /// The rendering state this node will use when rendering.
-@property(nonatomic, readonly, strong) CCRenderState *renderState;
+@property(nonatomic, readonly, strong, nullable) CCRenderState *renderState;
 
 @end
 
@@ -187,6 +188,8 @@
 -(void) directorDidReshapeProjection:(CCDirector*)director;
 
 #endif // __CC_PLATFORM_IOS
+
+NS_ASSUME_NONNULL_END
 
 @end
 

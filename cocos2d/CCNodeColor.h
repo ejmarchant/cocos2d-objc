@@ -34,6 +34,8 @@
 #import "CCProtocols.h"
 #import "CCNode.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - CCNodeColor
 
 /**
@@ -272,3 +274,4 @@
 
 @end
 
+NS_ASSUME_NONNULL_END

@@ -9,6 +9,8 @@
 #import "CCControl.h"
 #import "../cocos2d/cocos2d.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  A slider is a control where the user drags a handle to set a slider value in the range 0.0 to 1.0.
  
@@ -42,7 +44,7 @@
  *  @param handle     Handle image for the normal state.
  *  @see CCSpriteFrame
  */
-- (id) initWithBackground:(CCSpriteFrame*)background andHandleImage:(CCSpriteFrame*)handle;
+- (id) initWithBackground:(nullable CCSpriteFrame*)background andHandleImage:(nullable CCSpriteFrame*)handle;
 
 
 /// -----------------------------------------------------------------------
@@ -85,7 +87,7 @@
  @see CCSpriteFrame
  @see CCControlState
  */
-- (void) setBackgroundSpriteFrame:(CCSpriteFrame*)spriteFrame forState:(CCControlState)state;
+- (void) setBackgroundSpriteFrame:(nullable CCSpriteFrame*)spriteFrame forState:(CCControlState)state;
 
 /**
  *  Gets the background's sprite frame for the specified state.
@@ -96,7 +98,7 @@
  *  @see CCSpriteFrame
  *  @see CCControlState
  */
-- (CCSpriteFrame*) backgroundSpriteFrameForState:(CCControlState)state;
+- (nullable CCSpriteFrame*) backgroundSpriteFrameForState:(CCControlState)state;
 
 /**
  *  Sets the handle's sprite frame for the specified state. If set to `nil` no handle will be drawn.
@@ -106,7 +108,7 @@
  *  @see CCSpriteFrame
  *  @see CCControlState
  */
-- (void) setHandleSpriteFrame:(CCSpriteFrame*)spriteFrame forState:(CCControlState)state;
+- (void) setHandleSpriteFrame:(nullable CCSpriteFrame*)spriteFrame forState:(CCControlState)state;
 
 /**
  *  Gets the handle's sprite frame for the specified state.
@@ -117,6 +119,8 @@
  *  @see CCSpriteFrame
  *  @see CCControlState
  */
-- (CCSpriteFrame*) handleSpriteFrameForState:(CCControlState)state;
+- (nullable CCSpriteFrame*) handleSpriteFrameForState:(CCControlState)state;
 
 @end
+
+NS_ASSUME_NONNULL_END

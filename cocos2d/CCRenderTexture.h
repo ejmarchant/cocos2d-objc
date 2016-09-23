@@ -35,6 +35,8 @@
 #import <UIKit/UIKit.h>
 #endif // iPHone
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class CCFrameBufferObject;
 
 /**
@@ -292,13 +294,13 @@ typedef NS_ENUM(NSInteger, CCRenderTextureImageFormat)
  
  @note Caller is responsible for releasing the CGImageRef by calling `CGImageRelease(imageRef)` on the returned CG image.
  */
--(CGImageRef) newCGImage;
+-(nullable CGImageRef) newCGImage;
 
 #if __CC_PLATFORM_IOS
 /**
  Returns a UIImage created from the texture.
  */
--(UIImage *) getUIImage;
+-(nullable UIImage *) getUIImage;
 #endif // __CC_PLATFORM_IOS
 
 /**
@@ -362,9 +364,10 @@ typedef NS_ENUM(NSInteger, CCRenderTextureImageFormat)
 
 @interface CCRenderTextureSprite : CCSprite
 
-@property (nonatomic, weak) CCRenderTexture *renderTexture;
+@property (nonatomic, weak, nullable) CCRenderTexture *renderTexture;
 
 - (CGAffineTransform)nodeToWorldTransform;
 
 @end
 
+NS_ASSUME_NONNULL_END

@@ -24,6 +24,8 @@
 
 #import "CCNode.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class CCTapDownGestureRecognizer;
 @class CCScrollView;
 
@@ -163,13 +165,13 @@
 /** @name Assigning Content Node and Delegate */
 
 /** An object that implements the CCScrollViewDelegate protocol. Use this to get informed about scroll view events. */
-@property (nonatomic, weak) id<CCScrollViewDelegate> delegate;
+@property (nonatomic, weak, nullable) id<CCScrollViewDelegate> delegate;
 
 /** The content node. Assigning a new content node will remove and replace the previous one.
  
  @note Assigning a new contentNode will not update the scroll view's [CCNode contentSize] and [CCNode contentSizeType] properties.
  If you need multiple views with varying sizes/pages you will also have to update these properties after assigning a new contentNode with different dimensions or pages. */
-@property (nonatomic,strong) CCNode* contentNode;
+@property (nonatomic,strong,nullable) CCNode* contentNode;
 
 /** @name Scrolling Properties */
 
@@ -237,3 +239,5 @@
 - (void) setVerticalPage:(int)verticalPage animated:(BOOL)animated;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -29,6 +29,8 @@
 
 #import "CCNode.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 /** 
  Node that draws dots, segments and polygons. Draws everything in a single batch draw.
  
@@ -93,3 +95,5 @@
 -(void)clear;
 
 @end
+
+NS_ASSUME_NONNULL_END

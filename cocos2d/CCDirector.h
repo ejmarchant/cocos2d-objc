@@ -35,6 +35,8 @@
 #import "CCRenderer.h"
 #import "Platforms/CCDirectorView.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  Possible OpenGL projections used by CCDirector.
  */
@@ -171,7 +173,7 @@ typedef NS_ENUM(NSUInteger, CCDirectorProjection) {
 
 // Undocumented members (considered private)
 @property ( nonatomic, strong ) CCResponderManager* responderManager;
-@property (nonatomic, readwrite, weak) id<CCDirectorDelegate> delegate;
+@property (nonatomic, readwrite, weak, nullable) id<CCDirectorDelegate> delegate;
 
 
 /** @name Singleton Accessor */
@@ -185,7 +187,7 @@ typedef NS_ENUM(NSUInteger, CCDirectorProjection) {
  executed on this thread due to OpenGL state changes only being allowed on the OpenGL thread.
  
  @returns The Cocos2D thread, typically this will be the main thread. */
-@property (weak, readonly, nonatomic ) NSThread *runningThread;
+@property (weak, readonly, nonatomic, nullable) NSThread *runningThread;
 
 #pragma mark Director - Stats
 
@@ -213,7 +215,7 @@ typedef NS_ENUM(NSUInteger, CCDirectorProjection) {
 
 /// View used by the director for rendering. The CC_VIEW macro equals UIView on iOS, NSOpenGLView on OS X and CCGLView.
 /// @see CCDirectorView
-@property(nonatomic, strong) CC_VIEW<CCDirectorView> *view;
+@property(nonatomic, strong, nullable) CC_VIEW<CCDirectorView> *view;
 /** Sets an OpenGL projection
  @see CCDirectorProjection
  @see projectionMatrix */
@@ -281,7 +283,7 @@ typedef NS_ENUM(NSUInteger, CCDirectorProjection) {
 
 /** The current running Scene. Director can only run one Scene at a time.
  @see presentScene: */
-@property (nonatomic, readonly) CCScene* runningScene;
+@property (nonatomic, readonly, nullable) CCScene* runningScene;
 
 /**
  *  Presents a new scene.
@@ -473,7 +475,7 @@ typedef NS_ENUM(NSUInteger, CCDirectorProjection) {
  This object MUST implement the "visit" selector.
  Useful to hook a notification object, like CCNotifications (http://github.com/manucorporat/CCNotifications)
  */
-@property (nonatomic, readwrite, strong) id	notificationNode;
+@property (nonatomic, readwrite, strong, nullable) id	notificationNode;
 
 /* CCScheduler associated with this director
  */
@@ -511,3 +513,5 @@ extern NSUInteger __ccNumberOfDraws;
 
 // optimization. Should only be used to read it. Never to write it.
 extern CGFloat	__ccContentScaleFactor;
+
+NS_ASSUME_NONNULL_END

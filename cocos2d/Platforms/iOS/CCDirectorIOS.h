@@ -33,6 +33,8 @@
 
 #import "../../CCDirector.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 /** CCDirector extensions for iPhone
  */
 @interface CCDirector (iOSExtension)
@@ -67,5 +69,7 @@
 }
 -(void) mainLoop:(id)sender;
 @end
+
+NS_ASSUME_NONNULL_END
 
 #endif // __CC_PLATFORM_IOS

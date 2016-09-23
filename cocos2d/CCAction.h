@@ -30,6 +30,8 @@
 
 #import "ccTypes.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 enum {
 	//! Default tag
 	kCCActionTagInvalid = -1,
@@ -97,10 +99,10 @@ enum {
  
  @warning The target is 'assigned' (unsafe unretained), it is not 'retained' nor managed by ARC.
  */
-@property (nonatomic,readonly,unsafe_unretained) id target;
+@property (nonatomic,readonly,unsafe_unretained,nullable) id target;
 
 /** The original target, since target can be nil. */
-@property (nonatomic,readonly,unsafe_unretained) id originalTarget;
+@property (nonatomic,readonly,unsafe_unretained,nullable) id originalTarget;
 
 /// -----------------------------------------------------------------------
 /// @name Identifying an Action
@@ -110,7 +112,7 @@ enum {
 @property (nonatomic,readwrite,assign) NSInteger tag;
 
 // NSCopying support.
-- (id)copyWithZone:(NSZone*) zone;
+- (id)copyWithZone:(nullable NSZone*) zone;
 
 
 /// -----------------------------------------------------------------------
@@ -199,7 +201,7 @@ enum {
 
  @return The reversed action.
  */
-- (CCActionFiniteTime *)reverse;
+- (nullable CCActionFiniteTime *)reverse;
 
 @end
 
@@ -431,3 +433,4 @@ enum {
 
 @end
 
+NS_ASSUME_NONNULL_END

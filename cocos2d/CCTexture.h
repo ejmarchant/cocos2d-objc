@@ -73,6 +73,8 @@ Copyright (C) 2008 Apple Inc. All Rights Reserved.
 #import "Platforms/CCGL.h" // OpenGL stuff
 #import "Platforms/CCNS.h" // Next-Step stuff
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class CCSpriteFrame;
 
 /**
@@ -274,7 +276,7 @@ typedef struct _ccTexParams {
  *
  *  @return An initialized CCTexture object.
  */
-- (id)initWithCGImage:(CGImageRef)cgImage contentScale:(CGFloat)contentScale;
+- (nullable id)initWithCGImage:(CGImageRef)cgImage contentScale:(CGFloat)contentScale;
 
 @end
 
@@ -310,7 +312,7 @@ typedef struct _ccTexParams {
 -(NSUInteger)bitsPerPixelForFormat;
 
 /** Returns the pixel format in a NSString. */
--(NSString*)stringForFormat;
+-(nullable NSString*)stringForFormat;
 
 /**
  *  Helper functions that returns bits per pixels for a given format.
@@ -349,7 +351,7 @@ typedef struct _ccTexParams {
  IMPORTANT: This method is only defined on iOS. It is not supported on the Mac version.
  
  */
--(id) initWithPVRFile: (NSString*) file;
+-(nullable id) initWithPVRFile: (NSString*) file;
 
 /* treats (or not) PVR files as if they have alpha premultiplied.
  Since it is impossible to know at runtime if the PVR images have the alpha channel premultiplied, it is
@@ -378,7 +380,7 @@ typedef struct _ccTexParams {
 
 @end
 
-
+NS_ASSUME_NONNULL_END
 
 
 

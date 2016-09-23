@@ -31,6 +31,8 @@
 #import <Foundation/Foundation.h>
 #import "CCSpriteFrame.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class CCSprite;
 @class CCTexture;
 
@@ -177,6 +179,8 @@
  *
  *  @return The CCSpriteFrame object.
  */
--(CCSpriteFrame*) spriteFrameByName:(NSString*)name;
+-(nullable CCSpriteFrame*) spriteFrameByName:(NSString*)name;
 
 @end
+
+NS_ASSUME_NONNULL_END

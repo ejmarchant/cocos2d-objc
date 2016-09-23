@@ -32,6 +32,8 @@
 #import "Support/uthash.h"
 #import "CCScheduler.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 typedef struct _hashElement {
     __unsafe_unretained NSMutableArray	*actions;
 	NSUInteger		actionIndex;
@@ -104,7 +106,7 @@ typedef struct _hashElement {
  *
  *  @return The Action the with the given tag.
  */
--(CCAction*)getActionByTag:(NSInteger) tag target:(id)target;
+-(nullable CCAction*)getActionByTag:(NSInteger) tag target:(id)target;
 
 /**
  *  Returns the numbers of actions that are running in a certain target.
@@ -160,3 +162,4 @@ typedef struct _hashElement {
 
 @end
 
+NS_ASSUME_NONNULL_END

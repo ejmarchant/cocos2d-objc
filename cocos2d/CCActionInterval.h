@@ -31,6 +31,8 @@
 
 #include <sys/time.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  Abstract base class for interval actions. An interval action is an action that performs its task over a certain period of time.
  
@@ -138,7 +140,7 @@
  *
  *  @return Created reversed action.
  */
-- (CCActionInterval*) reverse;
+- (nullable CCActionInterval*) reverse;
 
 /// -----------------------------------------------------------------------
 /// @name Methods implemented by Subclasses
@@ -1046,3 +1048,5 @@ typedef struct _ccBezierConfig {
 -(id) initWithAnimation:(CCAnimation*)animation;
 
 @end
+
+NS_ASSUME_NONNULL_END

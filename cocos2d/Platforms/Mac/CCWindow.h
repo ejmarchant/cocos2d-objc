@@ -30,6 +30,7 @@
 
 #import <Cocoa/Cocoa.h>
 
+NS_ASSUME_NONNULL_BEGIN
 
 @interface CCWindow : NSWindow
 {
@@ -38,5 +39,6 @@
 
 @end
 
+NS_ASSUME_NONNULL_END
 
 #endif // __CC_PLATFORM_MAC

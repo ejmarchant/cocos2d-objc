@@ -33,6 +33,7 @@
 #import "CCScheduler.h"
 #import "CCRenderer.h"
 
+NS_ASSUME_NONNULL_BEGIN
 
 @class CCScene;
 @class CCShader;
@@ -263,7 +264,7 @@
 
 /** Used to store a custom object of any type. For instance you could add a NSMutableDictionary to store custom
  data in a node without needing to subclass the node. */
-@property(nonatomic,readwrite,strong) id userObject;
+@property(nonatomic,readwrite,strong,nullable) id userObject;
 
 
 /// -----------------------------------------------------------------------
@@ -484,7 +485,7 @@
   @see zOrder
   @see name
  */
--(void) addChild: (CCNode*)node z:(NSInteger)z name:(NSString*)name;
+-(void) addChild: (CCNode*)node z:(NSInteger)z name:(nullable NSString*)name;
 
 /** Removes the node from its parent node. Will stop the node's scheduled selectors/blocks and actions.
  @note It is typically more efficient to change a node's visible status rather than remove + addChild: if all you need
@@ -525,7 +526,7 @@
 /** A weak reference to the parent.
  @warning **Never ever change the parent manually!** This must be done exclusively by Cocos2D. This property is not readonly due to historical
  reasons, and this is prone to change. */
-@property(nonatomic,readwrite,weak) CCNode* parent;
+@property(nonatomic,readwrite,weak,nullable) CCNode* parent;
 
 /** Array of child nodes. Used to enumerate child nodes, for instance the following allows you to perform a task on all child nodes with a matching name:
  
@@ -537,14 +538,14 @@
         }
     }
  */
-@property(nonatomic,readonly) NSArray *children;
+@property(nonatomic,readonly,nullable) NSArray *children;
 
 /** The scene this node is added to, or nil if it's not part of a scene.
  
  @note The scene property is nil during a node's init methods. The scene property is set only after addChild: was used to add it
  as a child node to a node that already is in the scene.
  @see CCScene */
-@property(nonatomic, readonly) CCScene *scene;
+@property(nonatomic, readonly, nullable) CCScene *scene;
 
 /// -----------------------------------------------------------------------
 /// @name Removing Nodes without stopping Actions/Scheduling (unsafe!)
@@ -623,7 +624,7 @@
  
  @see getChildByName:recursively:
  @see userObject */
-@property(nonatomic,strong) NSString* name;
+@property(nonatomic,strong,nullable) NSString* name;
 
 /**
   Search through the children of the container for one matching the name tag.
@@ -637,7 +638,7 @@
   @return Returns the first node with a matching name, or nil if no node with that name was found.
  @see name
  */
--(CCNode*) getChildByName:(NSString *)name recursively:(bool)isRecursive;
+-(nullable CCNode*) getChildByName:(NSString *)name recursively:(bool)isRecursive;
 
 /// -----------------------------------------------------------------------
 /// @name Working with Actions
@@ -696,7 +697,7 @@
  *  @return The first action with the given tag, or nil if there's no running action with this tag.
  *  @see CCAction
  */
--(CCAction*) getActionByTag:(NSInteger) tag;
+-(nullable CCAction*) getActionByTag:(NSInteger) tag;
 
 /** Returns the numbers of actions that are running plus the ones that are scheduled to run (actions in the internal actionsToAdd array).
  @note Composable actions are counted as 1 action. Example:
@@ -715,7 +716,7 @@
  @note The animationManager property is nil during a node's init methods.
  @see CCAnimationManager
  */
-@property (nonatomic, assign, readwrite) CCAnimationManager * animationManager;
+@property (nonatomic, assign, readwrite, nullable) CCAnimationManager * animationManager;
 
 
 /// -----------------------------------------------------------------------
@@ -1133,7 +1134,7 @@
  @see CCPhysicsBody
  @see physicsNode
  */
-@property(nonatomic, strong) CCPhysicsBody *physicsBody;
+@property(nonatomic, strong, nullable) CCPhysicsBody *physicsBody;
 
 /// Returns true if the node is not using custom uniforms.
 -(BOOL)hasDefaultShaderUniforms;
@@ -1225,3 +1226,4 @@ CGAffineTransform CGAffineTransformMakeRigid(CGPoint translate, CGFloat radians)
 
 @end
 
+NS_ASSUME_NONNULL_END

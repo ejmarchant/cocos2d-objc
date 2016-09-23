@@ -29,6 +29,8 @@
 #import "CCRenderDispatch.h"
 #import "CCRendererBasicTypes_Private.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 /// Options dictionary for the disabled blending mode.
 extern NSDictionary *CCBLEND_DISABLED_OPTIONS;
 
@@ -124,10 +126,10 @@ typedef NS_ENUM(NSUInteger, CCRenderCommandDrawMode){
 @property(nonatomic, readonly) NSDictionary *globalShaderUniforms;
 
 /// Retrieve the current renderer for the current thread.
-+(instancetype)currentRenderer;
++(nullable instancetype)currentRenderer;
 
 /// Set the current renderer for the current thread.
-+(void)bindRenderer:(CCRenderer *)renderer;
++(void)bindRenderer:(nullable CCRenderer *)renderer;
 
 /// Enqueue a general or custom render command.
 -(void)enqueueRenderCommand: (id<CCRenderCommand>) renderCommand;
@@ -168,3 +170,5 @@ void CCRENDERER_DEBUG_CHECK_ERRORS(void);
 #define CCRENDERER_DEBUG_CHECK_ERRORS();
 
 #endif
+
+NS_ASSUME_NONNULL_END

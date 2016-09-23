@@ -24,6 +24,8 @@
 
 #import "CCControl.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class CCSprite9Slice;
 @class CCLabelTTF;
 @class CCSpriteFrame;
@@ -64,7 +66,7 @@
  *
  *  @return A new button.
  */
-+ (id) buttonWithTitle:(NSString*) title;
++ (id) buttonWithTitle:(nullable NSString*) title;
 
 /**
  *  Creates a new button with a title and no background.
@@ -75,7 +77,7 @@
  *
  *  @return A new button.
  */
-+ (id) buttonWithTitle:(NSString*) title fontName:(NSString*)fontName fontSize:(float)size;
++ (id) buttonWithTitle:(nullable NSString*) title fontName:(nullable NSString*)fontName fontSize:(float)size;
 
 /**
  *  Creates a new button with the specified title for the label and sprite frame for its background.
@@ -86,7 +88,7 @@
  *  @return A new button.
  *  @see CCSpriteFrame
  */
-+ (id) buttonWithTitle:(NSString*) title spriteFrame:(CCSpriteFrame*) spriteFrame;
++ (id) buttonWithTitle:(nullable NSString*) title spriteFrame:(nullable CCSpriteFrame*) spriteFrame;
 
 /**
  *  Creates a new button with the speicified title for the label, sprite frames for its background in different states.
@@ -99,7 +101,7 @@
  *  @return A new button.
  *  @see CCSpriteFrame
  */
-+ (id) buttonWithTitle:(NSString*) title spriteFrame:(CCSpriteFrame*) spriteFrame highlightedSpriteFrame:(CCSpriteFrame*) highlighted disabledSpriteFrame:(CCSpriteFrame*) disabled;
++ (id) buttonWithTitle:(nullable NSString*) title spriteFrame:(nullable CCSpriteFrame*) spriteFrame highlightedSpriteFrame:(nullable CCSpriteFrame*) highlighted disabledSpriteFrame:(nullable CCSpriteFrame*) disabled;
 
 /**
  *  Initializes a new button with a title and no background. Uses default font and font size.
@@ -108,7 +110,7 @@
  *
  *  @return A new button.
  */
-- (id) initWithTitle:(NSString*) title;
+- (id) initWithTitle:(nullable NSString*) title;
 
 /**
  *  Initializes a new button with a title and no background.
@@ -119,7 +121,7 @@
  *
  *  @return A new button.
  */
-- (id) initWithTitle:(NSString *)title fontName:(NSString*)fontName fontSize:(float)size;
+- (id) initWithTitle:(nullable NSString *)title fontName:(nullable NSString*)fontName fontSize:(float)size;
 
 /**
  *  Initializes a new button with the specified title for the label and sprite frame for its background.
@@ -130,7 +132,7 @@
  *  @return A new button.
  *  @see CCSpriteFrame
  */
-- (id) initWithTitle:(NSString*) title spriteFrame:(CCSpriteFrame*) spriteFrame;
+- (id) initWithTitle:(nullable NSString*) title spriteFrame:(nullable CCSpriteFrame*) spriteFrame;
 
 /**
  *  Initializes a new button with the speicified title for the label, sprite frames for its background in different states.
@@ -143,7 +145,7 @@
  *  @return A new button.
  *  @see CCSpriteFrame
  */
-- (id) initWithTitle:(NSString*) title spriteFrame:(CCSpriteFrame*) spriteFrame highlightedSpriteFrame:(CCSpriteFrame*) highlighted disabledSpriteFrame:(CCSpriteFrame*) disabled;
+- (id) initWithTitle:(nullable NSString*) title spriteFrame:(nullable CCSpriteFrame*) spriteFrame highlightedSpriteFrame:(nullable CCSpriteFrame*) highlighted disabledSpriteFrame:(nullable CCSpriteFrame*) disabled;
 
 /// -----------------------------------------------------------------------
 /// @name Button Child Nodes
@@ -234,7 +236,7 @@
  *  @see CCSpriteFrame
  *  @see CCControlState
  */
-- (void) setBackgroundSpriteFrame:(CCSpriteFrame*)spriteFrame forState:(CCControlState)state;
+- (void) setBackgroundSpriteFrame:(nullable CCSpriteFrame*)spriteFrame forState:(CCControlState)state;
 
 /**
  *  Gets the background's sprite frame for the specified state.
@@ -245,7 +247,7 @@
  *  @see CCSpriteFrame
  *  @see CCControlState
  */
-- (CCSpriteFrame*) backgroundSpriteFrameForState:(CCControlState)state;
+- (nullable CCSpriteFrame*) backgroundSpriteFrameForState:(CCControlState)state;
 
 /// -----------------------------------------------------------------------
 /// @name Label Properties
@@ -300,3 +302,5 @@
 - (CGFloat) labelOpacityForState:(CCControlState) state;
 
 @end
+
+NS_ASSUME_NONNULL_END

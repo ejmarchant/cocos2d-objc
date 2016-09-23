@@ -28,6 +28,7 @@
 #import "NSValue+CCRenderer.h"
 #import "CCRendererBasicTypes.h"
 
+NS_ASSUME_NONNULL_BEGIN
 
 /// Check if the given bounding box as specified by it's center and extents (half with/height) is visible onscreen.	
 static inline BOOL
@@ -129,3 +130,4 @@ CCRenderCheckVisbility(const GLKMatrix4 *transform, GLKVector2 center, GLKVector
 
 @end
 
+NS_ASSUME_NONNULL_END

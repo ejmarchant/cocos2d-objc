@@ -25,6 +25,7 @@
 #import "ccTypes.h"
 #import "CCRendererSharedTypes.h"
 
+NS_ASSUME_NONNULL_BEGIN
 
 /// Multiply the vertex's position by the given transform. Pass the rest.
 static inline CCVertex
@@ -158,7 +159,7 @@ extern NSString * const CCBlendEquationAlpha;
 /// @see CCBlendMode
 /// @see CCShader
 /// @see CCTexture
-+(instancetype)renderStateWithBlendMode:(CCBlendMode *)blendMode shader:(CCShader *)shader mainTexture:(CCTexture *)mainTexture;
++(instancetype)renderStateWithBlendMode:(CCBlendMode *)blendMode shader:(CCShader *)shader mainTexture:(nullable CCTexture *)mainTexture;
 
 /// Creates an **uncached** blending mode for a given blending mode, shader and set of uniform values.
 /// Allowing the uniform dictionary to be copied allows the render state to be immutable, which is more efficient.
@@ -186,3 +187,5 @@ extern NSString * const CCBlendEquationAlpha;
 +(instancetype)debugColor;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -28,6 +28,8 @@
 #import "CCProgressNode.h"
 #import "../cocos2d/CCActionInterval.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  *  This action is for use with the CCProgressNode to control the progression to animation.
  *  @warning The target node must be a CCProgressNode or subclass of CCProgressNode.
@@ -96,3 +98,5 @@
 - (id)initWithDuration:(CCTime)duration from:(float)fromPercentage to:(float)toPercentage;
 
 @end
+
+NS_ASSUME_NONNULL_END

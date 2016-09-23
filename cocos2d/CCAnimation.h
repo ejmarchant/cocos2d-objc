@@ -30,6 +30,8 @@
 #import <CoreGraphics/CoreGraphics.h>
 #endif
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class CCSpriteFrame;
 @class CCTexture;
 @class CCSpriteFrame;
@@ -67,7 +69,7 @@
  *  @return An initialized CCAnimationFrame Object.
  *  @see CCSpriteFrame
  */
--(id) initWithSpriteFrame:(CCSpriteFrame*)spriteFrame delayUnits:(float)delayUnits userInfo:(NSDictionary*)userInfo;
+-(id) initWithSpriteFrame:(CCSpriteFrame*)spriteFrame delayUnits:(float)delayUnits userInfo:(nullable NSDictionary*)userInfo;
 
 
 /// -----------------------------------------------------------------------
@@ -82,7 +84,7 @@
 @property (nonatomic, readwrite) float delayUnits;
 
 /** Dictionary with custom user data. */
-@property (nonatomic, readwrite, strong) NSDictionary *userInfo;
+@property (nonatomic, readwrite, strong, nullable) NSDictionary *userInfo;
 
 @end
 
@@ -130,7 +132,7 @@
  *
  *  @return The CCAnimation Object.
  */
-+(instancetype) animationWithSpriteFrames:(NSArray*)arrayOfSpriteFrameNames;
++(instancetype) animationWithSpriteFrames:(nullable NSArray*)arrayOfSpriteFrameNames;
 
 /**
  *  Creates and returns an animation object using the specified CCSpriteFrame array and per frame dealy values.
@@ -140,7 +142,7 @@
  *
  *  @return The CCAnimation Object.
  */
-+(instancetype) animationWithSpriteFrames:(NSArray*)arrayOfSpriteFrameNames delay:(float)delay;
++(instancetype) animationWithSpriteFrames:(nullable NSArray*)arrayOfSpriteFrameNames delay:(float)delay;
 
 /**
  *  Creates and returns an animation object using the specified CCSpriteFrame array, per frame delay and times to repeat animation values.
@@ -160,7 +162,7 @@
  *
  *  @return An initialized CCAnimation Object.
  */
--(id) initWithSpriteFrames:(NSArray*)arrayOfSpriteFrameNames;
+-(id) initWithSpriteFrames:(nullable NSArray*)arrayOfSpriteFrameNames;
 
 /**
  *  Initializes and returns an animation object using the specified CCSpriteFrame array and per frame dealy values.
@@ -170,7 +172,7 @@
  *
  *  @return An initialized CCAnimation Object.
  */
--(id) initWithSpriteFrames:(NSArray *)arrayOfSpriteFrameNames delay:(float)delay;
+-(id) initWithSpriteFrames:(nullable NSArray *)arrayOfSpriteFrameNames delay:(float)delay;
 
 /**
  *  Initializes and returns an animation object using the specified CCSpriteFrame array, per frame delay and times to repeat animation values.
@@ -239,3 +241,5 @@
 @property (nonatomic,readwrite) BOOL restoreOriginalFrame;
 
 @end
+
+NS_ASSUME_NONNULL_END

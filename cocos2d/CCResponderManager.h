@@ -40,6 +40,8 @@
 
 #pragma mark - iOS Running Responder
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  *  Defines a running iOS responder.
  */
@@ -61,6 +63,8 @@
 @property (nonatomic, weak) CCTouchEvent *event;
 
 @end
+
+NS_ASSUME_NONNULL_END
 
 #elif __CC_PLATFORM_MAC
 
@@ -87,6 +91,8 @@ typedef NS_ENUM(NSInteger, CCMouseButton)
 
 #pragma mark - CCRunningResponder
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  *  Defines a running OS X responder.
  */
@@ -104,6 +110,8 @@ typedef NS_ENUM(NSInteger, CCMouseButton)
 
 @end
 
+NS_ASSUME_NONNULL_END
+
 #endif
 
 #pragma mark - CCResponderManager
@@ -118,6 +126,8 @@ enum
 {
     CCResponderManagerBufferSize        = 256,
 };
+
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  The responder manager handles touches.
@@ -197,7 +207,7 @@ enum
  *
  *  @return The CCNode at the position (if any).
  */
-- (CCNode *)nodeAtPoint:(CGPoint)pos;
+- (nullable CCNode *)nodeAtPoint:(CGPoint)pos;
 
 /**
  *  Returns a list of all responders at a certain world position.
@@ -214,13 +224,15 @@ enum
 /// @name CCResponderManager Touch methods
 /// -----------------------------------------------------------------------
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(CCTouchEvent *)event;
+- (void)touchesBegan:(NSSet *)touches withEvent:(nullable CCTouchEvent *)event;
 
-- (void)touchesMoved:(NSSet *)touches withEvent:(CCTouchEvent *)event;
+- (void)touchesMoved:(NSSet *)touches withEvent:(nullable CCTouchEvent *)event;
 
-- (void)touchesEnded:(NSSet *)touches withEvent:(CCTouchEvent *)event;
+- (void)touchesEnded:(NSSet *)touches withEvent:(nullable CCTouchEvent *)event;
 
-- (void)touchesCancelled:(NSSet *)touches withEvent:(CCTouchEvent *)event;
+- (void)touchesCancelled:(NSSet *)touches withEvent:(nullable CCTouchEvent *)event;
 #endif
 
 @end
+
+NS_ASSUME_NONNULL_END

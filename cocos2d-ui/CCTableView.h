@@ -24,6 +24,8 @@
 
 #import "CCScrollView.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class CCButton;
 @class CCTableView;
 
@@ -69,7 +71,7 @@
  @param tableView The CCTableView that is requesting a cell for the index.
  @param index The index of the cell that is requested.
  @returns The CCTableViewCell for the given index. */
-- (id<CCTableViewCellProtocol>) tableView:(CCTableView*)tableView nodeForRowAtIndex:(NSUInteger) index;
+- (nullable id<CCTableViewCellProtocol>) tableView:(CCTableView*)tableView nodeForRowAtIndex:(NSUInteger) index;
 /** Requests the number of rows in the given table view.
  @param tableView The CCTableView for which the number of rows should be returned.
  @returns The number of rows in the table view. */
@@ -169,7 +171,7 @@
  
  @note Assigning a new or different data source immediately calls reloadData.
  */
-@property (nonatomic,strong) id <CCTableViewDataSource> dataSource;
+@property (nonatomic,strong,nullable) id <CCTableViewDataSource> dataSource;
 
 /** Removes all cells from memory and requests a new set of cells from the dataSource.
  Assigning a different dataSource and changing the rowHeight will cause reloadData to run.
@@ -207,7 +209,7 @@
     }
  
  */
-@property (nonatomic,copy) void(^block)(id sender);
+@property (nonatomic,copy,nullable) void(^block)(id sender);
 
 /** Selector that is executed when a row is selected (tapped, clicked). The selector must take one parameter of type `id` and return void:
  
@@ -227,3 +229,5 @@
 -(void) selectedRow:(NSUInteger)row;
 
 @end
+
+NS_ASSUME_NONNULL_END

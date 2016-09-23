@@ -28,6 +28,8 @@
 
 #import "CCNode.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class CCTexture;
 @class CCSprite;
 
@@ -92,3 +94,5 @@ __attribute__((deprecated))
 -(id)initWithFile:(NSString*)fileImage capacity:(NSUInteger)capacity;
 
 @end
+
+NS_ASSUME_NONNULL_END

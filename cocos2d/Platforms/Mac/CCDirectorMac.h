@@ -33,6 +33,8 @@
 #import <QuartzCore/CVDisplayLink.h>
 #import "../../CCDirector.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 enum  {
 	// If the window is resized, it won't be autoscaled
 	kCCDirectorResize_NoScale,
@@ -96,6 +98,8 @@ enum  {
 	CVDisplayLinkRef displayLink;
 }
 @end
+
+NS_ASSUME_NONNULL_END
 
 #endif // __CC_PLATFORM_MAC
 

@@ -33,6 +33,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class CCTexture;
 
 /** Singleton that handles the loading of textures.  Once the texture is loaded, the next time it will return
@@ -63,7 +65,7 @@
  *
  *  @return A CCTexture object.
  */
--(CCTexture*) addImage: (NSString*) fileimage;
+-(nullable CCTexture*) addImage: (NSString*) fileimage;
 
 /**
  * Asynchronously, load a texture2d from a file.
@@ -108,7 +110,7 @@
  *
  *  @return Texture.
  */
--(CCTexture*) addCGImage: (CGImageRef) image forKey: (NSString *)key;
+-(nullable CCTexture*) addCGImage: (CGImageRef) image forKey: (nullable NSString *)key;
 
 /**
  *  Returns an already created texture. Returns nil if the texture doesn't exist.
@@ -117,7 +119,7 @@
  *
  *  @return Texture from cache.
  */
--(CCTexture *) textureForKey:(NSString *)key;
+-(nullable CCTexture *) textureForKey:(NSString *)key;
 
 /** Purges the dictionary of loaded textures.
  * Call this method if you receive the "Memory Warning".
@@ -162,7 +164,7 @@
  *
  *  @return A Texture.
  */
--(CCTexture*) addPVRImage:(NSString*) filename;
+-(nullable CCTexture*) addPVRImage:(NSString*) filename;
 
 @end
 
@@ -173,3 +175,5 @@
 -(void) dumpCachedTextureInfo;
 
 @end
+
+NS_ASSUME_NONNULL_END
