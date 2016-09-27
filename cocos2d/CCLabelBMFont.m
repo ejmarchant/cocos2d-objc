@@ -45,6 +45,7 @@
 #import "Support/CCFileUtils.h"
 #import "Support/CGPointExtension.h"
 #import "Support/uthash.h"
+#import "CCImageResizer.h"
 
 #pragma mark -
 #pragma mark FNTConfig Cache - free functions
@@ -89,7 +90,10 @@ void FNTConfigRemoveCache( void )
 #pragma mark -
 #pragma mark CCBMFontConfiguration
 
-@implementation CCBMFontConfiguration
+@implementation CCBMFontConfiguration {
+    NSInteger _scaleW;
+    NSInteger _scaleH;
+}
 @synthesize characterSet=_characterSet;
 @synthesize atlasName=_atlasName;
 
@@ -107,6 +111,41 @@ void FNTConfigRemoveCache( void )
     
 		NSMutableString *validCharsString = [self parseConfigFile:fntFile];
 		  
+        if ([[CCImageResizer sharedInstance] enableResizing] && (_scaleW > 0 && _scaleH > 0)) {
+            // Rescale rects, offsets, padding etc. if using auto resizing.
+            CGSize baseSize = CGSizeMake(_scaleW, _scaleH);
+            CGSize scaledSize = [[CCImageResizer sharedInstance] integralScaledSize:baseSize];
+            CGFloat scaleX = scaledSize.width / baseSize.width;
+            CGFloat scaleY = scaledSize.height / baseSize.height;
+            
+            _commonHeight = (NSInteger)(_commonHeight * scaleY);
+            
+            _padding.left = (int)(_padding.left * scaleX);
+            _padding.top = (int)(_padding.top * scaleY);
+            _padding.right = (int)(_padding.right * scaleX);
+            _padding.bottom = (int)(_padding.bottom * scaleY);
+            
+            tCCFontDefHashElement *currentFD;
+            tCCFontDefHashElement *tmpFD;
+            HASH_ITER(hh, _fontDefDictionary, currentFD, tmpFD) {
+                ccBMFontDef oldFontDef = currentFD->fontDef;
+                ccBMFontDef newFontDef = (ccBMFontDef){
+                    oldFontDef.charID,
+                    [[CCImageResizer sharedInstance] scaledSubrect:oldFontDef.rect withinBounds:baseSize],
+                    (short)(oldFontDef.xOffset * scaleX),
+                    (short)(oldFontDef.yOffset * scaleY),
+                    (short)(oldFontDef.xAdvance * scaleX)
+                };
+                currentFD->fontDef = newFontDef;
+            }
+            
+            tCCKerningHashElement *currentK;
+            tCCKerningHashElement *tmpK;
+            HASH_ITER(hh, _kerningDictionary, currentK, tmpK) {
+                currentK->amount = (int)(currentK->amount * scaleX);
+            }
+        }
+        
 		if( ! validCharsString ) {
 			return nil;
 		}
@@ -339,11 +378,13 @@ void FNTConfigRemoveCache( void )
     
 	// scaleW. sanity check
 	propertyValue = [nse nextObject];
-	NSAssert( [propertyValue intValue] <= [[CCConfiguration sharedConfiguration] maxTextureSize], @"CCLabelBMFont: page can't be larger than supported");
+    _scaleW = [propertyValue integerValue];
+	NSAssert( _scaleW <= [[CCConfiguration sharedConfiguration] maxTextureSize], @"CCLabelBMFont: page can't be larger than supported");
     
 	// scaleH. sanity check
 	propertyValue = [nse nextObject];
-	NSAssert( [propertyValue intValue] <= [[CCConfiguration sharedConfiguration] maxTextureSize], @"CCLabelBMFont: page can't be larger than supported");
+    _scaleH = [propertyValue integerValue];
+	NSAssert( _scaleH <= [[CCConfiguration sharedConfiguration] maxTextureSize], @"CCLabelBMFont: page can't be larger than supported");
     
 	// pages. sanity check
 	propertyValue = [nse nextObject];
