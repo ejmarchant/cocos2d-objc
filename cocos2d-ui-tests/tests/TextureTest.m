@@ -205,7 +205,9 @@
 	// requires a power of two image
 	CCTexture* texture = [[CCTextureCache sharedTextureCache] addImage:@"test_image.png"];
 	
-	CCSprite *img = [CCSprite spriteWithTexture:texture rect:CGRectMake(0, 0, 800, 600)];
+	CCSprite *img = [CCSprite spriteWithTexture:texture];
+    [img makeTexturePowerOfTwo];
+    img.textureRect = CGRectMake(0, 0, 800, 600);
 	img.position = ccp( s.width/2.0f, s.height/2.0f);
 	ccTexParams params = {GL_LINEAR,GL_LINEAR,GL_REPEAT,GL_REPEAT};
 	[img.texture setTexParameters:&params];

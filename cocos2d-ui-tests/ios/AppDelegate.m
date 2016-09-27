@@ -25,9 +25,9 @@
 #import "cocos2d.h"
 
 #import "AppDelegate.h"
-#import "MainMenu.h"
+#import "IntroScene.h"
 #import "TestBase.h"
-#import "CCPackageConstants.h"
+//#import "CCPackageConstants.h"
 
 @implementation AppController
 
@@ -40,70 +40,44 @@
 
 - (void)configureCocos2d
 {
-#if CC_CCBREADER
-    // Configure the file utils to work with SpriteBuilder, but use a custom resource path (Resources-shared instead of Published-iOS)
-    [CCBReader configureCCFileUtils];
-#else 
-    CCFileUtils *sharedFileUtils = [CCFileUtils sharedFileUtils];
+    [self setupCocos2dWithOptions:@{
+        CCSetupDepthFormat: @GL_DEPTH24_STENCIL8,
+        CCSetupShowDebugStats: @(getenv("SHOW_DEBUG_STATS") != nil),
+    }];
     
-    // Setup file utils for use with SpriteBuilder
-    [sharedFileUtils setEnableiPhoneResourcesOniPad:NO];
-    
-    sharedFileUtils.directoriesDict =
-    [[NSMutableDictionary alloc] initWithObjectsAndKeys:
-     @"resources-tablet", CCFileUtilsSuffixiPad,
-     @"resources-tablethd", CCFileUtilsSuffixiPadHD,
-     @"resources-phone", CCFileUtilsSuffixiPhone,
-     @"resources-phonehd", CCFileUtilsSuffixiPhoneHD,
-     @"resources-phone", CCFileUtilsSuffixiPhone5,
-     @"resources-phonehd", CCFileUtilsSuffixiPhone5HD,
-     @"resources-phone", CCFileUtilsSuffixMac,
-     @"resources-phonehd", CCFileUtilsSuffixMacHD,
-     @"", CCFileUtilsSuffixDefault,
-     nil];
-
-    sharedFileUtils.searchPath =
-    [NSArray arrayWithObjects:
-     [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Published-iOS"],
-     [[NSBundle mainBundle] resourcePath],
-     nil];
-    
-    sharedFileUtils.enableiPhoneResourcesOniPad = YES;
-    sharedFileUtils.searchMode = CCFileUtilsSearchModeDirectory;
-    [sharedFileUtils buildSearchResolutionsOrder];
-    
-    [sharedFileUtils loadFilenameLookupDictionaryFromFile:@"fileLookup.plist"];
-    [[CCSpriteFrameCache sharedSpriteFrameCache] loadSpriteFrameLookupDictionaryFromFile:@"spriteFrameFileList.plist"];
-#endif
+    // UI / assets scale factors
+    [CCImageResizer sharedInstance].enableResizing = YES;
+    [CCImageResizer sharedInstance].baseAssetScaleFactor = 2.0;
+    CGFloat uiScaleFactor;
+    CGSize size = [[CCDirector sharedDirector] designSize];
+    if ([UIScreen mainScreen].traitCollection.userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
+        uiScaleFactor = MIN(size.width, size.height) / 320.0;
+    } else if ([UIScreen mainScreen].traitCollection.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+        uiScaleFactor = 2 * MIN(size.width, size.height) / 768.0;
+    } else if ([UIScreen mainScreen].traitCollection.userInterfaceIdiom == UIUserInterfaceIdiomTV) {
+        uiScaleFactor = MIN(size.width, size.height) / 320.0;
+    } else {
+        uiScaleFactor = 1.0;
+    }
+    [CCDirector sharedDirector].UIScaleFactor = uiScaleFactor;
+    [CCImageResizer sharedInstance].assetUIScaleFactor = uiScaleFactor;
 
     [self configureFileUtilsSearchPathAndRegisterSpriteSheets];
 
-    [self setupCocos2dWithOptions:@{
-			CCSetupDepthFormat: @GL_DEPTH24_STENCIL8,
-//			CCSetupScreenMode: CCScreenModeFixed,
-//			CCSetupScreenOrientation: CCScreenOrientationPortrait,
-			CCSetupTabletScale2X: @YES,
-			CCSetupShowDebugStats: @(getenv("SHOW_DEBUG_STATS") != nil),
-		}];
-    
-    [[CCDirector sharedDirector] runWithScene:[MainMenu scene]];
+    [[CCDirector sharedDirector] runWithScene:[[IntroScene alloc] init]];
 }
 
 - (void)configureFileUtilsSearchPathAndRegisterSpriteSheets
 {
-    [[NSUserDefaults standardUserDefaults] setValue:nil forKey:PACKAGE_STORAGE_USERDEFAULTS_KEY];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-
     CCFileUtils* sharedFileUtils = [CCFileUtils sharedFileUtils];
-
-    sharedFileUtils.searchPath =
-    [NSArray arrayWithObjects:
-     [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Images"],
-     [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Fonts"],
-     [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Resources-shared"],
-     [[NSBundle mainBundle] resourcePath],
-     nil];
-
+    sharedFileUtils.searchDirectories = @[
+        @"Images",
+        @"Fonts",
+        @"Sounds",
+        @"Resources-shared/",
+        @"Resources-shared/resources"
+        ];
+    
     // Register spritesheets.
     [[CCSpriteFrameCache sharedSpriteFrameCache] registerSpriteFramesFile:@"Interface.plist"];
     [[CCSpriteFrameCache sharedSpriteFrameCache] registerSpriteFramesFile:@"Sprites.plist"];

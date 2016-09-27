@@ -7,55 +7,52 @@
 //
 
 #import "AppDelegate.h"
-#import "MainMenu.h"
+#import "IntroScene.h"
 
 @implementation cocos2d_ui_tests_osxAppDelegate
 @synthesize window=window_, glView=glView_;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-	CCDirectorMac *director = (CCDirectorMac*) [CCDirector sharedDirector];
-
-	// enable FPS and SPF
-	[director setDisplayStats:YES];
-	
-	// connect the OpenGL view with the director
-	[director setView:glView_];
-
-	// EXPERIMENTAL stuff.
-	// 'Effects' don't work correctly when autoscale is turned on.
-	// Use kCCDirectorResize_NoScale if you don't want auto-scaling.
-	[director setResizeMode:kCCDirectorResize_NoScale];
-	
-	// Enable "moving" mouse event. Default no.
-	[window_ setAcceptsMouseMovedEvents:NO];
-	
-	// Center main window
-	[window_ center];
+    CCDirectorMac *director = (CCDirectorMac*) [CCDirector sharedDirector];
     
-    CCFileUtils* fileUtils = [CCFileUtils sharedFileUtils];
+    // enable FPS and SPF
+    [director setDisplayStats:YES];
     
-    fileUtils.directoriesDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
-                                 @"resources-tablet", CCFileUtilsSuffixDefault,
-                                 nil];
-    fileUtils.searchPath = [NSArray arrayWithObjects:
-                            [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Images"],
-                            [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Fonts"],
-                            [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Resources-shared"],
-                            [[NSBundle mainBundle] resourcePath],
-                            nil];
+    CGSize defaultWinSize = CGSizeMake(1136, 640);
+    [window_ setFrame:CGRectMake(0, 0, defaultWinSize.width, defaultWinSize.height) display:YES];
+    glView_.frame = window_.frame;
     
-    fileUtils.searchMode = CCFileUtilsSearchModeDirectory;
-    [fileUtils buildSearchResolutionsOrder];
+    // connect the OpenGL view with the director
+    [director setView:glView_];
     
-    [fileUtils loadFilenameLookupDictionaryFromFile:@"fileLookup.plist"];
-		
+    // Enable "moving" mouse event. Default no.
+    [window_ setAcceptsMouseMovedEvents:NO];
+    
+    // Center main window
+    [window_ center];
+    
+    [CCImageResizer sharedInstance].enableResizing = YES;
+    [CCImageResizer sharedInstance].baseAssetScaleFactor = 2.0;
+    CGFloat uiScaleFactor = 1.0;
+    [CCDirector sharedDirector].UIScaleFactor = uiScaleFactor;
+    [CCImageResizer sharedInstance].assetUIScaleFactor = uiScaleFactor;
+    
+    CCFileUtils* sharedFileUtils = [CCFileUtils sharedFileUtils];
+    sharedFileUtils.searchDirectories = @[
+                                          @"Images",
+                                          @"Fonts",
+                                          @"Sounds",
+                                          @"Resources-shared/",
+                                          @"Resources-shared/resources"
+                                          ];
+    
     // Register spritesheets.
     [[CCSpriteFrameCache sharedSpriteFrameCache] registerSpriteFramesFile:@"Interface.plist"];
     [[CCSpriteFrameCache sharedSpriteFrameCache] registerSpriteFramesFile:@"Sprites.plist"];
     [[CCSpriteFrameCache sharedSpriteFrameCache] registerSpriteFramesFile:@"TilesAtlassed.plist"];
-	
-	[director runWithScene:[MainMenu scene]];
+    
+    [director runWithScene:[[IntroScene alloc] init]];
 }
 
 - (BOOL) applicationShouldTerminateAfterLastWindowClosed: (NSApplication *) theApplication

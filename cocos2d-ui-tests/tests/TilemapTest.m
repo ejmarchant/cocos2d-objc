@@ -8,7 +8,7 @@
 
 #import "cocos2d.h"
 #import "TestBase.h"
-#import "CCTiledMapLayer_Private.h"
+//#import "CCTiledMapLayer_Private.h"
 #import "CCTileMaps.h"
 
 @interface TilemapTest : TestBase @end

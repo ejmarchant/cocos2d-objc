@@ -32,6 +32,10 @@
 
 static CGPoint scrollPosition;
 
+
+@interface MainMenu : CCNode <CCTableViewDataSource>
+@end
+
 @implementation MainMenu
 
 - (NSArray*) testClassNames
@@ -52,25 +56,25 @@ static CGPoint scrollPosition;
 	return [arr sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
 }
 
-+ (CCScene *) scene
-{
-    static CCScene *mainMenuScene = nil;
-    static dispatch_once_t once = 0L;
-    dispatch_once(&once, ^{
-        mainMenuScene = [CCScene node];
-        
-        // 'layer' is an autorelease object.
-        MainMenu *node = [MainMenu node];
-        
-        
-        // add layer as a child to scene
-        [mainMenuScene addChild: node];
-        
-        // return the scene
-    });
-
-	return mainMenuScene;
-}
+//+ (CCScene *) scene
+//{
+//    static CCScene *mainMenuScene = nil;
+//    static dispatch_once_t once = 0L;
+//    dispatch_once(&once, ^{
+//        mainMenuScene = [CCScene node];
+//        
+//        // 'layer' is an autorelease object.
+//        MainMenu *node = [MainMenu node];
+//        
+//        
+//        // add layer as a child to scene
+//        [mainMenuScene addChild: node];
+//        
+//        // return the scene
+//    });
+//
+//	return mainMenuScene;
+//}
 
 - (id) init
 {
@@ -158,6 +162,19 @@ static CGPoint scrollPosition;
 - (NSUInteger) tableViewNumberOfRows:(CCTableView*) tableView
 {
     return [self testClassNames].count;
+}
+
+@end
+
+
+@implementation MainScene
+
+-(id)init {
+    self = [super init];
+    if (self) {
+        [self addChild:[[MainMenu alloc] init]];
+    }
+    return self;
 }
 
 @end

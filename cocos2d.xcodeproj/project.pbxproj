@@ -2098,6 +2098,10 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/build/Debug-iphonesimulator\"",
+					"$(PROJECT_DIR)/external/Chipmunk/msvc/glew/lib/Release/Win32",
+					"$(PROJECT_DIR)/external/Chipmunk/msvc/glfw/lib-msvc100",
+					"$(PROJECT_DIR)/external/Chipmunk/xcode/libGLEW/lib",
+					"$(PROJECT_DIR)/external/Chipmunk/xcode/libglfw/lib",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "";
@@ -2134,6 +2138,10 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/build/Debug-iphonesimulator\"",
+					"$(PROJECT_DIR)/external/Chipmunk/msvc/glew/lib/Release/Win32",
+					"$(PROJECT_DIR)/external/Chipmunk/msvc/glfw/lib-msvc100",
+					"$(PROJECT_DIR)/external/Chipmunk/xcode/libGLEW/lib",
+					"$(PROJECT_DIR)/external/Chipmunk/xcode/libglfw/lib",
 				);
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = cocos2d;

@@ -27,8 +27,5 @@
 
 #define kCCUITestHeaderHeight 44
 
-@interface MainMenu : CCNode <CCTableViewDataSource>
-
-+ (CCScene *) scene;
-
+@interface MainScene: CCScene
 @end
