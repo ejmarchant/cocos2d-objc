@@ -6,6 +6,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CCFileUtils : NSObject
 
+@property(nonatomic,strong) NSArray<NSString*> *searchDirectories;
+
 +(instancetype)sharedFileUtils;
 
 // Preferred method.

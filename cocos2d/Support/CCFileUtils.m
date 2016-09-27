@@ -16,6 +16,9 @@
 
 -(instancetype)init {
     self = [super init];
+    if (self) {
+        _searchDirectories = @[];
+    }
     return self;
 }
 
@@ -27,11 +30,19 @@
     if (contentScale != NULL) {
         *contentScale = 1.0;
     }
-    // Check if file exists (full path provided), otherwise use bundle.
-    if (![[NSFileManager defaultManager] fileExistsAtPath:filename]) {
-        return [[NSBundle mainBundle] pathForResource:filename ofType:nil];
+    // Check if file exists (full path provided)
+    if ([[NSFileManager defaultManager] fileExistsAtPath:filename]) {
+        return filename;
     }
-    return filename;
+    // Check search paths
+    for (NSString *directory in _searchDirectories) {
+        NSString *path = [[NSBundle mainBundle] pathForResource:filename ofType:nil inDirectory:directory];
+        if (path) {
+            return path;
+        }
+    }
+    // Use bundle
+    return [[NSBundle mainBundle] pathForResource:filename ofType:nil];
 }
 
 -(NSString*)standarizePath:(NSString*)path {
