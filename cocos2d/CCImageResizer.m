@@ -15,6 +15,7 @@
 #endif
 #import "CCDirector.h"
 #import "Support/CCFileUtils.h"
+#import "Support/ccUtils.h"
 #import "CCRenderTexture.h"
 
 
@@ -40,6 +41,10 @@
     return self;
 }
 
+-(CGFloat)theoreticalResizingScaleFactor {
+    return _assetUIScaleFactor * [[CCDirector sharedDirector] contentScaleFactor] / _baseAssetScaleFactor;
+}
+
 -(CCTexture*)resizedTextureOfBaseTextureWithName:(NSString*)fileName {
     if (!_enableResizing) {
         return nil;
@@ -58,7 +63,11 @@
     CGFloat contentScale = [[CCDirector sharedDirector] contentScaleFactor];
     CGFloat resizeScale = _assetUIScaleFactor * contentScale / _baseAssetScaleFactor;
     
-    if ([[fileExtension lowercaseString] isEqualToString:@"png"]) {
+    if ([[fileExtension lowercaseString] isEqualToString:@"png"] ||
+        [[fileExtension lowercaseString] isEqualToString:@"bmp"] ||
+        [[fileExtension lowercaseString] isEqualToString:@"jpg"] ||
+        [[fileExtension lowercaseString] isEqualToString:@"jpeg"] ||
+        [[fileExtension lowercaseString] isEqualToString:@"tiff"]) {
         // --- PNG ---
         NSData *data = [[NSData alloc] initWithContentsOfFile:path];
         if (data == nil) {
@@ -130,6 +139,66 @@
     }
 
     return tex;
+}
+
+-(CGSize)integralScaledSize:(CGSize)size {
+    CGFloat contentScale = [[CCDirector sharedDirector] contentScaleFactor];
+    CGFloat resizeScale = _assetUIScaleFactor * contentScale / _baseAssetScaleFactor;
+    CGSize scaledSize = CGSizeMake(roundf(size.width * resizeScale), roundf(size.height * resizeScale));
+    return scaledSize;
+}
+
+-(CGRect)scaledSubrect:(CGRect)subrect withinBounds:(CGSize)bounds {
+    if (!(bounds.width > 0 && bounds.height > 0)) {
+        return CGRectZero;
+    }
+    CGSize scaledBounds = [self integralScaledSize:bounds];
+    CGFloat scaleX = scaledBounds.width / bounds.width;
+    CGFloat scaleY = scaledBounds.height / bounds.height;
+    if (fabs(scaleX - 1.0) > 0.01 || fabs(scaleY - 1.0) > 0.01) {
+        // Keep the same center but expand the rect to integral proportions.
+        // Note: we may end up with a rect with non-integral origin (but this should look ok).
+        CGFloat scaledSubrectWidth = ceilf(subrect.size.width * scaleX);
+        CGFloat scaledSubrectHeight = ceilf(subrect.size.height * scaleY);
+        CGPoint scaledSubrectCenter = CGPointMake(scaleX * (subrect.origin.x + subrect.size.width * 0.5), scaleY * (subrect.origin.y + subrect.size.height * 0.5));
+        CGRect scaledSubrect = CGRectMake(scaledSubrectCenter.x - scaledSubrectWidth * 0.5, scaledSubrectCenter.y - scaledSubrectHeight * 0.5, scaledSubrectWidth, scaledSubrectHeight);
+        return scaledSubrect;
+    } else {
+        return subrect;
+    }
+}
+
+@end
+
+
+@implementation CCSprite (makeTexturePowerOfTwo)
+
+-(void)makeTexturePowerOfTwo {
+    NSInteger pixelsWide = _texture.pixelWidth;
+    NSInteger w = CCNextPOT(pixelsWide);
+    NSInteger pixelsHigh = _texture.pixelHeight;
+    NSInteger h = CCNextPOT(pixelsHigh);
+    if (w == pixelsWide && h == pixelsHigh) {
+        return;
+    }
+    // Replace texture
+    CGFloat scaleFactorX = (CGFloat)(w - 1) / (CGFloat)(pixelsWide - 1);
+    CGFloat scaleFactorY = (CGFloat)(h - 1) / (CGFloat)(pixelsHigh - 1);
+    CCSprite *tempSprite = [CCSprite spriteWithTexture:_texture];
+    tempSprite.scaleX = scaleFactorX;
+    tempSprite.scaleY = scaleFactorY;
+    CCRenderTexture *rtx = [[CCRenderTexture alloc] init];
+    [rtx beginWithPixelWidth:w pixelHeight:h];
+    tempSprite.anchorPoint = ccp(0.5, 0.5);
+    tempSprite.position = ccpMult(ccp((CGFloat)w * 0.5, (CGFloat)h * 0.5), 1.0 / [[CCDirector sharedDirector] contentScaleFactor]);
+    [tempSprite visit];
+    [rtx end];
+    [self setTexture:rtx.sprite.texture];
+    [self setBlendMode:[CCBlendMode premultipliedAlphaMode]];
+    _texture.antialiased = YES;
+    _scaleX = _scaleX * 1.0 / scaleFactorX;
+    _scaleY = _scaleY * 1.0 / scaleFactorY;
+    return;
 }
 
 @end

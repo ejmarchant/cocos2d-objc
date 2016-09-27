@@ -239,13 +239,8 @@ static CCSpriteFrameCache *_sharedSpriteFrameCache=nil;
 	// check the format
 	NSAssert( format >= 0 && format <= 3, @"format is not supported for CCSpriteFrameCache addSpriteFramesWithDictionary:textureFilename:");
 
-    // check if we need to scale frames
-    CGFloat contentScale = [[CCDirector sharedDirector] contentScaleFactor];
-    CGFloat resizeScale = [[CCImageResizer sharedInstance] assetUIScaleFactor] * contentScale / [[CCImageResizer sharedInstance] baseAssetScaleFactor];
+    // get the full size
     CGSize baseSize = CCSizeFromString([metadataDict objectForKey:@"size"]);
-    CGSize scaledSize = CGSizeMake(roundf(baseSize.width * resizeScale), roundf(baseSize.height * resizeScale));
-    CGFloat realScaleX = scaledSize.width / baseSize.width;
-    CGFloat realScaleY = scaledSize.height / baseSize.height;
     
 	// SpriteFrame info
 	CGRect rectInPixels;
@@ -319,16 +314,15 @@ static CCSpriteFrameCache *_sharedSpriteFrameCache=nil;
 			originalSize = spriteSourceSize;
 		}
         
-        if (([[CCImageResizer sharedInstance] enableResizing]) &&
-            (fabs(realScaleX - 1.0) > 0.01 || fabs(realScaleY - 1.0) > 0.01)) {
-            // Keep the same center but expand the rect to integral proportions.
-            // Note: we may end up with a rect with non-integral origin (but this should look ok).
-            CGFloat newRectWidthInPixels = ceilf(rectInPixels.size.width * realScaleX);
-            CGFloat newRectHeightInPixels = ceilf(rectInPixels.size.height * realScaleY);
-            CGPoint newRectCenter = CGPointMake(realScaleX * (rectInPixels.origin.x + rectInPixels.size.width * 0.5), realScaleY * (rectInPixels.origin.y + rectInPixels.size.height * 0.5));
-            rectInPixels = CGRectMake(newRectCenter.x - newRectWidthInPixels * 0.5, newRectCenter.y - newRectHeightInPixels * 0.5, newRectWidthInPixels, newRectHeightInPixels);
-            frameOffset = CGPointMake(frameOffset.x * realScaleX, frameOffset.y * realScaleY);
-            originalSize = CGSizeMake(MAX(ceilf(originalSize.width * realScaleX), newRectWidthInPixels), MAX(ceilf(originalSize.height * realScaleY), newRectHeightInPixels));
+        // resize if required
+        if ([[CCImageResizer sharedInstance] enableResizing] &&
+            (baseSize.width > 0 && baseSize.height > 0)) {
+            rectInPixels = [[CCImageResizer sharedInstance] scaledSubrect:rectInPixels withinBounds:baseSize];
+            CGSize scaledSize = [[CCImageResizer sharedInstance] integralScaledSize:baseSize];
+            CGFloat scaleX = scaledSize.width / baseSize.width;
+            CGFloat scaleY = scaledSize.height / baseSize.height;
+            frameOffset = CGPointMake(frameOffset.x * scaleX, frameOffset.y * scaleY);
+            originalSize = CGSizeMake(MAX(ceilf(originalSize.width * scaleX), rectInPixels.size.width), MAX(ceilf(originalSize.height * scaleY), rectInPixels.size.height));
         }
         
         [self addSpriteFrame:spriteFrame withTextureReference:textureReference key:frameDictKey rectInPixels:rectInPixels rotated:isRotated offset:frameOffset originalSize:originalSize];
