@@ -36,6 +36,7 @@
 #import "CCSprite.h"
 #import "CCTextureCache.h"
 #import "Support/CGPointExtension.h"
+#import "CCImageResizer.h"
 
 #pragma mark -
 #pragma mark CCTMXTiledMap
@@ -100,7 +101,10 @@
 		[self setContentSize:CGSizeZero];
 
 		CCTiledMapInfo *mapInfo = [CCTiledMapInfo formatWithXML:tmxString resourcePath:resourcePath];
-
+        if ([CCImageResizer sharedInstance].enableResizing) {
+            [self rescaleMapInfo:mapInfo];
+        }
+        
 		NSAssert( [mapInfo.tilesets count] != 0, @"TMXTiledMap: Map not found. Please check the filename.");
 		[self buildWithMapInfo:mapInfo];
 	}
@@ -117,12 +121,29 @@
 		[self setContentSize:CGSizeZero];
 
 		CCTiledMapInfo *mapInfo = [CCTiledMapInfo formatWithTMXFile:tmxFile];
+        if ([CCImageResizer sharedInstance].enableResizing) {
+            [self rescaleMapInfo:mapInfo];
+        }
 
 		NSAssert( [mapInfo.tilesets count] != 0, @"TMXTiledMap: Map not found. Please check the filename.");
 		[self buildWithMapInfo:mapInfo];
 	}
 
 	return self;
+}
+
+-(void)rescaleMapInfo:(CCTiledMapInfo*)mapInfo {
+    CGFloat scaleFactor = [CCImageResizer sharedInstance].theoreticalResizingScaleFactor;
+    if (ABS(scaleFactor - 1) < 0.01) {
+        return;
+    }
+    mapInfo.tileSize = CGSizeMake(mapInfo.tileSize.width * scaleFactor, mapInfo.tileSize.height * scaleFactor);
+    for (CCTiledMapTilesetInfo *tilesetInfo in mapInfo.tilesets) {
+        tilesetInfo.spacing = tilesetInfo.spacing * scaleFactor;
+        tilesetInfo.margin = tilesetInfo.margin * scaleFactor;
+        tilesetInfo.tileOffset = CGPointMake(tilesetInfo.tileOffset.x * scaleFactor, tilesetInfo.tileOffset.y * scaleFactor);
+        tilesetInfo.tileSize = CGSizeMake(tilesetInfo.tileSize.width * scaleFactor, tilesetInfo.tileSize.height * scaleFactor);
+    }
 }
 
 

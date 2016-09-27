@@ -38,6 +38,7 @@
 #import "CCShader.h"
 #import "Support/CGPointExtension.h"
 #import "CCTexture.h"
+#import "CCDirector.h"
 
 #pragma mark -
 #pragma mark CCTMXLayer
@@ -54,7 +55,7 @@
 	int _mapRows, _mapColumns;
 	
 	// Size of a tile in points.
-	int _tileWidth, _tileHeight;
+	CGFloat _tileWidth, _tileHeight;
 	
 	// Only used when vertexZ is used.
 	float _vertexZvalue;
@@ -92,8 +93,9 @@
 		self.tileset = tilesetInfo;
 
 		// mapInfo
-		_tileWidth = mapInfo.tileSize.width;
-		_tileHeight = mapInfo.tileSize.height;
+        CGFloat contentScaleFactor = [[CCDirector sharedDirector] contentScaleFactor];
+		_tileWidth = mapInfo.tileSize.width / contentScaleFactor;
+		_tileHeight = mapInfo.tileSize.height / contentScaleFactor;
 		_layerOrientation = mapInfo.orientation;
 
 		
@@ -143,7 +145,7 @@
 -(void) setupTiles
 {
 	// Optimization: quick hack that sets the image size on the tileset
-	_tileset.imageSize = [self.texture contentSize];
+    _tileset.imageSize = self.texture.contentSizeInPixels;
 
 	// By default all the tiles are aliased
 	// pros:
@@ -328,7 +330,8 @@ struct IntRect { int xmin, xmax, ymin, ymax; };
 	
 	// TODO Doesn't handle offsets.
 	// Find the maximum amount a tile sprite can spill out of it's bounds.
-	float oversize = MAX(_tileset.tileSize.width, _tileset.tileSize.height)/MIN(_tileWidth, _tileHeight) - 1.0f;
+    CGFloat contentScaleFactor = [[CCDirector sharedDirector] contentScaleFactor];
+	float oversize = MAX(_tileset.tileSize.width, _tileset.tileSize.height) / contentScaleFactor / MIN(_tileWidth, _tileHeight) - 1.0f;
 	
 	// TODO This might be overly conservative for Isometric tilemaps.
 	if(_layerOrientation == CCTiledMapOrientationIso){
@@ -350,14 +353,17 @@ struct IntRect { int xmin, xmax, ymin, ymax; };
 }
 
 // Calculate the bounds of a tile on the screen. (Could be precalculated)
--(struct IntRect)tileBounds
+-(CGRect)tileBounds
 {
-	int w = _tileset.tileSize.width;
-	int h = _tileset.tileSize.height;
+    CGFloat contentScaleFactor = [[CCDirector sharedDirector] contentScaleFactor];
+	CGFloat w = _tileset.tileSize.width / contentScaleFactor;
+	CGFloat h = _tileset.tileSize.height / contentScaleFactor;
 	
 	switch(_layerOrientation){
-		case CCTiledMapOrientationOrtho: return (struct IntRect){0, w, 0, h};
-		case CCTiledMapOrientationIso: return (struct IntRect){-w/2, w/2, 0, h};
+		case CCTiledMapOrientationOrtho:
+            return CGRectMake(0, 0, w, h);
+		case CCTiledMapOrientationIso:
+            return CGRectMake(-w/2, 0, w, h);
 	}
 }
 
@@ -387,20 +393,16 @@ struct IntRect { int xmin, xmax, ymin, ymax; };
 	float alpha = _displayColor.a;
 	GLKVector4 color = GLKVector4Make(_displayColor.r*alpha, _displayColor.g*alpha, _displayColor.b*alpha, alpha);
 	
-	CCTexture *tex = self.texture;
-	float scale = tex.contentScale;
-	float scaleW = scale/self.texture.pixelWidth;
-	float scaleH = scale/self.texture.pixelHeight;
-	
+    float scaleW = 1.0 / self.texture.pixelWidth;
+    float scaleH = 1.0 / self.texture.pixelHeight;
+    
 	// Number of tiles per row in the tile sheet.
 	int tilesetFirstGid = _tileset.firstGid;
-	int tilesetMargin = _tileset.margin;
-	int tilesetSpacing = _tileset.spacing;
-	int tilesetTileW = _tileset.tileSize.width;
-	int tilesetTileH = _tileset.tileSize.height;
-	int tilesPerSheetRow = (_tileset.imageSize.width - tilesetMargin*2 + tilesetSpacing) / (_tileset.tileSize.width + _tileset.spacing);
+	CGFloat tilesetTileW = _tileset.tileSize.width;
+	CGFloat tilesetTileH = _tileset.tileSize.height;
+	int tilesPerSheetRow = (_tileset.imageSize.width - _tileset.margin * 2 + _tileset.spacing) / (_tileset.tileSize.width + _tileset.spacing);
 	
-	struct IntRect tileBounds = [self tileBounds];
+	CGRect tileBounds = [self tileBounds];
 	
 	CCRenderBuffer buffer = [renderer enqueueTriangles:tileCount*2 andVertexes:tileCount*4 withState:self.renderState globalSortOrder:0];
 	int vertex_cursor = 0;
@@ -429,11 +431,11 @@ struct IntRect { int xmin, xmax, ymin, ymax; };
 			// Calculate the vertex positions (in points).
 			GLKVector4 pos = GLKMatrix4MultiplyVector4(tileToNode, GLKVector4Make(tileX, tileY, 0.0f, 1.0f));
 			pos.y -= _tileHeight;
-			
-			GLKVector2 v0 = GLKVector2Make(tileBounds.xmin, tileBounds.ymin);
-			GLKVector2 v1 = GLKVector2Make(tileBounds.xmax, tileBounds.ymin);
-			GLKVector2 v2 = GLKVector2Make(tileBounds.xmax, tileBounds.ymax);
-			GLKVector2 v3 = GLKVector2Make(tileBounds.xmin, tileBounds.ymax);
+            
+			GLKVector2 v0 = GLKVector2Make(tileBounds.origin.x, tileBounds.origin.y);
+			GLKVector2 v1 = GLKVector2Make(tileBounds.origin.x + tileBounds.size.width, tileBounds.origin.y);
+			GLKVector2 v2 = GLKVector2Make(tileBounds.origin.x + tileBounds.size.width, tileBounds.origin.y + tileBounds.size.height);
+			GLKVector2 v3 = GLKVector2Make(tileBounds.origin.x, tileBounds.origin.y + tileBounds.size.height);
 			
 			if(diagonalFlip){
 				CC_SWAP(v0.x, v0.y);
@@ -446,12 +448,12 @@ struct IntRect { int xmin, xmax, ymin, ymax; };
 				CC_SWAP(horizontalFlip, verticalFlip);
 			}
 			
-			// Calculate the texture coordinates (in points).
+			// Calculate the texture coordinates (in pixels).
 			uint32_t tileIndex = gid - tilesetFirstGid;
-			int txmin = (tileIndex%tilesPerSheetRow)*(tilesetTileW + tilesetSpacing) + tilesetMargin;
-			int tymin = (tileIndex/tilesPerSheetRow)*(tilesetTileH + tilesetSpacing) + tilesetMargin;
-			int txmax = txmin + tilesetTileW;
-			int tymax = tymin + tilesetTileH;
+			CGFloat txmin = (tileIndex % tilesPerSheetRow) * (tilesetTileW + _tileset.spacing) + _tileset.margin;
+			CGFloat tymin = (tileIndex / tilesPerSheetRow) * (tilesetTileH + _tileset.spacing) + _tileset.margin;
+			CGFloat txmax = txmin + tilesetTileW;
+			CGFloat tymax = tymin + tilesetTileH;
 			
 			if(horizontalFlip) CC_SWAP(txmin, txmax);
 			if(verticalFlip  ) CC_SWAP(tymin, tymax);

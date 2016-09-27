@@ -138,10 +138,10 @@ typedef NS_ENUM(uint32_t, ccTMXTileFlags) {
 /// -----------------------------------------------------------------------
 
 /** Tileset spacing. */
-@property (nonatomic,readwrite,assign) unsigned int spacing;
+@property (nonatomic,readwrite,assign) CGFloat spacing;
 
 /** Tileset margin. */
-@property (nonatomic,readwrite,assign) unsigned int margin;
+@property (nonatomic,readwrite,assign) CGFloat margin;
 
 /** Tileset source texture, should be spritesheet. */
 @property (nonatomic,readwrite,strong) NSString *sourceImage;
