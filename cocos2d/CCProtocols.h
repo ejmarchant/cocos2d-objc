@@ -53,10 +53,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// The shader this node will be drawn using.
 @property(nonatomic, strong) CCShader *shader;
 /// The dictionary of shader uniform values that will be passed to the shader.
-@property(nonatomic, readonly, nullable) NSMutableDictionary *shaderUniforms;
+@property(nonatomic, readonly) NSMutableDictionary *shaderUniforms;
 
 /// The rendering state this node will use when rendering.
-@property(nonatomic, readonly, strong, nullable) CCRenderState *renderState;
+@property(nonatomic, readonly, strong) CCRenderState *renderState;
 
 @end
 
@@ -81,7 +81,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, readwrite, strong) CCBlendMode *blendMode;
 
 /// The rendering state this node will use when rendering.
-@property(nonatomic, readonly, strong, nullable) CCRenderState *renderState;
+@property(nonatomic, readonly, strong) CCRenderState *renderState;
 
 /** set the source blending function for the texture */
 -(void) setBlendFunc:(ccBlendFunc)blendFunc __attribute__((deprecated));
@@ -109,7 +109,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong, nullable) CCTexture *texture;
 
 /// The rendering state this node will use when rendering.
-@property(nonatomic, readonly, strong, nullable) CCRenderState *renderState;
+@property(nonatomic, readonly, strong) CCRenderState *renderState;
 
 @end
 
