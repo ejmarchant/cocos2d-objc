@@ -344,8 +344,7 @@ static CCTextureCache *sharedTextureCache;
             [_textures setObject: tex forKey:path];
         });
     } else {
-        CCLOG(@"cocos2d: Couldn't create texture for file:%@ in CCTextureCache", path);
-        return nil;
+        tex = [CCTexture none];
     }
 	
 	return (id)(tex.proxy);
@@ -375,6 +374,7 @@ static CCTextureCache *sharedTextureCache;
 		});
 	}else{
 		CCLOG(@"cocos2d: Couldn't add CGImage in CCTextureCache");
+        tex = [CCTexture none];
 	}
 
 	return (id)(tex.proxy);
@@ -473,6 +473,7 @@ static CCTextureCache *sharedTextureCache;
 		});
 	}else{
 		CCLOG(@"cocos2d: Couldn't add PVRImage:%@ in CCTextureCache",path);
+        tex = [CCTexture none];
 	}
 
 	return((id)tex.proxy);

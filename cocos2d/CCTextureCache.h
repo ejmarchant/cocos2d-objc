@@ -65,7 +65,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @return A CCTexture object.
  */
--(nullable CCTexture*) addImage: (NSString*) fileimage;
+-(CCTexture*) addImage: (NSString*) fileimage;
 
 /**
  * Asynchronously, load a texture2d from a file.
@@ -110,7 +110,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @return Texture.
  */
--(nullable CCTexture*) addCGImage: (CGImageRef) image forKey: (nullable NSString *)key;
+-(CCTexture*) addCGImage: (CGImageRef) image forKey: (nullable NSString *)key;
 
 /**
  *  Returns an already created texture. Returns nil if the texture doesn't exist.
@@ -164,7 +164,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @return A Texture.
  */
--(nullable CCTexture*) addPVRImage:(NSString*) filename;
+-(CCTexture*) addPVRImage:(NSString*) filename;
 
 @end
 
