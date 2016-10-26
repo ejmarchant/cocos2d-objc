@@ -111,9 +111,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 /** @name Creating a CCGLView */
 
-/** creates an initializes an CCGLView with a frame and 0-bit depth buffer, and a RGB565 color buffer.
- @param frame The frame of the view. */
-+ (nullable id) viewWithFrame:(CGRect)frame;
 /** creates an initializes an CCGLView with a frame, a color buffer format, and 0-bit depth buffer.
   @param frame The frame of the view.
   @param format The pixel format of the render buffer, either: `kEAGLColorFormatRGBA8` (24-bit colors, 8-bit alpha) or `kEAGLColorFormatRGB565` (16-bit colors, no alpha). */
@@ -133,9 +130,6 @@ NS_ASSUME_NONNULL_BEGIN
  @param samples The number of samples used in multisampling, from 0 (no AA) to `glGetIntegerv(GL_MAX_SAMPLES_APPLE)`. Only takes effect if the preceding multisampling parameters is set to `YES`. */
 + (nullable id) viewWithFrame:(CGRect)frame pixelFormat:(NSString*)format depthFormat:(GLuint)depth preserveBackbuffer:(BOOL)retained sharegroup:(nullable EAGLSharegroup*)sharegroup multiSampling:(BOOL)multisampling numberOfSamples:(unsigned int)samples;
 
-/** Initializes an CCGLView with a frame and 0-bit depth buffer, and a RGB565 color buffer
- @param frame The frame of the view. */
-- (nullable id) initWithFrame:(CGRect)frame; //These also set the current context
 /** Initializes an CCGLView with a frame, a color buffer format, and 0-bit depth buffer
  @param frame The frame of the view.
  @param format The pixel format of the render buffer, either: `kEAGLColorFormatRGBA8` (24-bit colors, 8-bit alpha) or `kEAGLColorFormatRGB565` (16-bit colors, no alpha). */

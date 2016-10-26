@@ -175,11 +175,6 @@ extern EAGLContext *CCRenderDispatchSetupGL(EAGLRenderingAPI api, EAGLSharegroup
 	return [CAEAGLLayer class];
 }
 
-+ (id) viewWithFrame:(CGRect)frame
-{
-	return [[self alloc] initWithFrame:frame];
-}
-
 + (id) viewWithFrame:(CGRect)frame pixelFormat:(NSString*)format
 {
 	return [[self alloc] initWithFrame:frame pixelFormat:format];
@@ -193,11 +188,6 @@ extern EAGLContext *CCRenderDispatchSetupGL(EAGLRenderingAPI api, EAGLSharegroup
 + (id) viewWithFrame:(CGRect)frame pixelFormat:(NSString*)format depthFormat:(GLuint)depth preserveBackbuffer:(BOOL)retained sharegroup:(EAGLSharegroup*)sharegroup multiSampling:(BOOL)multisampling numberOfSamples:(unsigned int)samples
 {
 	return [[self alloc] initWithFrame:frame pixelFormat:format depthFormat:depth preserveBackbuffer:retained sharegroup:sharegroup multiSampling:multisampling numberOfSamples:samples];
-}
-
-- (id) initWithFrame:(CGRect)frame
-{
-	return [self initWithFrame:frame pixelFormat:kEAGLColorFormatRGB565 depthFormat:0 preserveBackbuffer:NO sharegroup:nil multiSampling:NO numberOfSamples:0];
 }
 
 - (id) initWithFrame:(CGRect)frame pixelFormat:(NSString*)format
