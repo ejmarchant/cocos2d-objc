@@ -212,8 +212,8 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @return New action sequence.
  */
-+ (id)actionWithArray: (NSArray*) arrayOfActions;
-- (id)initWithArray:(NSArray*)arrayOfActions;
++ (id)actionWithArray: (NSArray<CCActionFiniteTime*>*) arrayOfActions;
+- (id)initWithArray:(NSArray<CCActionFiniteTime*>*)arrayOfActions;
 
 // purposefully undocumented: no point in having this documented if you can just create a list/array with 2 actions
 + (id)actionOne:(CCActionFiniteTime*)actionOne two:(CCActionFiniteTime*)actionTwo;
@@ -328,8 +328,8 @@ NS_ASSUME_NONNULL_BEGIN
  *  @return New action spawn.
  *  @see CCActionSequence
  */
-+ (id)actionWithArray:(NSArray*)arrayOfActions;
-- (id)initWithArray:(NSArray*)arrayOfActions;
++ (id)actionWithArray:(NSArray<CCActionFiniteTime*>*)arrayOfActions;
+- (id)initWithArray:(NSArray<CCActionFiniteTime*>*)arrayOfActions;
 
 // purposefully undocumented: no point in having this documented if you can just create a list/array with 2 actions
 + (id)actionOne:(CCActionFiniteTime*)one two:(CCActionFiniteTime*)two;

@@ -147,7 +147,7 @@
 }
 
 
-+(instancetype)actionWithArray:(NSArray *)actions
++(instancetype)actionWithArray:(NSArray<CCActionFiniteTime*>*)actions
 {
     CCActionFiniteTime *prev = actions[0];
 
@@ -158,7 +158,7 @@
     return (CCActionSequence *)prev;
 }
 
--(id) initWithArray:(NSArray *)actions
+-(id) initWithArray:(NSArray<CCActionFiniteTime*>*)actions
 {
     // this is backwards because it's "safer" as a quick Swift fix for v3.4
     return [CCActionSequence actionWithArray:actions];
