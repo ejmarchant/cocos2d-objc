@@ -70,7 +70,7 @@ static inline
 CCPhysicsBody *
 GetBodyIfRunning(CCNode *node)
 {
-	return (node->_isInActiveScene ? node->_physicsBody : nil);
+	return (node->_isInEnteredState ? node->_physicsBody : nil);
 }
 
 CGAffineTransform
@@ -145,7 +145,8 @@ static NSUInteger globalOrderOfArrival = 1;
 -(id) init
 {
 	if ((self=[super init]) ) {
-		_isInActiveScene = NO;
+		_isInEnteredState = NO;
+        _isInEnteredAfterTransitionState = NO;
 
 		_skewX = _skewY = 0.0f;
 		_rotationalSkewX = _rotationalSkewY = 0.0f;
@@ -764,8 +765,10 @@ RecursivelyIncrementPausedAncestors(CCNode *node, int increment)
 	child->_pausedAncestors = _pausedAncestors + (_paused ? 1 : 0);
 	RecursivelyIncrementPausedAncestors(child, child->_pausedAncestors);
 	
-	if( _isInActiveScene ) {
+	if (_isInEnteredState) {
 		[child onEnter];
+    }
+    if (_isInEnteredAfterTransitionState) {
 		[child onEnterTransitionDidFinish];
 	}
     
@@ -852,9 +855,10 @@ RecursivelyIncrementPausedAncestors(CCNode *node, int increment)
 		// IMPORTANT:
 		//  -1st do onExit
 		//  -2nd cleanup
-		if (_isInActiveScene)
-		{
+		if (_isInEnteredAfterTransitionState) {
 			[c onExitTransitionDidStart];
+        }
+        if (_isInEnteredState) {
 			[c onExit];
 		}
 		
@@ -879,11 +883,12 @@ RecursivelyIncrementPausedAncestors(CCNode *node, int increment)
 	// IMPORTANT:
 	//  -1st do onExit
 	//  -2nd cleanup
-	if (_isInActiveScene)
-	{
-		[child onExitTransitionDidStart];
-		[child onExit];
-	}
+    if (_isInEnteredAfterTransitionState) {
+        [child onExitTransitionDidStart];
+    }
+    if (_isInEnteredState) {
+        [child onExit];
+    }
 	
 	RecursivelyIncrementPausedAncestors(child, -child->_pausedAncestors);
 	child->_pausedAncestors = 0;
@@ -1096,7 +1101,7 @@ CGAffineTransformMakeRigid(CGPoint translate, CGFloat radians)
 	}
 	
 	if(physicsBody != _physicsBody){
-		if(_isInActiveScene){
+		if(_isInEnteredState){
 			[self teardownPhysics];
 			[self setupPhysicsBody:physicsBody];
 		}
@@ -1125,7 +1130,7 @@ CGAffineTransformMakeRigid(CGPoint translate, CGFloat radians)
 	[_scheduler scheduleTarget:self];
 	
 	BOOL wasRunning = self.runningInActiveScene;
-	_isInActiveScene = YES;
+	_isInEnteredState = YES;
 
 #if CC_PHYSICS
 	//If there's a physics node in the hierarchy, all actions should run on a fixed timestep.
@@ -1159,10 +1164,12 @@ CGAffineTransformMakeRigid(CGPoint translate, CGFloat radians)
 -(void) onEnterTransitionDidFinish
 {
 	[_children makeObjectsPerformSelector:@selector(onEnterTransitionDidFinish)];
+    _isInEnteredAfterTransitionState = YES;
 }
 
 -(void) onExitTransitionDidStart
 {
+    _isInEnteredAfterTransitionState = NO;
 	[_children makeObjectsPerformSelector:@selector(onExitTransitionDidStart)];
 }
 
@@ -1172,7 +1179,7 @@ CGAffineTransformMakeRigid(CGPoint translate, CGFloat radians)
 	[self teardownPhysics];
 #endif
 	BOOL wasRunning = self.runningInActiveScene;
-	_isInActiveScene = NO;
+	_isInEnteredState = NO;
 	[self wasRunning:wasRunning];
 	
 	[_children makeObjectsPerformSelector:@selector(onExit)];
@@ -1381,7 +1388,7 @@ CGAffineTransformMakeRigid(CGPoint translate, CGFloat radians)
 
 -(BOOL)isRunningInActiveScene
 {
-	return (_isInActiveScene && !_paused && _pausedAncestors == 0);
+	return (_isInEnteredState && !_paused && _pausedAncestors == 0);
 }
 
 -(void)setPaused:(BOOL)paused

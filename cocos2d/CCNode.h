@@ -225,8 +225,10 @@ NS_ASSUME_NONNULL_BEGIN
     //Animation Manager used to handle CCB animations
     CCAnimationManager * _animationManager;
 	
-	// YES if the node is added to an active scene.
-	BOOL _isInActiveScene;
+    // Set to YES when onEnter called, NO when onExit called.
+    BOOL _isInEnteredState;
+    // Set to YES when onEnterTransitionDidFinish called, NO when onExitTransitionDidStart called.
+    BOOL _isInEnteredAfterTransitionState;
 	
     // True if paused.
 	BOOL _paused;
