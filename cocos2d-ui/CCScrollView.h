@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-#import "CCNode.h"
+#import "../cocos2d/CCNode.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

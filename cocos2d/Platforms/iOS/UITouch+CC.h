@@ -24,11 +24,11 @@
  * THE SOFTWARE.
  */
 
-#import "ccMacros.h"
+#import "../../ccMacros.h"
 
 #if __CC_PLATFORM_IOS
 
-#import "cocos2d.h"
+#import "../../cocos2d.h"
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
