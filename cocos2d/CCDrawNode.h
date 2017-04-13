@@ -94,6 +94,9 @@ NS_ASSUME_NONNULL_BEGIN
  stored somewhere, with the changes applied. This is of course inefficient, hence the recommendation to use this node primarily for debug drawing. */
 -(void)clear;
 
+// Exposed for subclasses.
+-(CCRenderBuffer)bufferVertexes:(GLsizei)vertexCount andTriangleCount:(GLsizei)triangleCount;
+
 @end
 
 NS_ASSUME_NONNULL_END
