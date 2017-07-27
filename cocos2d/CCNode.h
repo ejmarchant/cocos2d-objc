@@ -208,7 +208,10 @@ NS_ASSUME_NONNULL_BEGIN
 	// DisplayColor and Color are kept separate to allow for cascading color and alpha changes through node children.
 	// Alphas tend to be multiplied together so you can fade groups of objects that are colored differently.
 	ccColor4F	_displayColor, _color;
-
+    // _colorMultiplier keeps track of the scaling factors from cascading colors / opacities.
+    // _displayColor = _color * _colorMultiplier
+    ccColor4F   _colorMultiplier;
+    
 	// Opacity/Color propagates into children that conform to if cascadeOpacity/cascadeColor is enabled.
 	BOOL		_cascadeColorEnabled, _cascadeOpacityEnabled;
 	
@@ -1004,14 +1007,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, getter = isCascadeColorEnabled) BOOL cascadeColorEnabled;
 
-// purposefully undocumented: internal method users needn't know about
-/*
- *  Recursive method that updates display color.
- *
- *  @param color Color used for update.
- */
-- (void)updateDisplayedColor:(ccColor4F)color;
-
 /// -----------------------------------------------------------------------
 /// @name Opacity (Alpha)
 /// -----------------------------------------------------------------------
@@ -1038,14 +1033,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, getter = isCascadeOpacityEnabled) BOOL cascadeOpacityEnabled;
 
-// purposefully undocumented: internal method users needn't know about
-/*
- *  Recursive method that updates the displayed opacity.
- *
- *  @param opacity Opacity to use for update.
- */
-- (void)updateDisplayedOpacity:(CGFloat)opacity;
-
 // purposefully undocumented: method marked deprecated
 /*
  Sets the premultipliedAlphaOpacity property.
@@ -1064,6 +1051,12 @@ NS_ASSUME_NONNULL_BEGIN
  */
 -(BOOL) doesOpacityModifyRGB __attribute__((deprecated));
 
+// purposefully undocumented: internal method users needn't know about
+/*
+ *  Called when _displayColor needs to be recalculated, causes children to recalculate their _colorMultiplier.
+ *  Can override and call [super recalculateDisplayColor] first if subclass needs to act on _displayColor being modified.
+ */
+-(void)recalculateDisplayColor;
 
 /// -----------------------------------------------------------------------
 /// @name Rendering (Implemented in Subclasses)

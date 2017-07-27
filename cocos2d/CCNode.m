@@ -185,7 +185,7 @@ static NSUInteger globalOrderOfArrival = 1;
 		// set default touch handling
 		self.hitAreaExpansion = 0.0f;
     
-		_displayColor = _color = [CCColor whiteColor].ccColor4f;
+		_colorMultiplier = _displayColor = _color = [CCColor whiteColor].ccColor4f;
 		_cascadeOpacityEnabled = NO;
 		_cascadeColorEnabled = NO;
 	}
@@ -775,12 +775,7 @@ RecursivelyIncrementPausedAncestors(CCNode *node, int increment)
     [[[CCDirector sharedDirector] responderManager] markAsDirty];
     
     // Cascade opacity & color to the child
-    if (_cascadeOpacityEnabled) {
-        [child updateDisplayedOpacity:_displayColor.a];
-    }
-    if (_cascadeColorEnabled) {
-        [child updateDisplayedColor:_displayColor];
-    }
+    [self cascadeColorMultiplier];
 }
 
 -(void) addChild: (CCNode*) child z:(NSInteger)z
@@ -1763,109 +1758,95 @@ CGAffineTransformMakeRigid(CGPoint translate, CGFloat radians)
 @synthesize cascadeColorEnabled=_cascadeColorEnabled;
 @synthesize cascadeOpacityEnabled=_cascadeOpacityEnabled;
 
--(CGFloat) opacity
-{
+-(CGFloat)opacity {
 	return _color.a;
 }
 
--(CGFloat) displayedOpacity
-{
+-(CGFloat)displayedOpacity {
 	return _displayColor.a;
 }
 
-- (void) setOpacity:(CGFloat)opacity
-{
-	_displayColor.a = _color.a = opacity;
-	[self cascadeOpacityIfNeeded];
+-(void)setOpacity:(CGFloat)opacity {
+    _color.a = opacity;
+    [self recalculateDisplayColor];
 }
 
--(CCColor*) color
-{
+-(CCColor*)color {
 	return [CCColor colorWithCcColor4f:_color];
 }
 
--(CCColor*) displayedColor
-{
+-(CCColor*)displayedColor {
 	return [CCColor colorWithCcColor4f:_displayColor];
 }
 
-
-- (void) setColor:(CCColor*)color
-{
-	// Retain old alpha.
-	float alpha = _color.a;
-	_displayColor = _color = color.ccColor4f;
-	_displayColor.a = _color.a = alpha;
-	
-	[self cascadeColorIfNeeded];
+-(void)setColor:(CCColor*)color {
+    // Retain old alpha value.
+    float alpha = _color.a;
+    _color = color.ccColor4f;
+    _color.a = alpha;
+    [self recalculateDisplayColor];
 }
 
--(CCColor*) colorRGBA
-{
+-(CCColor*)colorRGBA {
 	return [CCColor colorWithCcColor4f:_color];
 }
 
-- (void) setColorRGBA:(CCColor*)color
-{
-	// apply the new alpha too.
+-(void)setColorRGBA:(CCColor*)color {
+	// Apply the new alpha too.
 	_displayColor = _color = color.ccColor4f;
-	
-	[self cascadeColorIfNeeded];
-	[self cascadeOpacityIfNeeded];
+	[self recalculateDisplayColor];
 }
 
-
-- (void) cascadeColorIfNeeded
-{
-	if( _cascadeColorEnabled ) {
-		CCColor* parentColor = [CCColor whiteColor];
-		if( _parent.isCascadeColorEnabled )
-			parentColor = [_parent displayedColor];
-		[self updateDisplayedColor:parentColor.ccColor4f];
-	}
+-(void)setCascadeColorEnabled:(BOOL)cascadeColorEnabled {
+    _cascadeColorEnabled = cascadeColorEnabled;
+    [self cascadeColorMultiplier];
 }
 
-// Used internally to recurse through children, thus the parameter is not a CCColor*
-- (void)updateDisplayedColor:(ccColor4F) parentColor
-{
-	_displayColor.r = _color.r * parentColor.r;
-	_displayColor.g = _color.g * parentColor.g;
-	_displayColor.b = _color.b * parentColor.b;
-	
-	// if (_cascadeColorEnabled) {
-		for (CCNode* item in _children) {
-			[item updateDisplayedColor:_displayColor];
-		}
-	// }
+-(void)setCascadeOpacityEnabled:(BOOL)cascadeOpacityEnabled {
+    _cascadeOpacityEnabled = cascadeOpacityEnabled;
+    [self cascadeColorMultiplier];
 }
 
-- (void) cascadeOpacityIfNeeded
-{
-	if( _cascadeOpacityEnabled ) {
-		GLfloat parentOpacity = 1.0f;
-		if( [_parent isCascadeOpacityEnabled] )
-			parentOpacity = [_parent displayedOpacity];
-		[self updateDisplayedOpacity:parentOpacity];
-	}
-}
-
-- (void)updateDisplayedOpacity:(CGFloat)parentOpacity
-{
-	_displayColor.a = _color.a * parentOpacity;
-	
-	// if (_cascadeOpacityEnabled) {
-		for (CCNode* item in _children) {
-			[item updateDisplayedOpacity:_displayColor.a];
-		}
-	// }
-}
-
--(void) setOpacityModifyRGB:(BOOL)boolean{
+-(void)setOpacityModifyRGB:(BOOL)boolean {
 	// Ignored in CCNode. Implemented in subclasses
 }
 
--(BOOL) doesOpacityModifyRGB{
+-(BOOL)doesOpacityModifyRGB {
 	return YES;
+}
+
+-(void)recalculateColorMultiplier {
+    if ([_parent isCascadeColorEnabled]) {
+        _colorMultiplier.r = _parent->_displayColor.r;
+        _colorMultiplier.g = _parent->_displayColor.g;
+        _colorMultiplier.b = _parent->_displayColor.b;
+    } else {
+        _colorMultiplier.r = 1.0f;
+        _colorMultiplier.g = 1.0f;
+        _colorMultiplier.b = 1.0f;
+    }
+    if ([_parent isCascadeOpacityEnabled]) {
+        _colorMultiplier.a = _parent->_displayColor.a;
+    } else {
+        _colorMultiplier.a = 1.0f;
+    }
+    
+    [self recalculateDisplayColor];
+}
+
+-(void)recalculateDisplayColor {
+    _displayColor.r = _color.r * _colorMultiplier.r;
+    _displayColor.g = _color.g * _colorMultiplier.g;
+    _displayColor.b = _color.b * _colorMultiplier.b;
+    _displayColor.a = _color.a * _colorMultiplier.a;
+    
+    [self cascadeColorMultiplier];
+}
+
+-(void)cascadeColorMultiplier {
+    for (CCNode *child in _children) {
+        [child recalculateColorMultiplier];
+    }
 }
 
 #pragma mark - RenderState Methods

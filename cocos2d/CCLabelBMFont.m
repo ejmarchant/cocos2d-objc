@@ -871,10 +871,6 @@ void FNTConfigRemoveCache( void )
 				[self addChild:fontChar z:i];
 				[self setTag:i forChild:fontChar];
 //			}
-			
-			// Color MUST be set before opacity due to premultiplied alpha.
-			[fontChar updateDisplayedColor:_displayColor];
-			[fontChar updateDisplayedOpacity:_displayColor.a];
 		}
 
 		// updating previous sprite

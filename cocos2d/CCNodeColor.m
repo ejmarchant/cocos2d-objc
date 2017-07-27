@@ -133,9 +133,8 @@
 	[self updateColor];
 }
 
-- (void)updateDisplayedOpacity:(CGFloat)parentOpacity
-{
-    [super updateDisplayedOpacity:parentOpacity];
+-(void)recalculateDisplayColor {
+    [super recalculateDisplayColor];
     [self updateColor];
 }
 

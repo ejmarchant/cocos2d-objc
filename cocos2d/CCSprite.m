@@ -411,21 +411,14 @@
 	[self updateColor];
 }
 
--(void)updateDisplayedColor:(ccColor4F) parentColor
-{
-	[super updateDisplayedColor:parentColor];
-	[self updateColor];
-}
-
 -(void) setOpacity:(CGFloat)opacity
 {
 	[super setOpacity:opacity];
 	[self updateColor];
 }
 
--(void)updateDisplayedOpacity:(CGFloat)parentOpacity
-{
-    [super updateDisplayedOpacity:parentOpacity];
+-(void)recalculateDisplayColor {
+    [super recalculateDisplayColor];
     [self updateColor];
 }
 
