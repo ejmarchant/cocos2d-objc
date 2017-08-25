@@ -50,8 +50,6 @@
 #pragma mark - Node
 
 @interface CCNode ()
-// lazy allocs
--(void) childrenAlloc;
 // helper that reorder a child
 -(void) insertChild:(CCNode*)child z:(NSInteger)z;
 // used internally to alter the zOrder variable. DON'T call this method manually
@@ -163,8 +161,7 @@ static NSUInteger globalOrderOfArrival = 1;
 
 		_zOrder = 0;
 
-		// children (lazy allocs)
-		_children = nil;
+		_children = [[NSMutableArray<CCNode*> alloc] init];
 
 		// userObject is always inited as nil
 		_userObject = nil;
@@ -691,11 +688,6 @@ TransformPointAsVector(CGPoint p, CGAffineTransform t)
     }
 }
 
--(void) childrenAlloc
-{
-	_children = [[NSMutableArray alloc] init];
-}
-
 // Recursively get a child by name, but don't return the root of the search.
 -(CCNode*) getChildByNameRecursive:(NSString *)name root:(CCNode *)root
 {
@@ -749,9 +741,6 @@ RecursivelyIncrementPausedAncestors(CCNode *node, int increment)
 {
 	NSAssert( child != nil, @"Argument must be non-nil");
 	NSAssert( child.parent == nil, @"child already added to another node. It can't be added again");
-
-	if( ! _children )
-		[self childrenAlloc];
 
 	[self insertChild:child z:z];
 
