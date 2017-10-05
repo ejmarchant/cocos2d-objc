@@ -1776,6 +1776,18 @@ CGAffineTransformMakeRigid(CGPoint translate, CGFloat radians)
     [self recalculateDisplayColor];
 }
 
+-(ccColor4F)color4F {
+    return _color;
+}
+
+-(void)setColor4F:(ccColor4F)color {
+    // Retain old alpha value.
+    float alpha = _color.a;
+    _color = color;
+    _color.a = alpha;
+    [self recalculateDisplayColor];
+}
+
 -(CCColor*)colorRGBA {
 	return [CCColor colorWithCcColor4f:_color];
 }

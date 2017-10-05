@@ -977,6 +977,16 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic,strong) CCColor* color;
 
+/** Sets and returns the node's color. Alpha is ignored. Changing color has no effect on non-visible nodes (ie CCNode, CCScene).
+ 
+ @note By default color is not "inherited" by child nodes. This can be enabled via cascadeColorEnabled.
+ @see CCColor
+ @see colorRGBA
+ @see opacity
+ @see cascadeColorEnabled
+ */
+@property (nonatomic) ccColor4F color4F;
+
 /** Sets and returns the node's color including alpha. Changing color has no effect on non-visible nodes (ie CCNode, CCScene).
 
  @note By default color is not "inherited" by child nodes. This can be enabled via cascadeColorEnabled.
