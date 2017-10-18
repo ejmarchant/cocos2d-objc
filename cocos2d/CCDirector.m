@@ -568,7 +568,14 @@ static CCDirector *_sharedDirector = nil;
 	
 	[self setProjection:_projection];
 	
-	[_runningScene viewDidResizeTo: _winSizeInPoints];
+    // If the running scene is nil then call viewDidResizeTo on the next scene instead.
+    // Running scene may be nil if the app is loading and reshapeProjection is called before
+    // the game loop has started.
+    if (_runningScene != nil) {
+        [_runningScene viewDidResizeTo: _winSizeInPoints];
+    } else {
+        [_nextScene viewDidResizeTo: _winSizeInPoints];
+    }
 }
 
 #pragma mark Director Scene Management
