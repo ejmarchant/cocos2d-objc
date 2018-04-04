@@ -416,9 +416,9 @@ static CCTexture *CCTextureNone = nil;
 			{
 				CCGL_DEBUG_PUSH_GROUP_MARKER("CCTexture: Set Alias Texture Parameters");
 				
-				glBindTexture(GL_TEXTURE_2D, _name);
+				glBindTexture(GL_TEXTURE_2D, self->_name);
 				
-				if(_hasMipmaps){
+				if(self->_hasMipmaps){
 					glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, antialiased ? GL_NEAREST_MIPMAP_NEAREST : GL_NEAREST_MIPMAP_NEAREST);
 				} else {
 					glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, antialiased ? GL_LINEAR : GL_NEAREST);
@@ -768,12 +768,12 @@ static BOOL _PVRHaveAlphaPremultiplied = YES;
 			{
 				CCGL_DEBUG_PUSH_GROUP_MARKER("CCTexture: Generate Mipmap");
 				
-				NSAssert( _width == CCNextPOT(_width) && _height == CCNextPOT(_height), @"Mimpap texture only works in POT textures");
-				glBindTexture(GL_TEXTURE_2D, _name);
+				NSAssert( self->_width == CCNextPOT(self->_width) && self->_height == CCNextPOT(self->_height), @"Mimpap texture only works in POT textures");
+				glBindTexture(GL_TEXTURE_2D, self->_name);
 				glGenerateMipmap(GL_TEXTURE_2D);
 				
 				// Update the minification filter.
-				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, _antialiased ? GL_LINEAR_MIPMAP_NEAREST : GL_NEAREST_MIPMAP_NEAREST);
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, self->_antialiased ? GL_LINEAR_MIPMAP_NEAREST : GL_NEAREST_MIPMAP_NEAREST);
 				
 				CCGL_DEBUG_POP_GROUP_MARKER();
 			}
@@ -789,11 +789,11 @@ static BOOL _PVRHaveAlphaPremultiplied = YES;
 		CCGL_DEBUG_PUSH_GROUP_MARKER("CCTexture: Set Texture Parameters");
 		
 		NSAssert([CCConfiguration sharedConfiguration].graphicsAPI == CCGraphicsAPIGL, @"Not implemented for Metal.");
-		NSAssert( (_width == CCNextPOT(_width) && _height == CCNextPOT(_height)) ||
+		NSAssert( (self->_width == CCNextPOT(self->_width) && self->_height == CCNextPOT(self->_height)) ||
 					(texParams->wrapS == GL_CLAMP_TO_EDGE && texParams->wrapT == GL_CLAMP_TO_EDGE),
 				@"GL_CLAMP_TO_EDGE should be used in NPOT dimensions");
 
-		glBindTexture(GL_TEXTURE_2D, _name );
+		glBindTexture(GL_TEXTURE_2D, self->_name );
 		glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, texParams->minFilter );
 		glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, texParams->magFilter );
 		glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, texParams->wrapS );
