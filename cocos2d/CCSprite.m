@@ -272,7 +272,7 @@
 + (CCSpriteTexCoordSet)textureCoordsForTexture:(CCTexture *)texture withRect:(CGRect)rect rotated:(BOOL)rotated xFlipped:(BOOL)flipX yFlipped:(BOOL)flipY
 {
     CCSpriteTexCoordSet result;
-	if(!texture) return result;
+    if(!texture) return (CCSpriteTexCoordSet){GLKVector2Make(0, 0), GLKVector2Make(0, 0), GLKVector2Make(0, 0), GLKVector2Make(0, 0)};
 	
 	CGFloat scale = texture.contentScale;
 	rect = CC_RECT_SCALE(rect, scale);
