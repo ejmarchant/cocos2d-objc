@@ -214,26 +214,26 @@ BindVertexPage(CCGraphicsBufferBindingsGL *self, NSUInteger page)
 	if((self = [super init])){
 		CCRenderDispatch(NO, ^{
 			const NSUInteger CCRENDERER_INITIAL_VERTEX_CAPACITY = 16*1024;
-			_vertexBuffer = [[CCGraphicsBufferClass alloc] initWithCapacity:CCRENDERER_INITIAL_VERTEX_CAPACITY elementSize:sizeof(CCVertex) type:CCGraphicsBufferTypeVertex];
-			[_vertexBuffer prepare];
+			self->_vertexBuffer = [[CCGraphicsBufferClass alloc] initWithCapacity:CCRENDERER_INITIAL_VERTEX_CAPACITY elementSize:sizeof(CCVertex) type:CCGraphicsBufferTypeVertex];
+			[self->_vertexBuffer prepare];
 			
-			_indexBuffer = [[CCGraphicsBufferClass alloc] initWithCapacity:CCRENDERER_INITIAL_VERTEX_CAPACITY*1.5 elementSize:sizeof(uint16_t) type:CCGraphicsBufferTypeIndex];
-			[_indexBuffer prepare];
+			self->_indexBuffer = [[CCGraphicsBufferClass alloc] initWithCapacity:CCRENDERER_INITIAL_VERTEX_CAPACITY*1.5 elementSize:sizeof(uint16_t) type:CCGraphicsBufferTypeIndex];
+			[self->_indexBuffer prepare];
 			
 			CCGL_DEBUG_PUSH_GROUP_MARKER("CCGraphicsBufferBindingsGL: Creating VAO");
 			
-			glGenVertexArrays(1, &_vao);
-			glBindVertexArray(_vao);
+			glGenVertexArrays(1, &self->_vao);
+			glBindVertexArray(self->_vao);
 
 			glEnableVertexAttribArray(CCShaderAttributePosition);
 			glEnableVertexAttribArray(CCShaderAttributeTexCoord1);
 			glEnableVertexAttribArray(CCShaderAttributeTexCoord2);
 			glEnableVertexAttribArray(CCShaderAttributeColor);
 			
-			_currentPage = NSUIntegerMax; // Start with an invalid value.
+			self->_currentPage = NSUIntegerMax; // Start with an invalid value.
 			BindVertexPage(self, 0);
 			
-			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ((CCGraphicsBufferGLBasic *)_indexBuffer)->_buffer);
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ((CCGraphicsBufferGLBasic *)self->_indexBuffer)->_buffer);
 
 			glBindVertexArray(0);
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
@@ -280,8 +280,8 @@ BindVertexPage(CCGraphicsBufferBindingsGL *self, NSUInteger page)
 			CCGL_DEBUG_PUSH_GROUP_MARKER("CCRenderTexture: Create");
 			
 			// generate FBO
-			glGenFramebuffers(1, &_fbo);
-			glBindFramebuffer(GL_FRAMEBUFFER, _fbo);
+			glGenFramebuffers(1, &self->_fbo);
+			glBindFramebuffer(GL_FRAMEBUFFER, self->_fbo);
 			
 			// associate texture with FBO
 			glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, texture.name, 0);
@@ -291,14 +291,14 @@ BindVertexPage(CCGraphicsBufferBindingsGL *self, NSUInteger page)
 			
 			if(depthStencilFormat){
 				//create and attach depth buffer
-				glGenRenderbuffers(1, &_depthRenderBuffer);
-				glBindRenderbuffer(GL_RENDERBUFFER, _depthRenderBuffer);
+				glGenRenderbuffers(1, &self->_depthRenderBuffer);
+				glBindRenderbuffer(GL_RENDERBUFFER, self->_depthRenderBuffer);
 				glRenderbufferStorage(GL_RENDERBUFFER, depthStencilFormat, width, height);
-				glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, _depthRenderBuffer);
+				glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, self->_depthRenderBuffer);
 
 				// if depth format is the one with stencil part, bind same render buffer as stencil attachment
 				if(depthStencilFormat == GL_DEPTH24_STENCIL8){
-					glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_STENCIL_ATTACHMENT, GL_RENDERBUFFER, _depthRenderBuffer);
+					glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_STENCIL_ATTACHMENT, GL_RENDERBUFFER, self->_depthRenderBuffer);
 				}
 			}
 		

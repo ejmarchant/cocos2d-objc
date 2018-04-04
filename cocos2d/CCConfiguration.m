@@ -226,38 +226,38 @@ static char * glExtensions;
 			NSAssert( glExtensions, @"OpenGL not initialized!");
 
 #if __CC_PLATFORM_IOS
-			if( _OSVersion >= CCSystemVersion_iOS_4_0 )
-				glGetIntegerv(GL_MAX_SAMPLES_APPLE, &_maxSamplesAllowed);
+            if( self->_OSVersion >= CCSystemVersion_iOS_4_0 )
+                glGetIntegerv(GL_MAX_SAMPLES_APPLE, &self->_maxSamplesAllowed);
 			else
-				_maxSamplesAllowed = 0;
+                self->_maxSamplesAllowed = 0;
 #elif __CC_PLATFORM_MAC
 			glGetIntegerv(GL_MAX_SAMPLES, &_maxSamplesAllowed);
 #endif
 
-			glGetIntegerv(GL_MAX_TEXTURE_SIZE, &_maxTextureSize);
-			glGetIntegerv(GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS, &_maxTextureUnits );
+            glGetIntegerv(GL_MAX_TEXTURE_SIZE, &self->_maxTextureSize);
+            glGetIntegerv(GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS, &self->_maxTextureUnits );
 
 #if __CC_PLATFORM_IOS
-		_supportsNPOT = YES;
-        _supportsPackedDepthStencil = YES;
+            self->_supportsNPOT = YES;
+            self->_supportsPackedDepthStencil = YES;
 #elif __CC_PLATFORM_MAC
 		_supportsNPOT = [self checkForGLExtension:@"GL_ARB_texture_non_power_of_two"];
         _supportsPackedDepthStencil = YES;
 #endif
-		_supportsPVRTC = [self checkForGLExtension:@"GL_IMG_texture_compression_pvrtc"];
+            self->_supportsPVRTC = [self checkForGLExtension:@"GL_IMG_texture_compression_pvrtc"];
 
 		// It seems that somewhere between firmware iOS 3.0 and 4.2 Apple renamed
 		// GL_IMG_... to GL_APPLE.... So we should check both names
 #if __CC_PLATFORM_IOS
 		BOOL bgra8a = [self checkForGLExtension:@"GL_IMG_texture_format_BGRA8888"];
 		BOOL bgra8b = [self checkForGLExtension:@"GL_APPLE_texture_format_BGRA8888"];
-		_supportsBGRA8888 = bgra8a | bgra8b;
+            self->_supportsBGRA8888 = bgra8a | bgra8b;
 #elif __CC_PLATFORM_MAC
 		_supportsBGRA8888 = [self checkForGLExtension:@"GL_EXT_bgra"];
 #endif
-			_supportsDiscardFramebuffer = [self checkForGLExtension:@"GL_EXT_discard_framebuffer"];
+            self->_supportsDiscardFramebuffer = [self checkForGLExtension:@"GL_EXT_discard_framebuffer"];
 
-			_supportsShareableVAO = [self checkForGLExtension:@"GL_APPLE_vertex_array_object"];
+            self->_supportsShareableVAO = [self checkForGLExtension:@"GL_APPLE_vertex_array_object"];
 			
 			// Check if unsynchronized buffers are supported.
 			if(
@@ -267,7 +267,7 @@ static char * glExtensions;
 				CCGraphicsBufferClass = NSClassFromString(@"CCGraphicsBufferGLUnsynchronized");
 			}
 			
-			_openGLInitialized = YES;
+            self->_openGLInitialized = YES;
 		});
 	}
 }

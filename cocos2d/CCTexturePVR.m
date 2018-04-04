@@ -510,23 +510,23 @@ typedef struct {
 	__block BOOL retVal = NO;
 	
 CCRenderDispatch(NO, ^{
-	GLsizei width = _width;
-	GLsizei height = _height;
+	GLsizei width = self->_width;
+	GLsizei height = self->_height;
 	GLenum err;
 
-	if (_numberOfMipmaps > 0)
+	if (self->_numberOfMipmaps > 0)
 	{
-		if (_name != 0)
-			glDeleteTextures(1, &_name);
+		if (self->_name != 0)
+			glDeleteTextures(1, &self->_name);
 
 		// From PVR sources: "PVR files are never row aligned."
 		glPixelStorei(GL_UNPACK_ALIGNMENT,1);
 
-		glGenTextures(1, &_name);
-		glBindTexture(GL_TEXTURE_2D, _name);
+		glGenTextures(1, &self->_name);
+		glBindTexture(GL_TEXTURE_2D, self->_name);
 
 		// Default: Anti alias.
-		if( _numberOfMipmaps == 1 )
+		if( self->_numberOfMipmaps == 1 )
 			glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
 		else
 			glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST );
@@ -538,21 +538,21 @@ CCRenderDispatch(NO, ^{
 	
 	CC_CHECK_GL_ERROR_DEBUG(); // clean possible GL error
 
-	GLenum internalFormat = _pixelFormatInfo->internalFormat;
-	GLenum format = _pixelFormatInfo->format;
-	GLenum type = _pixelFormatInfo->type;
-	BOOL compressed = _pixelFormatInfo->compressed;
+	GLenum internalFormat = self->_pixelFormatInfo->internalFormat;
+	GLenum format = self->_pixelFormatInfo->format;
+	GLenum type = self->_pixelFormatInfo->type;
+	BOOL compressed = self->_pixelFormatInfo->compressed;
 
 	// Generate textures with mipmaps
-	for (GLint i=0; i < _numberOfMipmaps; i++)
+	for (GLint i=0; i < self->_numberOfMipmaps; i++)
 	{
 		if( compressed && ! [[CCConfiguration sharedConfiguration] supportsPVRTC] ) {
 			CCLOGWARN(@"cocos2d: WARNING: PVRTC images are not supported");
 			retVal = NO; return;
 		}
 
-		unsigned char *data = _mipmaps[i].address;
-		GLsizei datalen = _mipmaps[i].len;
+		unsigned char *data = self->_mipmaps[i].address;
+		GLsizei datalen = self->_mipmaps[i].len;
 
 		if( compressed)
 			glCompressedTexImage2D(GL_TEXTURE_2D, i, internalFormat, width, height, 0, datalen, data);

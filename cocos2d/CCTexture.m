@@ -261,8 +261,8 @@ static CCTexture *CCTextureNone = nil;
 			else
 				glPixelStorei(GL_UNPACK_ALIGNMENT,1);
 
-			glGenTextures(1, &_name);
-			glBindTexture(GL_TEXTURE_2D, _name);
+			glGenTextures(1, &self->_name);
+			glBindTexture(GL_TEXTURE_2D, self->_name);
 			
 			glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
 			glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
