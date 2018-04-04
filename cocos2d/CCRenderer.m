@@ -138,13 +138,13 @@ void CCRENDERER_DEBUG_CHECK_ERRORS(void){
 
 @implementation CCRenderCommandCustom
 {
-	void (^_block)();
+	void (^_block)(void);
 	NSString *_debugLabel;
 	
 	NSInteger _globalSortOrder;
 }
 
--(instancetype)initWithBlock:(void (^)())block debugLabel:(NSString *)debugLabel globalSortOrder:(NSInteger)globalSortOrder
+-(instancetype)initWithBlock:(void (^)(void))block debugLabel:(NSString *)debugLabel globalSortOrder:(NSInteger)globalSortOrder
 {
 	if((self = [super init])){
 		_block = block;
