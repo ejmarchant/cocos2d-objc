@@ -74,24 +74,6 @@ const CGSize FIXED_SIZE = {568, 384};
     }
 }
 
-// Supported orientations. Customize it for your own needs
-// Only valid on iOS 4 / 5. NOT VALID for iOS 6.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    if ([_screenOrientation isEqual:CCScreenOrientationAll])
-    {
-        return YES;
-    }
-    else if ([_screenOrientation isEqual:CCScreenOrientationPortrait])
-    {
-        return UIInterfaceOrientationIsPortrait(interfaceOrientation);
-    }
-    else
-    {
-        return UIInterfaceOrientationIsLandscape(interfaceOrientation);
-    }
-}
-
 // Projection delegate is only used if the fixed resolution mode is enabled
 -(GLKMatrix4)updateProjection
 {

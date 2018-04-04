@@ -185,18 +185,6 @@
 		}
 }
 
-#if !defined(__TV_OS_VERSION_MAX_ALLOWED)
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-	BOOL ret =YES;
-	if( [_delegate respondsToSelector:_cmd] )
-		ret = (BOOL) [_delegate shouldAutorotateToInterfaceOrientation:interfaceOrientation];
-
-	return ret;
-}
-#endif
-
 // Commented. See issue #1453 for further info: http://code.google.com/p/cocos2d-iphone/issues/detail?id=1453
 //-(void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 //{
@@ -263,16 +251,6 @@
 	CCLOG(@"cocos2d: viewDidLoad");
 
 	[super viewDidLoad];
-}
-
-
-- (void)viewDidUnload
-{
-	CCLOG(@"cocos2d: viewDidUnload");
-
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
 #pragma mark helper
