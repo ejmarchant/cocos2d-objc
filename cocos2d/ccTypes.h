@@ -345,17 +345,6 @@ typedef struct _ccV2F_C4F_T2F_Quad
 	ccV2F_C4F_T2F	tr;
 } ccV2F_C4F_T2F_Quad;
 
-//! Blend Function used for textures
-typedef struct _ccBlendFunc
-{
-	//! source blend function
-	GLenum src;
-	//! destination blend function
-	GLenum dst;
-} ccBlendFunc;
-
-static const ccBlendFunc kCCBlendFuncDisable = {GL_ONE, GL_ZERO};
-
 // XXX: If any of these enums are edited and/or reordered, update CCTexture2D.m
 /// Vertical text alignment type. Used by CCLabelTTF and CCButton.
 typedef NS_ENUM(NSUInteger, CCVerticalTextAlignment)
