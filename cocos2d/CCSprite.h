@@ -35,7 +35,6 @@ NS_ASSUME_NONNULL_BEGIN
 @class CCEffectRenderer;
 #endif
 
-@class CCSpriteBatchNode;
 @class CCSpriteFrame;
 @class CCAnimation;
 

@@ -25,8 +25,8 @@
  *
  */
 
-#import "CCSpriteBatchNode.h"
 #import "Support/uthash.h"
+#import "CCNode.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

@@ -65,7 +65,7 @@
  The "correct" way to prevent artifacts is by using the spritesheet-artifact-fixer.py or a similar tool.
 
  Affected nodes:
-	- CCSprite / CCSpriteBatchNode and subclasses: CCLabelBMFont, CCTMXLayer
+	- CCSprite and subclasses: CCLabelBMFont, CCTMXLayer
 	- CCLabelAtlas
 	- CCParticleSystemQuad
 	- CCTileMap
@@ -140,7 +140,6 @@
  If enabled, all subclasses of CCSprite will draw a bounding box.
  Useful for debugging purposes only. It is recommended to leave it disabled.
 
- If the CCSprite is being drawn by a CCSpriteBatchNode, the bounding box might be a bit different.
  To enable set it to a value different than 0. Disabled by default:
  0 -- disabled
  1 -- draw bounding box
