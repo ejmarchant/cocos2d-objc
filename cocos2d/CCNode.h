@@ -41,8 +41,6 @@ NS_ASSUME_NONNULL_BEGIN
 @class CCActionManager;
 @class CCAction;
 @class CCPhysicsBody;
-@class CCBAnimationManager;
-@class CCAnimationManager;
 
 /**
  CCNode is the base class for all objects displayed by Cocos2D. CCNode handles transformations, can have a content size and provides a coordinate system for its child nodes.
@@ -224,9 +222,6 @@ NS_ASSUME_NONNULL_BEGIN
 	
 	// ActionManager used to handle all the actions.
 	CCActionManager	*_actionManager;
-	
-    //Animation Manager used to handle CCB animations
-    CCAnimationManager * _animationManager;
 	
     // Set to YES when onEnter called, NO when onExit called.
     BOOL _isInEnteredState;
@@ -710,18 +705,6 @@ NS_ASSUME_NONNULL_BEGIN
  - If you are running 7 Sequences each with 2 actions, it will return 7.
  */
 -(NSUInteger) numberOfRunningActions;
-
-/// -----------------------------------------------------------------------
-/// @name CocosBuilder Animation Manager
-/// -----------------------------------------------------------------------
-
-/**
- Returns the Animation Manager of this node, or that of its parent.
- 
- @note The animationManager property is nil during a node's init methods.
- @see CCAnimationManager
- */
-@property (nonatomic, assign, readwrite, nullable) CCAnimationManager * animationManager;
 
 
 /// -----------------------------------------------------------------------

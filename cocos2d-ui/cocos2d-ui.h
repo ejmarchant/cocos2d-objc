@@ -31,8 +31,3 @@
 #import "CCSlider.h"
 #import "CCProgressNode.h"
 #import "CCPotentiometer.h"
-
-#if CC_CCBREADER
-// CCBReader
-#import "CCBuilderReader.h"
-#endif

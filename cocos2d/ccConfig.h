@@ -177,10 +177,6 @@
 #define CC_PHYSICS 0
 #endif
 
-#ifndef CC_CCBREADER
-#define CC_CCBREADER 0
-#endif
-
 /**
  For CCEffectLighting you need to enable both CC_EFFECTS and CC_LIGHTING
  */
