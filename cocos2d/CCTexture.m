@@ -406,11 +406,11 @@ static CCTexture *CCTextureNone = nil;
 				
 				MTLSamplerDescriptor *samplerDesc = [MTLSamplerDescriptor new];
 				samplerDesc.minFilter = samplerDesc.magFilter = (antialiased ? MTLSamplerMinMagFilterLinear : MTLSamplerMinMagFilterNearest);
-				samplerDesc.mipFilter = (_hasMipmaps ? MTLSamplerMipFilterNearest : MTLSamplerMipFilterNotMipmapped);
+                samplerDesc.mipFilter = (self->_hasMipmaps ? MTLSamplerMipFilterNearest : MTLSamplerMipFilterNotMipmapped);
 				samplerDesc.sAddressMode = MTLSamplerAddressModeClampToEdge;
 				samplerDesc.tAddressMode = MTLSamplerAddressModeClampToEdge;
 				
-				_metalSampler = [context.device newSamplerStateWithDescriptor:samplerDesc];
+                self->_metalSampler = [context.device newSamplerStateWithDescriptor:samplerDesc];
 			} else
 #endif
 			{
@@ -732,8 +732,8 @@ static BOOL _PVRHaveAlphaPremultiplied = YES;
 				CCMetalContext *context = [CCMetalContext currentContext];
 				
 				// Create a new blank texture.
-				MTLPixelFormat metalFormat = MetalPixelFormats[_format];
-				MTLTextureDescriptor *textureDesc = [MTLTextureDescriptor texture2DDescriptorWithPixelFormat:metalFormat width:_width height:_height mipmapped:YES];
+                MTLPixelFormat metalFormat = MetalPixelFormats[self->_format];
+                MTLTextureDescriptor *textureDesc = [MTLTextureDescriptor texture2DDescriptorWithPixelFormat:metalFormat width:self->_width height:self->_height mipmapped:YES];
 				id<MTLTexture> newTexture = [context.device newTextureWithDescriptor:textureDesc];
 				
 				// Set up a command buffer for the blit operations.
@@ -742,9 +742,9 @@ static BOOL _PVRHaveAlphaPremultiplied = YES;
 				
 				// Copy in level 0.
 				MTLOrigin origin = MTLOriginMake(0, 0, 0);
-				MTLSize size = MTLSizeMake(_width, _height, 1);
+                MTLSize size = MTLSizeMake(self->_width, self->_height, 1);
 				[blitter
-					copyFromTexture:_metalTexture sourceSlice:0 sourceLevel:0 sourceOrigin:origin sourceSize:size
+					copyFromTexture:self->_metalTexture sourceSlice:0 sourceLevel:0 sourceOrigin:origin sourceSize:size
 					toTexture:newTexture destinationSlice:0 destinationLevel:0 destinationOrigin:origin
 				];
 				
@@ -755,14 +755,14 @@ static BOOL _PVRHaveAlphaPremultiplied = YES;
 				
 				// Update sampler and texture.
 				MTLSamplerDescriptor *samplerDesc = [MTLSamplerDescriptor new];
-				samplerDesc.minFilter = samplerDesc.magFilter = (_antialiased ? MTLSamplerMinMagFilterLinear : MTLSamplerMinMagFilterNearest);
+				samplerDesc.minFilter = samplerDesc.magFilter = (self->_antialiased ? MTLSamplerMinMagFilterLinear : MTLSamplerMinMagFilterNearest);
 				samplerDesc.mipFilter = MTLSamplerMipFilterNearest; // TODO trillinear?
 				samplerDesc.sAddressMode = MTLSamplerAddressModeClampToEdge;
 				samplerDesc.tAddressMode = MTLSamplerAddressModeClampToEdge;
 				
-				_metalSampler = [context.device newSamplerStateWithDescriptor:samplerDesc];
-				NSLog(@"Generate mipmaps. Replacing %p with %p.", _metalTexture, newTexture);
-				_metalTexture = newTexture;
+				self->_metalSampler = [context.device newSamplerStateWithDescriptor:samplerDesc];
+				NSLog(@"Generate mipmaps. Replacing %p with %p.", self->_metalTexture, newTexture);
+				self->_metalTexture = newTexture;
 			} else
 #endif
 			{
