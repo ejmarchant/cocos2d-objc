@@ -21,6 +21,10 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		001217BB20CA94D700DF8A92 /* CCGLFullscreenWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 001217B720CA94D600DF8A92 /* CCGLFullscreenWindow.m */; };
+		001217BC20CA94D700DF8A92 /* CCGLWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 001217B820CA94D600DF8A92 /* CCGLWindowController.m */; };
+		001217BD20CA94D700DF8A92 /* CCGLFullscreenWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = 001217B920CA94D600DF8A92 /* CCGLFullscreenWindow.h */; };
+		001217BE20CA94D700DF8A92 /* CCGLWindowController.h in Headers */ = {isa = PBXBuildFile; fileRef = 001217BA20CA94D700DF8A92 /* CCGLWindowController.h */; };
 		0038CAA71D11953800582E3C /* CCImageResizer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0038CAA51D11953800582E3C /* CCImageResizer.h */; };
 		0038CAA81D11953800582E3C /* CCImageResizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0038CAA61D11953800582E3C /* CCImageResizer.m */; };
 		0038CADE1D11A4C400582E3C /* CCImageResizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0038CAA61D11953800582E3C /* CCImageResizer.m */; };
@@ -539,6 +543,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		001217B720CA94D600DF8A92 /* CCGLFullscreenWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCGLFullscreenWindow.m; sourceTree = "<group>"; };
+		001217B820CA94D600DF8A92 /* CCGLWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCGLWindowController.m; sourceTree = "<group>"; };
+		001217B920CA94D600DF8A92 /* CCGLFullscreenWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCGLFullscreenWindow.h; sourceTree = "<group>"; };
+		001217BA20CA94D700DF8A92 /* CCGLWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCGLWindowController.h; sourceTree = "<group>"; };
 		0038CAA51D11953800582E3C /* CCImageResizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCImageResizer.h; sourceTree = "<group>"; };
 		0038CAA61D11953800582E3C /* CCImageResizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCImageResizer.m; sourceTree = "<group>"; };
 		0529445911098D6F00E500F3 /* CCProfiling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCProfiling.h; sourceTree = "<group>"; };
@@ -1241,6 +1249,10 @@
 		E0E9749E1237E4EA00E3E64B /* Mac */ = {
 			isa = PBXGroup;
 			children = (
+				001217B920CA94D600DF8A92 /* CCGLFullscreenWindow.h */,
+				001217B720CA94D600DF8A92 /* CCGLFullscreenWindow.m */,
+				001217BA20CA94D700DF8A92 /* CCGLWindowController.h */,
+				001217B820CA94D600DF8A92 /* CCGLWindowController.m */,
 				5BC1DE281A2E2099009C2E67 /* NSEvent+CC.h */,
 				5BC1DE291A2E2099009C2E67 /* NSEvent+CC.m */,
 				A046E28B14C1DB7D0005BBF2 /* CCDirectorMac.h */,
@@ -1538,6 +1550,7 @@
 				7A59474D19E3730E00F65F90 /* ccFPSImages.h in Headers */,
 				7A59474F19E3730F00F65F90 /* ccConfig.h in Headers */,
 				7A59475019E3730F00F65F90 /* CCDirector.h in Headers */,
+				001217BD20CA94D700DF8A92 /* CCGLFullscreenWindow.h in Headers */,
 				7A59475219E3731000F65F90 /* ccMacros.h in Headers */,
 				7A59475319E3731000F65F90 /* ccTypes.h in Headers */,
 				7A59475419E3731000F65F90 /* CCConfiguration.h in Headers */,
@@ -1545,6 +1558,7 @@
 				7A59475719E3731100F65F90 /* CCScheduler.h in Headers */,
 				7A59476019E3731400F65F90 /* CCPlatformTextField.h in Headers */,
 				7A59476419E3731500F65F90 /* CCPlatformTextFieldMac.h in Headers */,
+				001217BE20CA94D700DF8A92 /* CCGLWindowController.h in Headers */,
 				7A59477919E3731D00F65F90 /* cocos2d-ui.h in Headers */,
 				7A59477A19E3731E00F65F90 /* CCControl.h in Headers */,
 				7A59477B19E3731E00F65F90 /* CCControlSubclass.h in Headers */,
@@ -1882,6 +1896,7 @@
 				7A5947C719E3759D00F65F90 /* CCLabelTTF.m in Sources */,
 				7A5947CA19E3759D00F65F90 /* CCAnimation.m in Sources */,
 				7A5947CC19E3759E00F65F90 /* CCAnimationCache.m in Sources */,
+				001217BC20CA94D700DF8A92 /* CCGLWindowController.m in Sources */,
 				7A5947CE19E3759E00F65F90 /* CCSprite.m in Sources */,
 				7A5947D019E3759E00F65F90 /* CCSprite9Slice.m in Sources */,
 				7A5947D419E3759E00F65F90 /* CCSpriteFrame.m in Sources */,
@@ -1897,6 +1912,7 @@
 				7A59482A19E375A700F65F90 /* CCActionManager.m in Sources */,
 				7A59482C19E375A800F65F90 /* CCAction.m in Sources */,
 				7A59482E19E375A800F65F90 /* CCActionInstant.m in Sources */,
+				001217BB20CA94D700DF8A92 /* CCGLFullscreenWindow.m in Sources */,
 				7A59483019E375A800F65F90 /* CCActionInterval.m in Sources */,
 				0038CADE1D11A4C400582E3C /* CCImageResizer.m in Sources */,
 				7A59483219E375A800F65F90 /* CCActionEase.m in Sources */,

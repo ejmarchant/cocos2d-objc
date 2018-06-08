@@ -30,7 +30,7 @@
 #import "../../ccMacros.h"
 #if __CC_PLATFORM_MAC
 
-#import <QuartzCore/CVDisplayLink.h>
+#import <Cocoa/Cocoa.h>
 #import "../../CCDirector.h"
 
 NS_ASSUME_NONNULL_BEGIN

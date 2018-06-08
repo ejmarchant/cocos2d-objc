@@ -118,6 +118,8 @@
 #import "Platforms/Mac/CCDirectorMac.h"
 #import "Platforms/Mac/CCWindow.h"
 #import "Platforms/Mac/NSEvent+CC.h"
+#import "Platforms/Mac/CCGLWindowController.h"
+#import "Platforms/Mac/CCGLFullscreenWindow.h"
 #endif
 
 //
