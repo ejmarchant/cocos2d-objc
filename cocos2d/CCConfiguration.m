@@ -231,7 +231,7 @@ static char * glExtensions;
 			else
                 self->_maxSamplesAllowed = 0;
 #elif __CC_PLATFORM_MAC
-			glGetIntegerv(GL_MAX_SAMPLES, &_maxSamplesAllowed);
+			glGetIntegerv(GL_MAX_SAMPLES, &self->_maxSamplesAllowed);
 #endif
 
             glGetIntegerv(GL_MAX_TEXTURE_SIZE, &self->_maxTextureSize);
@@ -241,8 +241,8 @@ static char * glExtensions;
             self->_supportsNPOT = YES;
             self->_supportsPackedDepthStencil = YES;
 #elif __CC_PLATFORM_MAC
-		_supportsNPOT = [self checkForGLExtension:@"GL_ARB_texture_non_power_of_two"];
-        _supportsPackedDepthStencil = YES;
+		self->_supportsNPOT = [self checkForGLExtension:@"GL_ARB_texture_non_power_of_two"];
+        self->_supportsPackedDepthStencil = YES;
 #endif
             self->_supportsPVRTC = [self checkForGLExtension:@"GL_IMG_texture_compression_pvrtc"];
 
@@ -253,7 +253,7 @@ static char * glExtensions;
 		BOOL bgra8b = [self checkForGLExtension:@"GL_APPLE_texture_format_BGRA8888"];
             self->_supportsBGRA8888 = bgra8a | bgra8b;
 #elif __CC_PLATFORM_MAC
-		_supportsBGRA8888 = [self checkForGLExtension:@"GL_EXT_bgra"];
+		self->_supportsBGRA8888 = [self checkForGLExtension:@"GL_EXT_bgra"];
 #endif
             self->_supportsDiscardFramebuffer = [self checkForGLExtension:@"GL_EXT_discard_framebuffer"];
 

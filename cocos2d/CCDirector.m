@@ -308,7 +308,7 @@ static CCDirector *_sharedDirector = nil;
 	
 	if(CCRenderDispatchBeginFrame()){
 		GLKMatrix4 projection = self.projectionMatrix;
-		
+        
 		// Synchronize the framebuffer with the view.
 		[_framebuffer syncWithView:self.view];
 		
