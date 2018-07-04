@@ -98,16 +98,32 @@
                 return [[CCTexture alloc] initWithCGImage:[image CGImageForProposedRect:nil context:nil hints:nil] contentScale:contentScale];
             }
             CGSize scaledSize = CGSizeMake(roundf(image.size.width * resizeScale), roundf(image.size.height * resizeScale));
-            NSImage *scaledImage = [[NSImage alloc] initWithSize:scaledSize];
-            [scaledImage lockFocus];
-            NSGraphicsContext *ctx = [NSGraphicsContext currentContext];
+            BOOL hasAlpha = YES;
+            NSBitmapImageRep *rep = [[NSBitmapImageRep alloc]
+                                     initWithBitmapDataPlanes: NULL
+                                     pixelsWide: scaledSize.width
+                                     pixelsHigh: scaledSize.height
+                                     bitsPerSample: 8
+                                     samplesPerPixel: 4
+                                     hasAlpha: hasAlpha
+                                     isPlanar: NO
+                                     colorSpaceName: NSCalibratedRGBColorSpace
+                                     bytesPerRow: 0
+                                     bitsPerPixel: 0];
+            rep.size = scaledSize;
+            [NSGraphicsContext saveGraphicsState];
+            NSGraphicsContext *ctx = [NSGraphicsContext graphicsContextWithBitmapImageRep:rep];
+            // Set the quality level to use when rescaling
             ctx.imageInterpolation = NSImageInterpolationHigh;
+            [NSGraphicsContext setCurrentContext: ctx];
             [image drawInRect: NSMakeRect(0, 0, scaledSize.width, scaledSize.height)
-                     fromRect: NSMakeRect(0, 0, image.size.width, image.size.height)
-                    operation: NSCompositeSourceOver
-                     fraction: 1];
-            [scaledImage unlockFocus];
-            return [[CCTexture alloc] initWithCGImage:[scaledImage CGImageForProposedRect:nil context:nil hints:nil] contentScale:contentScale];
+                     fromRect: NSZeroRect
+                    operation: NSCompositingOperationCopy
+                     fraction: 1.0];
+            [NSGraphicsContext restoreGraphicsState];
+            NSImage *scaledImage = [[NSImage alloc] initWithSize: scaledSize];
+            [scaledImage addRepresentation:rep];
+            tex = [[CCTexture alloc] initWithCGImage:[scaledImage CGImageForProposedRect:nil context:nil hints:nil] contentScale:contentScale];
         }
 #endif
         
@@ -137,7 +153,7 @@
         tex.antialiased = YES;
         tex.contentScale = contentScale;
     }
-
+    
     return tex;
 }
 
