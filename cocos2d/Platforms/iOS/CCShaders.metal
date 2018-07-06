@@ -26,7 +26,7 @@
 #include <metal_stdlib>
 #include <simd/simd.h>
 
-#include "CCRendererSharedTypes.h"
+#include "../../CCRendererSharedTypes.h"
 
 using namespace metal;
 

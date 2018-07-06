@@ -153,7 +153,7 @@
         tex.antialiased = YES;
         tex.contentScale = contentScale;
     }
-    
+
     return tex;
 }
 

@@ -42,8 +42,8 @@
 #import "../../CCShader.h"
 #import "../../ccFPSImages.h"
 #import "../../CCConfiguration.h"
-#import "CCRenderer_Private.h"
-#import "CCRenderDispatch_Private.h"
+#import "../../CCRenderer_Private.h"
+#import "../CCRenderDispatch_Private.h"
 
 // support imports
 #import "../../Support/CGPointExtension.h"

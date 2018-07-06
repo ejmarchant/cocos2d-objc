@@ -74,11 +74,10 @@ Copyright (C) 2008 Apple Inc. All Rights Reserved.
 
 #import "CCGLView.h"
 #import "../../CCDirector.h"
-#import "../../ccMacros.h"
 #import "../../CCConfiguration.h"
-#import "CCScene.h"
+#import "../../CCScene.h"
 
-#import "CCRenderDispatch.h"
+#import "../../CCRenderDispatch.h"
 
 
 extern EAGLContext *CCRenderDispatchSetupGL(EAGLRenderingAPI api, EAGLSharegroup *sharegroup);

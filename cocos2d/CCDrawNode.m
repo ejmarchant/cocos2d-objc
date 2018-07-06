@@ -32,7 +32,9 @@
 #import "Support/CGPointExtension.h"
 #import "Support/CCColor.h"
 #import "CCConfiguration.h"
-#import "CCMetalSupport_Private.h"
+#if __CC_PLATFORM_IOS
+#import "Platforms/iOS/CCMetalSupport_Private.h"
+#endif
 
 // Vertex shader that performs the modelview-projection multiplication on the GPU.
 // Faster for draw nodes that draw many vertexes, but can't be batched.

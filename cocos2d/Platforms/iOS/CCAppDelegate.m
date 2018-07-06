@@ -27,11 +27,11 @@
 #if __CC_PLATFORM_IOS
 
 #import "CCAppDelegate.h"
-#import "CCTexture.h"
-#import "Support/CCFileUtils.h"
-#import "CCDirector.h"
-#import "CCConfiguration.h"
-#import "CCScheduler.h"
+#import "../../CCTexture.h"
+#import "../../Support/CCFileUtils.h"
+#import "../../CCDirector.h"
+#import "../../CCConfiguration.h"
+#import "../../CCScheduler.h"
 #import "CCGLView.h"
 
 #if __CC_METAL_SUPPORTED_AND_ENABLED

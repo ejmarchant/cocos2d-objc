@@ -46,7 +46,7 @@
 #import "CCConfiguration.h"
 #import "CCTransition.h"
 #import "CCRenderer_Private.h"
-#import "CCRenderDispatch_Private.h"
+#import "Platforms/CCRenderDispatch_Private.h"
 
 // support imports
 #import "Platforms/CCGL.h"

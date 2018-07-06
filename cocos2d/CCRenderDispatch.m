@@ -22,7 +22,8 @@
  * THE SOFTWARE.
  */
 
-#import "CCRenderDispatch_Private.h"
+#import "CCRenderDispatch.h"
+#import "Platforms/CCRenderDispatch_Private.h"
 #import "Platforms/CCGL.h"
 
 #if CC_RENDER_DISPATCH_ENABLED

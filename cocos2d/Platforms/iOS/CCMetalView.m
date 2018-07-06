@@ -1,4 +1,5 @@
 #import "CCMetalView.h"
+#import "../../ccMacros.h"
 
 #if __CC_METAL_SUPPORTED_AND_ENABLED
 
@@ -7,9 +8,8 @@
 
 #import "CCMetalView.h"
 #import "../../CCDirector.h"
-#import "../../ccMacros.h"
 #import "../../CCConfiguration.h"
-#import "CCScene.h"
+#import "../../CCScene.h"
 
 #import "CCMetalSupport_Private.h"
 

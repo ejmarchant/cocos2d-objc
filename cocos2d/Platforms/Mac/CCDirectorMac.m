@@ -41,8 +41,8 @@
 #import "../../CCShader.h"
 #import "../../ccFPSImages.h"
  
-#import "CCRenderer_Private.h"
-#import "CCRenderDispatch.h"
+#import "../../CCRenderer_Private.h"
+#import "../../CCRenderDispatch.h"
 
 #pragma mark -
 #pragma mark Director Mac extensions

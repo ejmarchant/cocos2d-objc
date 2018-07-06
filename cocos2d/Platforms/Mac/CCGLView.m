@@ -37,7 +37,6 @@
 #import "CCGLView.h"
 #import "CCDirectorMac.h"
 #import "../../ccConfig.h"
-#import "../../ccMacros.h"
 
 @interface CCGLViewFence : NSObject
 

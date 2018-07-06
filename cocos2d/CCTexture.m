@@ -89,7 +89,7 @@
 
 #if __CC_METAL_SUPPORTED_AND_ENABLED
 
-#import "CCMetalSupport_Private.h"
+#import "Platforms/iOS/CCMetalSupport_Private.h"
 
 static const MTLPixelFormat MetalPixelFormats[] = {
 	MTLPixelFormatRGBA8Unorm,

@@ -26,8 +26,8 @@
  */
 
 #import "NSAttributedString+CCAdditions.h"
-#import "ccMacros.h"
-#import "cocos2d.h"
+#import "../ccMacros.h"
+#import "../cocos2d.h"
 #import <CoreText/CoreText.h>
 
 BOOL NSMutableAttributedStringSetDefaultAttribute(NSMutableAttributedString *attrString, NSString*attr, id defaultValue);

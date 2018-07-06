@@ -718,8 +718,8 @@
 		D34CAD6A19C3AA10009BED7A /* CCRendererBasicTypes_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCRendererBasicTypes_Private.h; sourceTree = "<group>"; };
 		D38058181889AD6000822437 /* CCRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCRenderer.h; sourceTree = "<group>"; };
 		D38058191889AD6000822437 /* CCRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCRenderer.m; sourceTree = "<group>"; };
-		D380581E1889CE7700822437 /* CCCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCCache.h; path = ../CCCache.h; sourceTree = "<group>"; };
-		D380581F1889CE7700822437 /* CCCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CCCache.m; path = ../CCCache.m; sourceTree = "<group>"; };
+		D380581E1889CE7700822437 /* CCCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCCache.h; sourceTree = "<group>"; };
+		D380581F1889CE7700822437 /* CCCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCCache.m; sourceTree = "<group>"; };
 		D3903B0C1995288D003AA81A /* CCNoARC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCNoARC.m; sourceTree = "<group>"; };
 		D3903B0E199528A0003AA81A /* CCRenderDispatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCRenderDispatch.h; sourceTree = "<group>"; };
 		D3903B0F199528A0003AA81A /* CCRenderDispatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCRenderDispatch.m; sourceTree = "<group>"; };
@@ -925,6 +925,8 @@
 				5066020F0E38A70D000B500E /* CCScheduler.h */,
 				506602100E38A70D000B500E /* CCScheduler.m */,
 				D3903B0C1995288D003AA81A /* CCNoARC.m */,
+				D380581E1889CE7700822437 /* CCCache.h */,
+				D380581F1889CE7700822437 /* CCCache.m */,
 			);
 			path = cocos2d;
 			sourceTree = "<group>";
@@ -951,8 +953,6 @@
 				B75C2E7B17C5908B002B0E0D /* NSAttributedString+CCAdditions.m */,
 				B7E7761F1857A159004221AA /* CCColor.h */,
 				B7E776201857A159004221AA /* CCColor.m */,
-				D380581E1889CE7700822437 /* CCCache.h */,
-				D380581F1889CE7700822437 /* CCCache.m */,
 			);
 			path = Support;
 			sourceTree = "<group>";

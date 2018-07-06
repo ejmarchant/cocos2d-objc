@@ -23,13 +23,13 @@
  * THE SOFTWARE.
  */
 
-#import "ccMacros.h"
+#import "../../ccMacros.h"
 
 #if __CC_PLATFORM_MAC
 
 #import "NSEvent+CC.h"
 #import "CCDirectorMac.h"
-#import "CCNode.h"
+#import "../../CCNode.h"
 
 @implementation NSEvent (CC)
 

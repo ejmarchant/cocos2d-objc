@@ -25,7 +25,7 @@
  *
  */
 
-#import "objc/message.h"
+#import <objc/message.h>
 
 #import "CCTransition.h"
 #import "CCDirector.h"
