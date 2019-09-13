@@ -757,7 +757,7 @@ RecursivelyIncrementPausedAncestors(CCNode *node, int increment)
     [[[CCDirector sharedDirector] responderManager] markAsDirty];
     
     // Cascade opacity & color to the child
-    [self cascadeColorMultiplier];
+    [child recalculateColorMultiplier];
 }
 
 -(void) addChild: (CCNode*) child z:(NSInteger)z
