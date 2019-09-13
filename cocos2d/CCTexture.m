@@ -224,7 +224,7 @@ static CCTexture *CCTextureNone = nil;
     return [[CCTextureCache sharedTextureCache] addImage:file];
 }
 
-- (id) initWithData:(const void*)data pixelFormat:(CCTexturePixelFormat)pixelFormat pixelsWide:(NSUInteger)width pixelsHigh:(NSUInteger)height contentSizeInPixels:(CGSize)sizeInPixels contentScale:(CGFloat)contentScale
+- (id) initWithData:(const void*)data pixelFormat:(CCTexturePixelFormat)pixelFormat pixelsWide:(NSUInteger)width pixelsHigh:(NSUInteger)height contentSizeInPixels:(CGSize)sizeInPixels contentScale:(CGFloat)contentScale isRenderTarget:(BOOL)isRenderTarget
 {
 	NSAssert([CCConfiguration sharedConfiguration].graphicsAPI != CCGraphicsAPIInvalid, @"Graphics API not configured.");
 	
@@ -246,6 +246,11 @@ static CCTexture *CCTextureNone = nil;
 			NSAssert(metalFormat != MTLPixelFormatInvalid, @"This texture format is not supported by Apple's Metal API.");
 			
 			MTLTextureDescriptor *textureDesc = [MTLTextureDescriptor texture2DDescriptorWithPixelFormat:metalFormat width:width height:height mipmapped:NO];
+            if (isRenderTarget) {
+                textureDesc.usage = MTLTextureUsageRenderTarget | MTLTextureUsageShaderRead;
+            } else {
+                textureDesc.usage = MTLTextureUsageShaderRead;
+            }
 			_metalTexture = [device newTextureWithDescriptor:textureDesc];
 			
 			NSUInteger bytesPerRow = width*[CCTexture bitsPerPixelForFormat:pixelFormat]/8;
@@ -631,12 +636,12 @@ static CCTexture *CCTextureNone = nil;
 		//Convert "RRRRRRRRGGGGGGGGBBBBBBBBAAAAAAAA" to "RRRRRGGGGGBBBBBA"
 		/*
 		 Here was a bug.
-		 When you convert RGBA8888 texture to RGB5A1 texture and then render it on black background, you'll see a "ghost" image as if the texture is still RGBA8888. 
+		 When you convert RGBA8888 texture to RGB5A1 texture and then render it on black background, you'll see a "ghost" image as if the texture is still RGBA8888.
 		 On background lighter than the pixel color this effect disappers.
 		 This happens because the old convertion function doesn't premultiply old RGB with new A.
 		 As Result = sourceRGB + destination*(1-source A), then
 		 if Destination = 0000, then Result = source. Here comes the ghost!
-		 We need to check new alpha value first (it may be 1 or 0) and depending on it whether convert RGB values or just set pixel to 0 
+		 We need to check new alpha value first (it may be 1 or 0) and depending on it whether convert RGB values or just set pixel to 0
 		 */
 		tempData = malloc(textureHeight * textureWidth * 2);
 		inPixel32 = (unsigned int*)data;
@@ -655,7 +660,7 @@ static CCTexture *CCTextureNone = nil;
 		free(data);
 		data = tempData;
 	}
-	self = [self initWithData:data pixelFormat:pixelFormat pixelsWide:textureWidth pixelsHigh:textureHeight contentSizeInPixels:imageSizeInPixels contentScale:contentScale];
+	self = [self initWithData:data pixelFormat:pixelFormat pixelsWide:textureWidth pixelsHigh:textureHeight contentSizeInPixels:imageSizeInPixels contentScale:contentScale isRenderTarget:NO];
 
 	// should be after calling super init
 	_premultipliedAlpha = (info == kCGImageAlphaPremultipliedLast || info == kCGImageAlphaPremultipliedFirst);

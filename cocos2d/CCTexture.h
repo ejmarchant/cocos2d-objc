@@ -167,7 +167,7 @@ typedef struct _ccTexParams {
  *  @return An initialized CCTexture Object.
  *  @see CCTexturePixelFormat
  */
-- (id)initWithData:(const void*)data pixelFormat:(CCTexturePixelFormat)pixelFormat pixelsWide:(NSUInteger)width pixelsHigh:(NSUInteger)height contentSizeInPixels:(CGSize)sizeInPixels contentScale:(CGFloat)contentScale;
+- (id)initWithData:(const void*)data pixelFormat:(CCTexturePixelFormat)pixelFormat pixelsWide:(NSUInteger)width pixelsHigh:(NSUInteger)height contentSizeInPixels:(CGSize)sizeInPixels contentScale:(CGFloat)contentScale isRenderTarget:(BOOL)isRenderTarget;
 
 /**
  *  Creates and returns a new texture, based on the specified image file path.
