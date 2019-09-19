@@ -416,7 +416,7 @@
 		7A59489C19E375B500F65F90 /* CCDirector.m in Sources */ = {isa = PBXBuildFile; fileRef = 5018F2570DFDEAFF00C013A5 /* CCDirector.m */; };
 		7A5948A019E375B600F65F90 /* CCConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 503862D911007181005D2C92 /* CCConfiguration.m */; };
 		7A5948A319E375B700F65F90 /* CCScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 506602100E38A70D000B500E /* CCScheduler.m */; };
-		7A5948A519E375B700F65F90 /* CCNoARC.m in Sources */ = {isa = PBXBuildFile; fileRef = D3903B0C1995288D003AA81A /* CCNoARC.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		7A5948A519E375B700F65F90 /* CCNoARC.m in Sources */ = {isa = PBXBuildFile; fileRef = D3903B0C1995288D003AA81A /* CCNoARC.m */; };
 		7A5948B019E375B900F65F90 /* CCPlatformTextFieldMac.m in Sources */ = {isa = PBXBuildFile; fileRef = 571CD02519649E03003D460C /* CCPlatformTextFieldMac.m */; };
 		7A5948C719E375BC00F65F90 /* CCControl.m in Sources */ = {isa = PBXBuildFile; fileRef = B78AE45D17E7AF1C0028BE0B /* CCControl.m */; };
 		7A5948C919E375BD00F65F90 /* CCButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B78AE45B17E7AF1C0028BE0B /* CCButton.m */; };
